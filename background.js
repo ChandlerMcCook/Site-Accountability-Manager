@@ -1,7 +1,7 @@
 // this file makes sure that the active tab 
 
-let activeDomain = null
-let domainStartTime = null
+// let activeDomain = null
+// let domainStartTime = null
 
 // get the domain name of a website
 function GetDomain(url) {
@@ -13,31 +13,55 @@ function GetDomain(url) {
 }
 
 function StartTracking(tab) {
-    const sites = Object.keys(chrome.storage.local.get("trackedSites"))
+    console.log("STARTED TRACKING")
+
+    const sites = chrome.storage.local.get("trackedSites")
+    console.log(sites)
     let domain = GetDomain(tab.url)
+
+    console.log(domain)
+
+    let activeDomain = chrome.storage.local.get("activeDomain")
+    if (activeDomain !== undefined) {
+        activeDomain = activeDomain.activeDomain
+    }
+
     if (!domain || domain === activeDomain) return
     
     StopTracking()
     
     if (!sites.includes(domain)) return
 
-    activeDomain = domain
-    domainStartTime = Date.now()
+    chrome.storage.local.set({ activeDomain: domain })
+    chrome.storage.local.set({ domainStartTime: Date.now() }) 
 }
 
-StopTracking = () => {
+function StopTracking() {
+    let activeDomain = chrome.storage.local.get("activeDomain")
+    let domainStartTime = chrome.storage.local.get("domainStartTime")
+
+    if (activeDomain !== undefined) {
+        activeDomain = activeDomain.activeDomain
+    } if (domainStartTime !== undefined) {
+        domainStartTime = domainStartTime.domainStartTime
+    }
+
     if (activeDomain !== null && domainStartTime !== null) {
         const time = Date.now() - domainStartTime
-        const trackedSites = chrome.storage.local.get("trackedSites")
-        const previousTime = sites[activeDomain]
-        trackedSites = { ...sites, [activeDomain]: previousTime + time }
-        chrome.storage.local.set(trackedSites)
+        let trackedSites = chrome.storage.local.get("trackedSites")
+
+        if (trackedSites !== undefined) {
+            trackedSites = trackedSites.trackedSites
+        }
+
+        trackedSites[activeDomain] += time
+        chrome.storage.local.set({ trackedSites: trackedSites })
 
         console.log(`${activeDomain} time spent: ${previousTime + time}`)
     }
     
-    activeDomain = null
-    domainStartTime = null
+    chrome.storage.local.set({ activeDomain: null })
+    chrome.storage.local.set({ domainStartTime: null })
 }
 
 // track switching tabs

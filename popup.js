@@ -18,8 +18,8 @@ async function AddDomain() {
     let trackedSites = await chrome.storage.local.get("trackedSites")
 
     console.log(JSON.stringify(trackedSites))
-    if (trackedSites === undefined) {
-        trackedSites = {}
+    if (trackedSites.trackedSites !== undefined) {
+        trackedSites = trackedSites.trackedSites
     }
 
     if (domain in trackedSites) {
@@ -27,5 +27,6 @@ async function AddDomain() {
         return
     }
     trackedSites[domain] = 0
+    console.log(JSON.stringify(trackedSites))
     chrome.storage.local.set({trackedSites: trackedSites})
 }
