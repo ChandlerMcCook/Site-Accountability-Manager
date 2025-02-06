@@ -12,16 +12,21 @@ function GetDomain(url) {
     }
 }
 
-function StartTracking(tab) {
+async function StartTracking(tab) {
     console.log("STARTED TRACKING")
 
-    const sites = chrome.storage.local.get("trackedSites")
-    console.log(sites)
+    let sites = await chrome.storage.local.get("trackedSites")
+
+    if (sites.trackedSites !== undefined) {
+        sites = sites.trackedSites
+    }
+
+    console.log(`SITES: ${JSON.stringify(sites)}`)
     let domain = GetDomain(tab.url)
 
-    console.log(domain)
+    console.log(`DOMAIN OF START FUNCTION: ${domain}`)
 
-    let activeDomain = chrome.storage.local.get("activeDomain")
+    let activeDomain = await chrome.storage.local.get("activeDomain")
     if (activeDomain !== undefined) {
         activeDomain = activeDomain.activeDomain
     }
@@ -30,15 +35,19 @@ function StartTracking(tab) {
     
     StopTracking()
     
-    if (!sites.includes(domain)) return
+    if (!domain in sites) return
 
     chrome.storage.local.set({ activeDomain: domain })
     chrome.storage.local.set({ domainStartTime: Date.now() }) 
 }
 
-function StopTracking() {
-    let activeDomain = chrome.storage.local.get("activeDomain")
-    let domainStartTime = chrome.storage.local.get("domainStartTime")
+async function StopTracking() {
+    console.log("STOPPING TRACKING")
+
+    let activeDomain = await chrome.storage.local.get("activeDomain")
+    let domainStartTime = await chrome.storage.local.get("domainStartTime")
+
+    console.log(`STOP FUNCTION, ACTIVE DOMAIN: ${JSON.stringify(activeDomain)}, DOMAIN START TIME: ${JSON.stringify(domainStartTime)}`)
 
     if (activeDomain !== undefined) {
         activeDomain = activeDomain.activeDomain
@@ -48,16 +57,21 @@ function StopTracking() {
 
     if (activeDomain !== null && domainStartTime !== null) {
         const time = Date.now() - domainStartTime
-        let trackedSites = chrome.storage.local.get("trackedSites")
 
-        if (trackedSites !== undefined) {
+        console.log(`TIME TO ADD: ${time}`)
+
+        let trackedSites = await chrome.storage.local.get("trackedSites")
+
+        if (trackedSites.trackedSites !== undefined) {
             trackedSites = trackedSites.trackedSites
         }
-
-        trackedSites[activeDomain] += time
-        chrome.storage.local.set({ trackedSites: trackedSites })
-
-        console.log(`${activeDomain} time spent: ${previousTime + time}`)
+        
+        if (trackedSites[activeDomain] !== undefined) {
+            trackedSites[activeDomain] += time
+            chrome.storage.local.set({ trackedSites: trackedSites })
+    
+            console.log(`${activeDomain} time spent: ${trackedSites[activeDomain] + time}`)
+        }
     }
     
     chrome.storage.local.set({ activeDomain: null })
@@ -66,6 +80,8 @@ function StopTracking() {
 
 // track switching tabs
 chrome.tabs.onActivated.addListener((activeTab) => {
+    console.log("switched tabs")
+
     chrome.tabs.get(activeTab.tabId, (tab) => {
         if (chrome.runtime.lastError || !tab) return;
         StartTracking(tab);
@@ -74,6 +90,8 @@ chrome.tabs.onActivated.addListener((activeTab) => {
 
 // track tab URL updates
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    console.log("updated URL")
+
     if (changeInfo.url) {
         StartTracking(tab)
     }
@@ -81,6 +99,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 // track if different window is chosen
 chrome.windows.onFocusChanged.addListener((windowId) => {
+    console.log("changed window")
+    
     if (windowId === chrome.windows.WINDOW_ID_NONE) {
         StopTracking()
     } else {
