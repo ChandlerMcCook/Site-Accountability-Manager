@@ -1,4 +1,5 @@
-// this file makes sure that the active tab 
+// this file logs the name and start time of a tab, and after the user navigates to a different tab,
+// adds the total amount of time spent on the tab if it's one that's being tracked
 
 // let activeDomain = null
 // let domainStartTime = null
@@ -33,7 +34,7 @@ async function StartTracking(tab) {
 
     if (!domain || domain === activeDomain) return
     
-    StopTracking()
+    await StopTracking("StartTracking")
     
     if (!domain in sites) return
 
@@ -41,8 +42,8 @@ async function StartTracking(tab) {
     chrome.storage.local.set({ domainStartTime: Date.now() }) 
 }
 
-async function StopTracking() {
-    console.log("STOPPING TRACKING")
+async function StopTracking(source) {
+    console.log(`STOPPING TRACKING FROM ${source}`)
 
     let activeDomain = await chrome.storage.local.get("activeDomain")
     let domainStartTime = await chrome.storage.local.get("domainStartTime")
@@ -90,11 +91,9 @@ chrome.tabs.onActivated.addListener((activeTab) => {
 
 // track tab URL updates
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    console.log("updated URL")
+    console.log(`updated URL to ${tab.url}`)
 
-    if (changeInfo.url) {
-        StartTracking(tab)
-    }
+    StartTracking(tab)
 })
 
 // track if different window is chosen
@@ -102,7 +101,7 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
     console.log("changed window")
     
     if (windowId === chrome.windows.WINDOW_ID_NONE) {
-        StopTracking()
+        StopTracking("Window changed")
     } else {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs.length > 0) StartTracking(tabs[0])
