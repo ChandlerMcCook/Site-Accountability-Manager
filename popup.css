@@ -1,3 +1,61 @@
 body {
-    background-color: aquamarine;
+    background-color: #242832;
+}
+
+#title {
+    color: #757fa4;
+}
+
+#content {
+    background-color: #757fa4;
+    height: 300px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+#timeList {
+    background-color: #8a95bd;
+    border-collapse: collapse;
+    width: auto;
+    border: 3px solid #545b75;
+}
+
+tr {
+    padding: 15px;
+}
+
+tr:nth-child(2n) {
+    background-color: #7981a1;
+}
+
+td {
+    border: 1px solid #545b75;
+    padding: 5px;
+}
+
+td:nth-child(1) {
+    font-weight: bold;
+}
+
+.tableImage {
+    text-align: center;
+}
+
+.tableButton {
+    text-align: center;
+}
+
+.addButton {
+    background-image: "images/settings.png";
+    height: 24px;
+    width: 24px;
+}
+
+.deleteButton {
+    background-image: "images/settings.png";
+    height: 24px;
+    width: 24px;
 }

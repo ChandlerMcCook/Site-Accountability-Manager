@@ -38,8 +38,8 @@ async function StartTracking(tab) {
     
     if (!domain in sites) return
 
-    chrome.storage.local.set({ activeDomain: domain })
-    chrome.storage.local.set({ domainStartTime: Date.now() }) 
+    await chrome.storage.local.set({ activeDomain: domain })
+    await chrome.storage.local.set({ domainStartTime: Date.now() }) 
 }
 
 async function StopTracking(source) {
@@ -50,9 +50,9 @@ async function StopTracking(source) {
 
     console.log(`STOP FUNCTION, ACTIVE DOMAIN: ${JSON.stringify(activeDomain)}, DOMAIN START TIME: ${JSON.stringify(domainStartTime)}`)
 
-    if (activeDomain !== undefined) {
+    if (activeDomain.activeDomain !== undefined) {
         activeDomain = activeDomain.activeDomain
-    } if (domainStartTime !== undefined) {
+    } if (domainStartTime.domainStartTime !== undefined) {
         domainStartTime = domainStartTime.domainStartTime
     }
 
