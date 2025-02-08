@@ -45,15 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
             // add delete button
             const deleteButton = document.createElement("button")
             deleteButton.className = "deleteButton"
-            deleteButton.id = `db${index}`
-            deleteButton.addEventListener("click", async () => {
-                // let trackedSites = await chrome.storage.local.get("trackedSites")
+            deleteButton.id = `db${domain}`
+            deleteButton.addEventListener("click", async (e) => {
+                let trackedSites = await chrome.storage.local.get("trackedSites")
 
-                // if (trackedSites.trackedSites !== undefined) {
-                //     trackedSites = trackedSites.trackedSites
-                // }
+                if (trackedSites.trackedSites !== undefined) {
+                    trackedSites = trackedSites.trackedSites
+                }
 
-                console.log("DELETE BUTTON CLICKED")
+                delete trackedSites[e.target.getAttribute("id").slice(2)]
+
+                chrome.storage.local.set({ trackedSites: trackedSites })
+                console.log(`DELETE BUTTON CLICKED ${e.target.getAttribute("id").slice(2)}`)
+                
+                document.location.reload(true)
             })
             const dbNode = document.createElement("td")
             dbNode.className = "tableButton"
@@ -86,5 +91,5 @@ async function AddDomain() {
     }
     trackedSites[domain] = 0
     console.log(JSON.stringify(trackedSites))
-    chrome.storage.local.set({trackedSites: trackedSites})
+    chrome.storage.local.set({ trackedSites: trackedSites })
 }

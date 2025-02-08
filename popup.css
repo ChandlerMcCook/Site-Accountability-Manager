@@ -49,13 +49,13 @@ td:nth-child(1) {
 }
 
 .addButton {
-    background-image: "images/settings.png";
-    height: 24px;
-    width: 24px;
+    background-image: url("images/settings.png");
+    height: 28px;
+    width: 28px;
 }
 
 .deleteButton {
-    background-image: "images/settings.png";
-    height: 24px;
-    width: 24px;
+    background-image: url("images/delete.png");
+    height: 28px;
+    width: 28px;
 }
