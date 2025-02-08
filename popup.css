@@ -1,13 +1,33 @@
+:root {
+    /* purple */
+
+    /* --light: #757fa4;
+    --dark: #242832;
+    --accent-light: #8a95bd;
+    --accent-medium: #7981a1;
+    --accent-dark: #545b75;
+    --cream: #fcfacc; */
+
+    /* green */
+
+    --light: #F0F0D7;
+    --dark: #727D73;
+    --accent-light: #bfcab3;
+    --accent-medium: #AAB99A;
+    --accent-dark: #9bad88;
+    --cream: #fcfacc;
+}
+
 body {
-    background-color: #242832;
+    background-color: var(--dark);
 }
 
 #title {
-    color: #757fa4;
+    color: var(--light);
 }
 
 #content {
-    background-color: #757fa4;
+    background-color: var(--light);
     height: 300px;
     width: 600px;
     display: flex;
@@ -16,11 +36,32 @@ body {
     padding: 20px;
 }
 
-#timeList {
-    background-color: #8a95bd;
-    border-collapse: collapse;
+/* table elements */
+
+#tableDiv {
+    overflow-y: auto;
     width: auto;
-    border: 3px solid #545b75;
+    border: 3px solid var(--accent-dark);
+}
+
+::-webkit-scrollbar {
+    display: none;
+    background-color: var(--accent-dark);
+    width: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-light);
+    border-radius: 8px;
+    border: 1px solid black; 
+}
+
+#timeList {
+    background-color: var(--accent-light);
+    border-collapse: collapse;
+    width: 100%;
 }
 
 tr {
@@ -28,11 +69,11 @@ tr {
 }
 
 tr:nth-child(2n) {
-    background-color: #7981a1;
+    background-color: var(--accent-medium);
 }
 
 td {
-    border: 1px solid #545b75;
+    border: 1px solid var(--accent-dark);
     padding: 5px;
 }
 
@@ -58,4 +99,22 @@ td:nth-child(1) {
     background-image: url("images/delete.png");
     height: 28px;
     width: 28px;
+}
+
+/* add website button */
+#addSiteDiv {
+    background-color: var(--accent-light);
+    width: auto;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+#newDomain {
+    background-color: var(--accent-dark);
+    color: var(--cream);
+}
+
+#addSiteButton {
+    background-color: var(--accent-dark);
+    color: var(--cream);
 }

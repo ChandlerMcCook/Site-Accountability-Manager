@@ -4,8 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const timeList = document.getElementById("timeList")
 
         Object.entries(tracker).forEach(([domain, time], index) => {
-            const hours = time / 3600000
-            const seconds = (time / 1000) % 60
+            const nonMilli = time / 1000
+            const hours = nonMilli / 3600
+            const minutes = Math.floor(nonMilli / 60) % 60
+            const seconds = nonMilli % 60
 
             // create img element
             const domainImg = document.createElement("img")
@@ -16,7 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // create text elements 
             const domainText = document.createTextNode(`${domain}`)
-            const timeText = document.createTextNode(`${hours.toFixed(2)} hours, ${seconds.toFixed(2)} seconds`)
+            const timeText = document.createTextNode(
+                (hours > 1) ?
+                    `${hours.toFixed(2)} hours`
+                :
+                    `${minutes} minutes, ${seconds.toFixed(2)} seconds`
+
+            )
             const domainNode = document.createElement("td")
             const timeNode = document.createElement("td")
             domainNode.appendChild(domainText)
