@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <h3 id="title">Site Accountability Manager</h3>
+    <div id="topbar">
+        <h3 id="title">Site Accountability Manager</h3>
+        <button id="checkMoreButton"></button>
+    </div>
     <div id="content">
         <h2>Time Spent Per Domain</h2>
         <div id="tableDiv">
@@ -14,7 +17,7 @@
         </div>
         <div id="addSiteDiv">
             <form id="newForm">
-                Enter website to track: <input id="newDomain" type="text">
+                Enter website to track: <input id="newDomain" type="text" placeholder="ex: www.facebook.com">
                 <input id="addSiteButton" type="submit" value="track!">
             </form>
         </div>

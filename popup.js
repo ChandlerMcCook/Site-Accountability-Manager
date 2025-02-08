@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
             imageNode.className = "tableImage"
             
             // create text elements 
-            const domainText = document.createTextNode(`${domain}`)
+            let websiteName = domain.slice(4, -4)
+            websiteName = websiteName.charAt(0).toUpperCase() + websiteName.slice(1)
+            const domainText = document.createTextNode(`${websiteName}`)
             const timeText = document.createTextNode(
                 (hours > 1) ?
                     `${hours.toFixed(2)} hours`
@@ -78,7 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
             timeList.appendChild(row)
         })
     })
+
     document.getElementById("newForm").addEventListener("submit", AddDomain)
+
+    document.getElementById("checkMoreButton").addEventListener("click", () => {
+        chrome.tabs.create({ url: "https://us-tuna-sounds-images.voicemod.net/e2fe1cea-9e94-41da-b9bf-daff2d703460-1678634997912.png" })
+        console.log("BRUHHHHHH")
+    })
 })
 
 
