@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     entry: {
-        popup: "./src/popup.js",
+        chartPopup: "./src/chartPopup.js",
     },
     output: {
         filename: "[name].js",
