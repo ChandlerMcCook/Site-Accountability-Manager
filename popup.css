@@ -42,13 +42,20 @@ body {
 
 #content {
     background-color: var(--light);
-    height: 300px;
-    width: 600px;
+    border-radius: 5px;
+    height: auto;
+    width: auto;
+}
+
+/* TOTAL PAGE */
+
+#totalPage {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding: 20px;
-    border-radius: 5px;
+    gap: 20px;
+    height: 300px;
+    width: 500px;
 }
 
 /* table elements */
@@ -118,6 +125,7 @@ td:nth-child(2) {
 }
 
 /* add website button */
+
 #addSiteDiv {
     display: flex;
     flex-direction: column;
@@ -142,3 +150,5 @@ td:nth-child(2) {
     color: var(--cream);
     border-radius: 5px;
 }
+
+/* CHART PAGE */

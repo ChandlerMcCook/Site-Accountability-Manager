@@ -87,6 +87,34 @@ document.addEventListener("DOMContentLoaded", () => {
         chrome.tabs.create({ url: "https://us-tuna-sounds-images.voicemod.net/e2fe1cea-9e94-41da-b9bf-daff2d703460-1678634997912.png" })
         console.log("BRUHHHHHH")
     })
+
+    let timeData = {
+        "www.facebook.com": 200000,
+        "www.google.com": 2866744,
+        "www.linkedin.com": 1991200,
+        "www.reddit.com": 757504,
+        "www.twitter.com": 100000,
+        "www.youtube.com": 9323897
+    }
+  
+    const siteNames = Object.keys(timeData)
+        .map(name => name.slice(4, -4))
+        .map(name => name.charAt(0).toUpperCase() + name.slice(1))
+    const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
+    
+    new Chart("pieChart", {
+        type: "bar",
+        data: {
+            labels: siteNames,
+            datasets: [
+                {
+                    label: " Hours",
+                    data: siteTimes,
+                    backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                }
+            ]
+        }
+    })
 })
 
 
