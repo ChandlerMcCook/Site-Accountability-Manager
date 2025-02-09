@@ -3,5 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const text = document.createTextNode("Hello")
 
-    chartDiv.appendChild(text)
+    const p = document.createElement("p")
+
+    p.appendChild(text)
+
+    chartDiv.appendChild(p)
 })
