@@ -1,3 +1,7 @@
+import { Chart, registerables } from "chart.js"
+
+Chart.register(...registerables)
+
 document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.get("trackedSites", (data) => {
         const tracker = data.trackedSites || {}
@@ -102,7 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .map(name => name.charAt(0).toUpperCase() + name.slice(1))
     const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
     
-    new Chart("pieChart", {
+    const pieChart = document.getElementById("pieChart")
+
+    new Chart(pieChart, {
         type: "bar",
         data: {
             labels: siteNames,

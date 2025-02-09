@@ -1,0 +1,21 @@
+{
+  "name": "site-accountability-manager",
+  "version": "1.0.0",
+  "description": "The Website Usage Tracker Chrome Extension helps users monitor their browsing habits by tracking total, daily, and monthly website usage. Inspired by Android's Digital Wellbeing, this extension provides insights into screen time and allows users to set timers or block specific websites for better productivity and digital wellbeing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.7"
+  }
+}

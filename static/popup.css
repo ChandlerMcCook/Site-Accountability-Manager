@@ -152,3 +152,6 @@ td:nth-child(2) {
 }
 
 /* CHART PAGE */
+#chartPage {
+    display: none;
+}
