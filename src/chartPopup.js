@@ -14,8 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalDiv = document.getElementById("totalPage")
         const chartDiv = document.getElementById("chartPage")
+        const checkMoreButton = document.getElementById("checkMoreButton")
         
         if (visiblePage === "" || visiblePage === "total") {
+            checkMoreButton.style.backgroundImage = "url(\"images/settings.png\")"
+
             content.dataset.visiblePage = "chart"
 
             totalDiv.style.display = "none"
@@ -48,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         } else {
             content.dataset.visiblePage = "total"
+            checkMoreButton.style.backgroundImage = "url(\"images/chart.png\")"
 
             totalDiv.style.display = "flex"
             chartDiv.style.display = "none"

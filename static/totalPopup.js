@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const nonMilli = time / 1000
             const hours = nonMilli / 3600
             const minutes = Math.floor(nonMilli / 60) % 60
-            const seconds = nonMilli % 60
+            const seconds = Math.floor(nonMilli % 60)
 
             // create img element
             const domainImg = document.createElement("img")
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 (hours > 1) ?
                     `${hours.toFixed(2)} hours`
                 :
-                    `${minutes} minutes, ${seconds.toFixed(2)} seconds`
+                    `${minutes} minutes, ${seconds} seconds`
 
             )
             const domainNode = document.createElement("td")
