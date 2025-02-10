@@ -2,11 +2,23 @@ import { Chart, registerables } from "chart.js"
 
 Chart.register(...registerables)
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const content = document.getElementById("content")
     content.dataset.visiblePage = "total"
+
+    let currentChart = null
     
-    document.getElementById("checkMoreButton").addEventListener("click", async () => {
+    let timeData = await chrome.storage.local.get("trackedSites")
+    timeData = timeData.trackedSites || {}
+
+    console.log(JSON.stringify(timeData))
+
+    const siteNames = Object.keys(timeData)
+        .map(name => name.slice(4, -4))
+        .map(name => name.charAt(0).toUpperCase() + name.slice(1))
+    const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
+    
+    document.getElementById("checkMoreButton").addEventListener("click", () => {
         const content = document.getElementById("content")
         const visiblePage = content.dataset.visiblePage
 
@@ -24,19 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
             totalDiv.style.display = "none"
             chartDiv.style.display = "flex"
     
-            let timeData = await chrome.storage.local.get("trackedSites")
-            timeData = timeData.trackedSites || {}
+            const pieChart = document.getElementById("chart")
         
-            console.log(JSON.stringify(timeData))
-        
-            const siteNames = Object.keys(timeData)
-                .map(name => name.slice(4, -4))
-                .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-            const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
-        
-            const pieChart = document.getElementById("pieChart")
-        
-            new Chart(pieChart, {
+            if (currentChart) {
+                currentChart.destroy()
+            }
+
+            currentChart = new Chart(pieChart, {
                 type: "pie",
                 data: {
                 labels: siteNames,
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         } else {
             content.dataset.visiblePage = "total"
-            checkMoreButton.style.backgroundImage = "url(\"images/chart.png\")"
+            checkMoreButton.style.backgroundImage = "url(\"images/barChart.png\")"
 
             totalDiv.style.display = "flex"
             chartDiv.style.display = "none"
@@ -59,4 +65,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 
+
+    document.getElementById("pieButton").addEventListener("click", () => {
+        const chart = document.getElementById("chart")
+        
+        if (currentChart) {
+            currentChart.destroy()
+        }
+
+        currentChart = new Chart(chart, {
+            type: "pie",
+            data: {
+            labels: siteNames,
+            datasets: [
+                {
+                label: " Hours",
+                data: siteTimes,
+                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                }
+            ]
+            }
+        })
+    })
+
+    document.getElementById("barButton").addEventListener("click", () => {
+        const chart = document.getElementById("chart")
+        
+        if (currentChart) {
+            currentChart.destroy()
+        }
+
+        currentChart = new Chart(chart, {
+            type: "bar",
+            data: {
+            labels: siteNames,
+            datasets: [
+                {
+                label: " Hours",
+                data: siteTimes,
+                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                }
+            ]
+            }
+        })
+    })
+
+    document.getElementById("lineButton").addEventListener("click", () => {
+        const chart = document.getElementById("chart")
+        
+        if (currentChart) {
+            currentChart.destroy()
+        }
+
+        currentChart = new Chart(chart, {
+            type: "line",
+            data: {
+            labels: siteNames,
+            datasets: [
+                {
+                label: " Hours",
+                data: siteTimes,
+                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                }
+            ]
+            }
+        })
+    })
 })

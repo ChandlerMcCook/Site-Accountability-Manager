@@ -22,6 +22,10 @@ body {
     background-color: var(--dark);
 }
 
+.button:hover {
+    border: 1px solid yellow;
+}
+
 #topbar {
     display: flex;
     flex-direction: row;
@@ -35,7 +39,7 @@ body {
 }
 
 #checkMoreButton {
-    background-image: url("images/chart.png");
+    background-image: url("images/barChart.png");
     height: 28px;
     width: 28px;
 }
@@ -162,6 +166,46 @@ td:nth-child(2) {
     align-items: center;
 }
 
-#pieChart {
+#chartContent {
+    /* background-color: var(--accent-light); */
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    height: auto;
+    width: 500px;
+    align-items: center;
+    /* padding: 10px; */
+    /* border-radius: 8px; */
+}
+
+#chart {
     max-height: 300px;
+    max-width: 300px;
+}
+
+#chartButtons {
+    background-color: var(--accent-light);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#pieButton {
+    background-image: url("images/pieChart.png");
+    height: 28px;
+    width: 28px;
+}
+
+#barButton {
+    background-image: url("images/barChart.png");
+    height: 28px;
+    width: 28px;
+}
+
+#lineButton {
+    background-image: url("images/lineChart.png");
+    height: 28px;
+    width: 28px;
 }
