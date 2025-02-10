@@ -82,11 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     document.getElementById("newForm").addEventListener("submit", AddDomain)
-
-    document.getElementById("checkMoreButton").addEventListener("click", () => {
-        chrome.tabs.create({ url: "https://us-tuna-sounds-images.voicemod.net/e2fe1cea-9e94-41da-b9bf-daff2d703460-1678634997912.png" })
-        console.log("BRUHHHHHH")
-    })
 })
 
 
