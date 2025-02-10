@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             currentChart = new Chart(pieChart, {
                 type: "pie",
                 data: {
-                labels: siteNames,
-                datasets: [
-                    {
-                    label: " Hours",
-                    data: siteTimes,
-                    backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-                    }
-                ]
+                    labels: siteNames,
+                    datasets: [
+                        {
+                            label: " Hours",
+                            data: siteTimes,
+                            backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                        }
+                    ]
                 }
             })
         } else {
@@ -76,14 +76,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         currentChart = new Chart(chart, {
             type: "pie",
             data: {
-            labels: siteNames,
-            datasets: [
-                {
-                label: " Hours",
-                data: siteTimes,
-                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-                }
-            ]
+                labels: siteNames,
+                datasets: [
+                    {
+                        label: " Hours",
+                        data: siteTimes,
+                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                    }
+                ]
             }
         })
     })
@@ -98,14 +98,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         currentChart = new Chart(chart, {
             type: "bar",
             data: {
-            labels: siteNames,
-            datasets: [
-                {
-                label: " Hours",
-                data: siteTimes,
-                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-                }
-            ]
+                labels: siteNames,
+                datasets: [
+                    {
+                        label: " Hours",
+                        data: siteTimes,
+                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                    }
+                ]
             }
         })
     })
@@ -120,14 +120,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         currentChart = new Chart(chart, {
             type: "line",
             data: {
-            labels: siteNames,
-            datasets: [
-                {
-                label: " Hours",
-                data: siteTimes,
-                backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-                }
-            ]
+                labels: siteNames,
+                datasets: [
+                    {
+                        label: " Hours",
+                        data: siteTimes,
+                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                    }
+                ]
             }
         })
     })
