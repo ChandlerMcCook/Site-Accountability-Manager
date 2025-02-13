@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+export function totalPopupLogic() {
     chrome.storage.local.get("trackedSites", (data) => {
         const tracker = data.trackedSites || {}
         const timeList = document.getElementById("timeList")
@@ -82,25 +82,24 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     document.getElementById("newForm").addEventListener("submit", AddDomain)
-})
-
-
-async function AddDomain() {
-    const domain = document.getElementById("newDomain").value
-    console.log(domain)
-
-    let trackedSites = await chrome.storage.local.get("trackedSites")
-
-    console.log(JSON.stringify(trackedSites))
-    if (trackedSites.trackedSites !== undefined) {
-        trackedSites = trackedSites.trackedSites
+    
+    async function AddDomain() {
+        const domain = document.getElementById("newDomain").value
+        console.log(domain)
+    
+        let trackedSites = await chrome.storage.local.get("trackedSites")
+    
+        console.log(JSON.stringify(trackedSites))
+        if (trackedSites.trackedSites !== undefined) {
+            trackedSites = trackedSites.trackedSites
+        }
+    
+        if (domain in trackedSites) {
+            console.log("site already added")
+            return
+        }
+        trackedSites[domain] = 0
+        console.log(JSON.stringify(trackedSites))
+        chrome.storage.local.set({ trackedSites: trackedSites })
     }
-
-    if (domain in trackedSites) {
-        console.log("site already added")
-        return
-    }
-    trackedSites[domain] = 0
-    console.log(JSON.stringify(trackedSites))
-    chrome.storage.local.set({ trackedSites: trackedSites })
 }

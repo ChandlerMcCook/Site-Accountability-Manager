@@ -5,7 +5,11 @@
     "version": "1.0",
     "permissions": [
         "tabs",
-        "storage"
+        "activeTab",
+        "storage",
+        "unlimitedStorage",
+        "idle",
+        "offscreen"
     ],
     "background": {
         "service_worker": "background.js"
