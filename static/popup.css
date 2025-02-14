@@ -116,8 +116,8 @@ td:nth-child(2) {
     text-align: center;
 }
 
-.addButton {
-    background-image: url("images/settings.png");
+.blockButton {
+    background-image: url("images/light-cancel.png");
     height: 28px;
     width: 28px;
 }
@@ -156,6 +156,7 @@ td:nth-child(2) {
 }
 
 /* CHART PAGE */
+
 #chartPage {
     display: none;
     flex-direction: column;
@@ -208,4 +209,16 @@ td:nth-child(2) {
     background-image: url("images/lineChart.png");
     height: 28px;
     width: 28px;
+}
+
+/* BLOCK PAGE */
+
+#blockPage {
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    height: auto;
+    width: 500px;
+    align-items: center;
 }

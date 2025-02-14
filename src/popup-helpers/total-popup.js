@@ -1,9 +1,15 @@
 export function totalPopupLogic() {
-    chrome.storage.local.get("trackedSites", (data) => {
+    chrome.storage.local.get("trackedSites", async (data) => {
         const tracker = data.trackedSites || {}
         const timeList = document.getElementById("timeList")
+        let blocked = await chrome.storage.local.get("blockedSites")
+        if (blocked.blockedSites) {
+            blocked = blocked.blockedSites
+        } else {
+            blocked = []
+        }
 
-        Object.entries(tracker).forEach(([domain, time], index) => {
+        Object.entries(tracker).forEach(([domain, time]) => {
             const nonMilli = time / 1000
             const hours = nonMilli / 3600
             const minutes = Math.floor(nonMilli / 60) % 60
@@ -32,25 +38,38 @@ export function totalPopupLogic() {
             domainNode.appendChild(domainText)
             timeNode.appendChild(timeText)
 
-            // add time button
-            // const buttonDiv = document.createElement("div")
-            // const addLabel = document.createElement("label")
-            // addLabel.setAttribute("for", `ab${index}`)
-            const addTimeButton = document.createElement("button")
-            addTimeButton.className = "addButton"
-            addTimeButton.id = `ab${index}`
-            addTimeButton.addEventListener("click", async () => {
-                // let trackedSites = await chrome.storage.local.get("trackedSites")
+            
+            const blockButton = document.createElement("button")
+            blockButton.className = "blockButton"
+            blockButton.id = `bb${domain}`
+            console.log(blocked)
+            if (blocked.includes(domain)) {
+                blockButton.style.backgroundImage = "url(\"images/cancel.png\")"
+            }
+            blockButton.addEventListener("click", async (e) => {
+                const siteClicked = e.target.getAttribute("id").slice(2)
 
-                // if (trackedSites.trackedSites !== undefined) {
-                //     trackedSites = trackedSites.trackedSites
-                // }
+                let blockedSites = await chrome.storage.local.get("blockedSites")
 
-                console.log("ADD BUTTON CLICKED")
+                if (blockedSites.blockedSites) {
+                    blockedSites = blockedSites.blockedSites
+                } else {
+                    blockedSites = []
+                }
+
+                if (blockedSites.includes(siteClicked)) {
+                    e.target.style.backgroundImage = "url(\"images/cancel.png\")"
+                    blockedSites = blockedSites.filter(s => s !== siteClicked)
+                } else {
+                    e.target.style.backgroundImage = "url(\"images/light-cancel.png\")"
+                    blockedSites.push(siteClicked)
+                }
+
+                chrome.storage.local.set({ blockedSites: blockedSites })
             })
-            const abNode = document.createElement("td")
-            abNode.className = "tableButton"
-            abNode.appendChild(addTimeButton)
+            const bbNode = document.createElement("td")
+            bbNode.className = "tableButton"
+            bbNode.appendChild(blockButton)
 
             // add delete button
             const deleteButton = document.createElement("button")
@@ -76,14 +95,12 @@ export function totalPopupLogic() {
 
             // add to table
             const row = document.createElement("tr")
-            row.append(imageNode, domainNode, timeNode, abNode, dbNode)
+            row.append(imageNode, domainNode, timeNode, bbNode, dbNode)
             timeList.appendChild(row)
         })
     })
 
-    document.getElementById("newForm").addEventListener("submit", AddDomain)
-    
-    async function AddDomain() {
+    document.getElementById("newForm").addEventListener("submit", async () => {
         const domain = document.getElementById("newDomain").value
         console.log(domain)
     
@@ -101,5 +118,5 @@ export function totalPopupLogic() {
         trackedSites[domain] = 0
         console.log(JSON.stringify(trackedSites))
         chrome.storage.local.set({ trackedSites: trackedSites })
-    }
+    })
 }

@@ -17,13 +17,29 @@ async function StartTracking(tab) {
     console.log("STARTED TRACKING")
 
     let sites = await chrome.storage.local.get("trackedSites")
+    let blockedSites = await chrome.storage.local.get("blockedSites")
 
     if (sites.trackedSites !== undefined) {
         sites = sites.trackedSites
     }
 
+    if (blockedSites.blockedSites) {
+        blockedSites = blockedSites.blockedSites
+    } else {
+        blockedSites = []
+    }
+
+    
     console.log(`SITES: ${JSON.stringify(sites)}`)
     let domain = GetDomain(tab.url)
+    
+    if (blockedSites.includes(domain)) {
+        console.log(`BLOCKING ${domain}`)
+        const blockUrl = chrome.runtime.getURL("extension-pages/blocked-site/blocked-site.html")
+        const tab = await chrome.tabs.query({ currentWindow: true, active: true })
+        await chrome.tabs.update(tab[0].id, { url: blockUrl })
+        return
+    }
 
     console.log(`DOMAIN OF START FUNCTION: ${domain}`)
 

@@ -1,5 +1,5 @@
-import { totalPopupLogic } from "./popup-helpers/totalPopup.js"
-import { chartPopupLogic } from "./popup-helpers/chartPopup.js" 
+import { totalPopupLogic } from "./popup-helpers/total-popup.js"
+import { chartPopupLogic } from "./popup-helpers/chart-popup.js" 
 
 document.addEventListener("DOMContentLoaded", () => {
     totalPopupLogic()
@@ -12,23 +12,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalDiv = document.getElementById("totalPage")
         const chartDiv = document.getElementById("chartPage")
+        const blockDiv = document.getElementById("blockPage")
         const checkMoreButton = document.getElementById("checkMoreButton")
         
         if (visiblePage === "" || visiblePage === "total") {
             content.dataset.visiblePage = "chart"
-            checkMoreButton.style.backgroundImage = "url(\"images/settings.png\")"
+            checkMoreButton.style.backgroundImage = "url(\"images/cancel.png\")"
             
             totalDiv.style.display = "none"
             chartDiv.style.display = "flex"
-            
-            // refreshChart()
+        } else if (visiblePage == "chart") {
+            content.dataset.visiblePage = "block"
+            checkMoreButton.style.backgroundImage = "url(\"images/settings.png\")"
+
+            chartDiv.style.display = "none"
+            blockDiv.style.display = "flex"
         } else {
             content.dataset.visiblePage = "total"
             checkMoreButton.style.backgroundImage = "url(\"images/barChart.png\")"
 
-            totalDiv.style.display = "flex"
             chartDiv.style.display = "none"
+            totalDiv.style.display = "flex"
         }
-
     })
 })
