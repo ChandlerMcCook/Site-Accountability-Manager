@@ -3,6 +3,7 @@ import { Chart, registerables } from "chart.js"
 export async function chartPopupLogic () {
     Chart.register(...registerables)
     
+    // get vars to be used in all buttons across the page
     const content = document.getElementById("content")
     content.dataset.visiblePage = "total"
 
@@ -10,8 +11,6 @@ export async function chartPopupLogic () {
     
     let timeData = await chrome.storage.local.get("trackedSites")
     timeData = timeData.trackedSites || {}
-
-    console.log(JSON.stringify(timeData))
 
     const siteNames = Object.keys(timeData)
         .map(name => name.slice(4, -4))

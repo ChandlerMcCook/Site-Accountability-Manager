@@ -1,13 +1,7 @@
 body {
-    background-image: url("../../images/bruh.png");
-    background-size: cover;
-    background-position: center; 
+    background-image: url("../../images/blocked-images/kid-cup.jpg");
+    background-size: 100% 100%;
+    /* background-position: center;  */
+    background-attachment: fixed;
     background-repeat: no-repeat; 
 }
-
-/* 
-#content {
-    background-image: url("../../images/bruh.png");
-    height: 100%;
-    width: 100%;
-} */

@@ -39,7 +39,7 @@ body {
 }
 
 #checkMoreButton {
-    background-image: url("images/barChart.png");
+    background-image: url("images/ui-images/bar-chart.png");
     height: 28px;
     width: 28px;
 }
@@ -117,13 +117,13 @@ td:nth-child(2) {
 }
 
 .blockButton {
-    background-image: url("images/light-cancel.png");
+    background-image: url("images/ui-images/light-cancel.png");
     height: 28px;
     width: 28px;
 }
 
 .deleteButton {
-    background-image: url("images/delete.png");
+    background-image: url("images/ui-images/delete.png");
     height: 28px;
     width: 28px;
 }
@@ -194,19 +194,19 @@ td:nth-child(2) {
 }
 
 #pieButton {
-    background-image: url("images/pieChart.png");
+    background-image: url("images/ui-images/pie-chart.png");
     height: 28px;
     width: 28px;
 }
 
 #barButton {
-    background-image: url("images/barChart.png");
+    background-image: url("images/ui-images/bar-chart.png");
     height: 28px;
     width: 28px;
 }
 
 #lineButton {
-    background-image: url("images/lineChart.png");
+    background-image: url("images/ui-images/line-chart.png");
     height: 28px;
     width: 28px;
 }

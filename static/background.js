@@ -1,8 +1,37 @@
 // this file logs the name and start time of a tab, and after the user navigates to a different tab,
 // adds the total amount of time spent on the tab if it's one that's being tracked
 
-// let activeDomain = null
-// let domainStartTime = null
+
+// track switching tabs
+chrome.tabs.onActivated.addListener((activeTab) => {
+    console.log("switched tabs")
+
+    chrome.tabs.get(activeTab.tabId, (tab) => {
+        if (chrome.runtime.lastError || !tab) return;
+        StartTracking(tab);
+    });
+})
+
+// track tab URL updates
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    console.log(`updated URL to ${tab.url}`)
+
+    StartTracking(tab)
+})
+
+// track if different window is chosen
+chrome.windows.onFocusChanged.addListener((windowId) => {
+    console.log("changed window")
+    
+    if (windowId === chrome.windows.WINDOW_ID_NONE) {
+        StopTracking("Window changed")
+    } else {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            if (tabs.length > 0) StartTracking(tabs[0])
+        })
+    }
+})
+
 
 // get the domain name of a website
 function GetDomain(url) {
@@ -13,6 +42,7 @@ function GetDomain(url) {
     }
 }
 
+// Whenever a new tab comes into focus, start tracking it
 async function StartTracking(tab) {
     console.log("STARTED TRACKING")
 
@@ -58,6 +88,7 @@ async function StartTracking(tab) {
     await chrome.storage.local.set({ domainStartTime: Date.now() }) 
 }
 
+// Whenever a new tab comes into focus, stop tracking the last one and store the time spent on the last one
 async function StopTracking(source) {
     console.log(`STOPPING TRACKING FROM ${source}`)
 
@@ -95,32 +126,3 @@ async function StopTracking(source) {
     chrome.storage.local.set({ domainStartTime: null })
 }
 
-// track switching tabs
-chrome.tabs.onActivated.addListener((activeTab) => {
-    console.log("switched tabs")
-
-    chrome.tabs.get(activeTab.tabId, (tab) => {
-        if (chrome.runtime.lastError || !tab) return;
-        StartTracking(tab);
-    });
-})
-
-// track tab URL updates
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    console.log(`updated URL to ${tab.url}`)
-
-    StartTracking(tab)
-})
-
-// track if different window is chosen
-chrome.windows.onFocusChanged.addListener((windowId) => {
-    console.log("changed window")
-    
-    if (windowId === chrome.windows.WINDOW_ID_NONE) {
-        StopTracking("Window changed")
-    } else {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            if (tabs.length > 0) StartTracking(tabs[0])
-        })
-    }
-})

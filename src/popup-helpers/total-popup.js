@@ -44,7 +44,7 @@ export function totalPopupLogic() {
             blockButton.id = `bb${domain}`
             console.log(blocked)
             if (blocked.includes(domain)) {
-                blockButton.style.backgroundImage = "url(\"images/cancel.png\")"
+                blockButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
             }
             blockButton.addEventListener("click", async (e) => {
                 const siteClicked = e.target.getAttribute("id").slice(2)
@@ -58,14 +58,13 @@ export function totalPopupLogic() {
                 }
 
                 if (blockedSites.includes(siteClicked)) {
-                    e.target.style.backgroundImage = "url(\"images/cancel.png\")"
                     blockedSites = blockedSites.filter(s => s !== siteClicked)
                 } else {
-                    e.target.style.backgroundImage = "url(\"images/light-cancel.png\")"
                     blockedSites.push(siteClicked)
                 }
 
                 chrome.storage.local.set({ blockedSites: blockedSites })
+                document.location.reload(true)
             })
             const bbNode = document.createElement("td")
             bbNode.className = "tableButton"
