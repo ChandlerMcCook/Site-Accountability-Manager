@@ -19,10 +19,9 @@ export async function totalPopupLogic() {
 
     // build the table of tracked websites
     domainsOfSites.forEach(([domain, time]) => {
-        const nonMilli = time / 1000
-        const hours = nonMilli / 3600
-        const minutes = Math.floor(nonMilli / 60) % 60
-        const seconds = Math.floor(nonMilli % 60)
+        const hours = time / 3600
+        const minutes = Math.floor(time / 60) % 60
+        const seconds = time % 60
 
         // create img element
         const domainImg = document.createElement("img")

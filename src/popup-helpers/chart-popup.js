@@ -8,7 +8,7 @@ export async function chartPopupLogic () {
     const content = document.getElementById("content")
     content.dataset.visiblePage = "total"
     let currentChart = null
-    const timeData = await GetLocalData(trackedSites) || {}
+    const timeData = await GetLocalData("trackedSites") || {}
 
     // get names of websites and times associated with websites
     const siteNames = Object.keys(timeData)
@@ -27,7 +27,8 @@ export async function chartPopupLogic () {
         }
 
         currentChart = new Chart(chart, {
-            type: "pie",
+            type: "doughnut",
+            cutout: "80%",
             data: {
                 labels: siteNames,
                 datasets: [
@@ -37,7 +38,7 @@ export async function chartPopupLogic () {
                         backgroundColor: chartColors
                     }
                 ]
-            }
+            },
         })
     })
 
@@ -93,7 +94,8 @@ export async function chartPopupLogic () {
         }
         
         currentChart = new Chart(chart, {
-            type: "pie",
+            type: "doughnut",
+            cutout: "80%",
             data: {
                 labels: siteNames,
                 datasets: [

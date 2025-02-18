@@ -15,11 +15,11 @@ async function TrackWebsite() {
     let trackedSites = await GetLocalData("trackedSites") || {}
     let blockedSites = await GetLocalData("blockedSites") || []
 
-    const [tab] = chrome.tabs.query({ active: true, lastFocusedWindow: true })
+    const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
+    if (tab === undefined) return
+
     const domain = GetDomain(tab.url)
-    
-    console.log(tab)
-    console.log(domain)
+    console.log(`DOMAIN: ${domain}`)
 
     if (blockedSites.includes(domain)) {
         const blockUrl = chrome.runtime.getURL("extension-pages/blocked-site/blocked-site.html")
@@ -27,11 +27,9 @@ async function TrackWebsite() {
         return
     }
 
-    if (!domain in trackedSites) return
+    if (!(domain in trackedSites)) return
 
-    trackedSites[domain] += 1000
-
-    console.log(trackedSites)
+    trackedSites[domain] += 1
 
     chrome.storage.local.set({ trackedSites: trackedSites })
 }
