@@ -7,11 +7,10 @@ export async function chartPopupLogic () {
     // get vars to be used in all buttons across the page
     const content = document.getElementById("content")
     content.dataset.visiblePage = "total"
-
     let currentChart = null
-    
     const timeData = await GetLocalData(trackedSites) || {}
 
+    // get names of websites and times associated with websites
     const siteNames = Object.keys(timeData)
         .map(name => name.slice(4, -4))
         .map(name => name.charAt(0).toUpperCase() + name.slice(1))

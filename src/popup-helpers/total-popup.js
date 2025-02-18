@@ -1,9 +1,10 @@
 import { GetLocalData } from "../helper-functions/get-local-data"
 
 export async function totalPopupLogic() {
+    // TIME LIST 
+
     const tracker = await GetLocalData("trackedSites") || {}
     const blocked = await GetLocalData("blockedSites") || []
-
     const timeList = document.getElementById("timeList")
 
     // build the table of tracked websites
@@ -83,6 +84,8 @@ export async function totalPopupLogic() {
         row.append(imageNode, domainNode, timeNode, bbNode, dbNode)
         timeList.appendChild(row)
     })
+
+    // ADD WEBSITE BUTTON
 
     document.getElementById("newForm").addEventListener("submit", async () => {
         const domain = document.getElementById("newDomain").value
