@@ -1,4 +1,5 @@
 import { Chart, registerables } from "chart.js"
+import { GetLocalData } from "../helper-functions/get-local-data"
 
 export async function chartPopupLogic () {
     Chart.register(...registerables)
@@ -9,8 +10,7 @@ export async function chartPopupLogic () {
 
     let currentChart = null
     
-    let timeData = await chrome.storage.local.get("trackedSites")
-    timeData = timeData.trackedSites || {}
+    const timeData = await GetLocalData(trackedSites) || {}
 
     const siteNames = Object.keys(timeData)
         .map(name => name.slice(4, -4))
