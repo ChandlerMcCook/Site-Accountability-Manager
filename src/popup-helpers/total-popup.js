@@ -6,8 +6,18 @@ export async function totalPopupLogic() {
 
     const timeList = document.getElementById("timeList")
 
+    const domainsOfSites = Object.entries(tracker)
+
+    if (domainsOfSites.length === 0) {
+        const noWebsitesText = document.createTextNode("No websites currently tracked :)")
+        timeList.appendChild(noWebsitesText)
+        timeList.style.display = "flex"
+        timeList.style.display = "flex"
+        timeList.style.display = "flex"
+    }
+
     // build the table of tracked websites
-    Object.entries(tracker).forEach(([domain, time]) => {
+    domainsOfSites.forEach(([domain, time]) => {
         const nonMilli = time / 1000
         const hours = nonMilli / 3600
         const minutes = Math.floor(nonMilli / 60) % 60
@@ -36,11 +46,11 @@ export async function totalPopupLogic() {
         domainNode.appendChild(domainText)
         timeNode.appendChild(timeText)
 
-        
+        // block website button logic
         const blockButton = document.createElement("button")
         blockButton.className = "blockButton"
         blockButton.id = `bb${domain}`
-        console.log(blocked)
+        // change the button from greyed out to highlighted if blocked
         if (blocked.includes(domain)) {
             blockButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
         }
@@ -86,8 +96,13 @@ export async function totalPopupLogic() {
 
     document.getElementById("newForm").addEventListener("submit", async () => {
         const domain = document.getElementById("newDomain").value
-        console.log(domain)
-    
+
+        // if the user didn't enter in the correct format alert them to do so
+        if (!/(^www\.)[a-zA-Z\.]+.com/.test(domain)) {
+            alert("please enter website in www.website.com format")
+            return
+        }
+
         let trackedSites = await GetLocalData("trackedSites") || {}
     
         if (domain in trackedSites) {

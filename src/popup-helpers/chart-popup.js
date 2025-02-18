@@ -10,12 +10,15 @@ export async function chartPopupLogic () {
 
     let currentChart = null
     
-    const timeData = await GetLocalData(trackedSites) || {}
+    const timeData = await GetLocalData("trackedSites") || {}
 
     const siteNames = Object.keys(timeData)
         .map(name => name.slice(4, -4))
         .map(name => name.charAt(0).toUpperCase() + name.slice(1))
     const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
+
+    // const chartColors = ["#789DBC", "#FFE3E3", "#FEF9F2", "#C9E9D2", "#C4D9FF", "#C5BAFF", "#E8F9FF"]
+    const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
 
     document.getElementById("pieButton").addEventListener("click", () => {
         const chart = document.getElementById("chart")
@@ -32,7 +35,7 @@ export async function chartPopupLogic () {
                     {
                         label: " Hours",
                         data: siteTimes,
-                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                        backgroundColor: chartColors
                     }
                 ]
             }
@@ -54,7 +57,7 @@ export async function chartPopupLogic () {
                     {
                         label: " Hours",
                         data: siteTimes,
-                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                        backgroundColor: chartColors
                     }
                 ]
             }
@@ -76,7 +79,7 @@ export async function chartPopupLogic () {
                     {
                         label: " Hours",
                         data: siteTimes,
-                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                        backgroundColor: chartColors
                     }
                 ]
             }
@@ -98,7 +101,7 @@ export async function chartPopupLogic () {
                     {
                         label: " Hours",
                         data: siteTimes,
-                        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+                        backgroundColor: chartColors
                     }
                 ]
             }
