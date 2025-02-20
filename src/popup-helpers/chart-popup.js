@@ -14,7 +14,7 @@ export async function chartPopupLogic () {
     const siteNames = Object.keys(timeData)
         .map(name => name.slice(4, -4))
         .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-    const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600000)
+    const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600)
 
     // const chartColors = ["#789DBC", "#FFE3E3", "#FEF9F2", "#C9E9D2", "#C4D9FF", "#C5BAFF", "#E8F9FF"]
     const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
@@ -28,11 +28,11 @@ export async function chartPopupLogic () {
 
         currentChart = new Chart(chart, {
             type: "doughnut",
-            cutout: "80%",
             data: {
                 labels: siteNames,
                 datasets: [
                     {
+                        cutout: "90%",
                         label: " Hours",
                         data: siteTimes,
                         backgroundColor: chartColors
@@ -95,11 +95,11 @@ export async function chartPopupLogic () {
         
         currentChart = new Chart(chart, {
             type: "doughnut",
-            cutout: "80%",
             data: {
                 labels: siteNames,
                 datasets: [
                     {
+                        cutout: "90%",
                         label: " Hours",
                         data: siteTimes,
                         backgroundColor: chartColors

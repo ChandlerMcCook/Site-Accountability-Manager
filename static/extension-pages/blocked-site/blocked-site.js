@@ -1,4 +1,4 @@
-const imageNames = ["bruh.png", "dog.png", "kid-cup.jpg", "worm.jpg", "evolution.jpg"]
+const imageNames = ["bruh.png", "dog.png", "kid-cup.jpg", "worm.jpg"]
 
 document.addEventListener("DOMContentLoaded", () => {
     const imageIndex = Math.floor(Math.random() * imageNames.length)
