@@ -1,4 +1,5 @@
 import { GetLocalData } from "../helper-functions/get-local-data"
+import { GetHostName } from "../helper-functions/get-host-name"
 
 export async function totalPopupLogic() {
     // TIME LIST 
@@ -12,8 +13,6 @@ export async function totalPopupLogic() {
     if (domainsOfSites.length === 0) {
         const noWebsitesText = document.createTextNode("No websites currently tracked :)")
         timeList.appendChild(noWebsitesText)
-        timeList.style.display = "flex"
-        timeList.style.display = "flex"
         timeList.style.display = "flex"
     }
 
@@ -31,8 +30,7 @@ export async function totalPopupLogic() {
         imageNode.className = "tableImage"
         
         // create text elements 
-        let websiteName = domain.slice(4, -4)
-        websiteName = websiteName.charAt(0).toUpperCase() + websiteName.slice(1)
+        let websiteName = domain.charAt(0).toUpperCase() + domain.slice(1)
         const domainText = document.createTextNode(`${websiteName}`)
         const timeText = document.createTextNode(
             (hours > 1) ?
@@ -99,21 +97,18 @@ export async function totalPopupLogic() {
     document.getElementById("newForm").addEventListener("submit", async () => {
         const domain = document.getElementById("newDomain").value
 
-        // if the user didn't enter in the correct format alert them to do so
-        if (!/(^www\.)[a-zA-Z\.]+.com/.test(domain)) {
-            alert("please enter website in www.website.com format")
-            return
-        }
+        const domainName = GetHostName(domain)
+        console.log(domainName)
 
         let trackedSites = await GetLocalData("trackedSites") || {}
     
-        if (domain in trackedSites) {
+        if (domainName in trackedSites) {
+            alert("Website is already tracked")
             console.log("site already added")
             return
         }
 
-        trackedSites[domain] = 0
-        console.log(JSON.stringify(trackedSites))
+        trackedSites[domainName] = 0
         chrome.storage.local.set({ trackedSites: trackedSites })
     })
 }

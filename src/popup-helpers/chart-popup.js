@@ -16,7 +16,6 @@ export async function chartPopupLogic () {
         .map(name => name.charAt(0).toUpperCase() + name.slice(1))
     const siteTimes = Object.keys(timeData).map(key => timeData[key] / 3600)
 
-    // const chartColors = ["#789DBC", "#FFE3E3", "#FEF9F2", "#C9E9D2", "#C4D9FF", "#C5BAFF", "#E8F9FF"]
     const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
 
     document.getElementById("pieButton").addEventListener("click", () => {

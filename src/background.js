@@ -2,14 +2,7 @@
 // adds the total amount of time spent on the tab if it's one that's being tracked
 
 import { GetLocalData } from "./helper-functions/get-local-data"
-
-function GetDomain(url) {
-    try {
-        return new URL(url).hostname
-    } catch (e) {
-        return null
-    }
-}
+import { GetHostName } from "./helper-functions/get-host-name"
 
 async function TrackWebsite() {
     let trackedSites = await GetLocalData("trackedSites") || {}
@@ -18,8 +11,7 @@ async function TrackWebsite() {
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
     if (tab === undefined) return
 
-    const domain = GetDomain(tab.url)
-    console.log(`DOMAIN: ${domain}`)
+    const domain = GetHostName(tab.url)
 
     if (blockedSites.includes(domain)) {
         const blockUrl = chrome.runtime.getURL("extension-pages/blocked-site/blocked-site.html")

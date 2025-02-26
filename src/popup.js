@@ -1,9 +1,11 @@
 import { totalPopupLogic } from "./popup-helpers/total-popup.js"
 import { chartPopupLogic } from "./popup-helpers/chart-popup.js" 
+import { blockPopupLogic } from "./popup-helpers/block-popup.js"
 
 document.addEventListener("DOMContentLoaded", () => {
     totalPopupLogic()
     chartPopupLogic()
+    blockPopupLogic()
 
     document.getElementById("checkMoreButton").addEventListener("click", () => {
         const content = document.getElementById("content")
@@ -30,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             content.dataset.visiblePage = "total"
             checkMoreButton.style.backgroundImage = "url(\"images/ui-images/bar-chart.png\")"
 
-            chartDiv.style.display = "none"
+            blockDiv.style.display = "none"
             totalDiv.style.display = "flex"
         }
     })

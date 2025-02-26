@@ -1,3 +1,7 @@
+@import url("css/total.css");
+@import url("css/chart.css");
+@import url("css/block.css");
+
 :root {
     /* purple */
 
@@ -51,45 +55,7 @@ body {
     width: auto;
 }
 
-/* TOTAL PAGE */
-
-#totalPage {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    height: 300px;
-    width: 500px;
-}
-
-/* table elements */
-
-#tableDiv {
-    overflow-y: auto;
-    width: auto;
-    border: 3px solid var(--accent-dark);
-    border-radius: 8px;
-}
-
-::-webkit-scrollbar {
-    display: none;
-    background-color: var(--accent-dark);
-    width: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--accent-light);
-    border-radius: 8px;
-    border: 1px solid black; 
-}
-
-#timeList {
-    background-color: var(--accent-light);
-    border-collapse: collapse;
-    width: 100%;
-}
+/* GLOBAL TABLE SETTINGS  */
 
 tr {
     padding: 15px;
@@ -106,119 +72,4 @@ td {
 
 td:nth-child(2) {
     font-weight: bold;
-}
-
-.tableImage {
-    text-align: center;
-}
-
-.tableButton {
-    text-align: center;
-}
-
-.blockButton {
-    background-image: url("images/ui-images/light-cancel.png");
-    height: 28px;
-    width: 28px;
-}
-
-.deleteButton {
-    background-image: url("images/ui-images/delete.png");
-    height: 28px;
-    width: 28px;
-}
-
-/* add website button */
-
-#addSiteDiv {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--accent-light);
-    width: auto;
-    padding: 5px;
-    border-radius: 8px;
-}
-
-#newForm {
-    width: auto;
-}
-
-#newDomain {
-    background-color: var(--accent-dark);
-    color: var(--cream);
-    border-radius: 5px;
-}
-
-#addSiteButton {
-    background-color: var(--accent-dark);
-    color: var(--cream);
-    border-radius: 5px;
-}
-
-/* CHART PAGE */
-
-#chartPage {
-    display: none;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    height: auto;
-    width: 500px;
-    align-items: center;
-}
-
-#chartContent {
-    /* background-color: var(--accent-light); */
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-    height: auto;
-    width: 500px;
-    align-items: center;
-    /* padding: 10px; */
-    /* border-radius: 8px; */
-}
-
-#chart {
-    max-height: 300px;
-    max-width: 300px;
-}
-
-#chartButtons {
-    background-color: var(--accent-light);
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-#pieButton {
-    background-image: url("images/ui-images/pie-chart.png");
-    height: 28px;
-    width: 28px;
-}
-
-#barButton {
-    background-image: url("images/ui-images/bar-chart.png");
-    height: 28px;
-    width: 28px;
-}
-
-#lineButton {
-    background-image: url("images/ui-images/line-chart.png");
-    height: 28px;
-    width: 28px;
-}
-
-/* BLOCK PAGE */
-
-#blockPage {
-    display: none;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    height: auto;
-    width: 500px;
-    align-items: center;
 }

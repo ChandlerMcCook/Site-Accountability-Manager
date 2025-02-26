@@ -1,0 +1,53 @@
+#chartPage {
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    height: auto;
+    width: 500px;
+    align-items: center;
+}
+
+#chartContent {
+    /* background-color: var(--accent-light); */
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    height: auto;
+    width: 500px;
+    align-items: center;
+    /* padding: 10px; */
+    /* border-radius: 8px; */
+}
+
+#chart {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+#chartButtons {
+    background-color: var(--accent-light);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#pieButton {
+    background-image: url("../images/ui-images/pie-chart.png");
+    height: 28px;
+    width: 28px;
+}
+
+#barButton {
+    background-image: url("../images/ui-images/bar-chart.png");
+    height: 28px;
+    width: 28px;
+}
+
+#lineButton {
+    background-image: url("../images/ui-images/line-chart.png");
+    height: 28px;
+    width: 28px;
+}
