@@ -10,9 +10,7 @@ export async function RefreshBlocked() {
     }
 
     const blocked = await GetLocalData("blockedSites")
-    console.log(`REFRESH BLOCKED`)
-    console.log(blocked)
-
+    
     if (blocked.length === 0) {
         const noWebsitesText = document.createTextNode("No websites currently blocked :)")
         blockTable.appendChild(noWebsitesText)

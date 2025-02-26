@@ -6,17 +6,22 @@ const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
 
 async function GetChartData(totalOrDaily) {
     const timeData = await GetLocalData("trackedSites")
+    const today = new Date().toLocaleDateString()
 
     // get names of websites and times associated with websites
-    const names = Object.keys(timeData)
-        .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-    let times
-    if (totalOrDaily === "total")
+    let names = []
+    let times = []
+    if (totalOrDaily === "total") {
+        names = Object.keys(timeData)
+            .map(name => name.charAt(0).toUpperCase() + name.slice(1))
         times = Object.keys(timeData).map(key => timeData[key].overall / 3600)
-    else {
-        const today = new Date().toLocaleDateString()
-        times = Object.keys(timeData).map(key => {
-            return timeData[key].days.find(day => day.date === today)?.time
+    } else {
+        Object.keys(timeData).forEach(key => {
+            const todayData = timeData[key].days.find(day => day.date === today)
+            if (todayData !== undefined) {
+                names.push(key)
+                times.push(todayData.time)
+            }
         })
     }
 
