@@ -8,8 +8,15 @@
 <body>
     <div id="topbar">
         <h3 id="title">Site Accountability Manager</h3>
-        <button id="checkMoreButton"></button>
+        <div id="topbar-right">
+            <select name="totalOrDaily" id="totalOrDailyDropdown">
+                <option value="total">Total</option>
+                <option value="daily">Daily</option>
+            </select>
+            <button id="checkMoreButton"></button>
+        </div>
     </div>
+    
     <div id="content" data-visiblePage="">
         <!-- TOTAL PAGE -->
         <div id="totalPage">

@@ -1,12 +1,14 @@
 import { GetLocalData } from "../helper-functions/get-local-data"
 import { GetHostName } from "../helper-functions/get-host-name"
 
-export async function totalPopupLogic() {
-    // TIME LIST 
-
-    const tracker = await GetLocalData("trackedSites") || {}
-    const blocked = await GetLocalData("blockedSites") || []
+export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
+    while (timeList.firstChild) {
+        timeList.removeChild(timeList.lastChild)
+    }
+
+    const tracker = await GetLocalData("trackedSites")
+    const blocked = await GetLocalData("blockedSites")
 
     const domainsOfSites = Object.entries(tracker)
 
@@ -17,7 +19,17 @@ export async function totalPopupLogic() {
     }
 
     // build the table of tracked websites
-    domainsOfSites.forEach(([domain, time]) => {
+    domainsOfSites.forEach(async ([domain, domainTimeData]) => {
+        const mode = await GetLocalData("totalOrDaily")
+
+        let time
+        if (mode === "total") {
+            time = domainTimeData.overall
+        } else {
+            const today = new Date().toLocaleDateString()
+            time = domainTimeData.days.find(day => day.date === today)
+        }
+
         const hours = time / 3600
         const minutes = Math.floor(time / 60) % 60
         const seconds = time % 60
@@ -55,7 +67,7 @@ export async function totalPopupLogic() {
         blockButton.addEventListener("click", async (e) => {
             const siteClicked = e.target.getAttribute("id").slice(2)
 
-            let blockedSites = await GetLocalData("blockedSites") || []
+            let blockedSites = await GetLocalData("blockedSites")
 
             if (blockedSites.includes(siteClicked)) {
                 blockedSites = blockedSites.filter(s => s !== siteClicked)
@@ -75,7 +87,7 @@ export async function totalPopupLogic() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `db${domain}`
         deleteButton.addEventListener("click", async (e) => {
-            let trackedSites = await GetLocalData("trackedSites") || {}
+            let trackedSites = await GetLocalData("trackedSites")
 
             delete trackedSites[e.target.getAttribute("id").slice(2)]
 
@@ -91,16 +103,21 @@ export async function totalPopupLogic() {
         row.append(imageNode, domainNode, timeNode, bbNode, dbNode)
         timeList.appendChild(row)
     })
+}
+
+export async function TotalPopupLogic() {
+    // TIME LIST 
+    RefreshTable()
+    
 
     // ADD WEBSITE BUTTON
-
     document.getElementById("newForm").addEventListener("submit", async () => {
         const domain = document.getElementById("newDomain").value
 
         const domainName = GetHostName(domain)
         console.log(domainName)
 
-        let trackedSites = await GetLocalData("trackedSites") || {}
+        const trackedSites = await GetLocalData("trackedSites")
     
         if (domainName in trackedSites) {
             alert("Website is already tracked")
@@ -108,7 +125,10 @@ export async function totalPopupLogic() {
             return
         }
 
-        trackedSites[domainName] = 0
+        trackedSites[domainName] = {
+            days: [],
+            overall: 0
+        }
         chrome.storage.local.set({ trackedSites: trackedSites })
     })
 }

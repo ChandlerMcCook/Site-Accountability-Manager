@@ -1,12 +1,21 @@
-import { totalPopupLogic } from "./popup-helpers/total-popup.js"
-import { chartPopupLogic } from "./popup-helpers/chart-popup.js" 
-import { blockPopupLogic } from "./popup-helpers/block-popup.js"
+import { TotalPopupLogic, RefreshTable } from "./popup-helpers/total-popup.js"
+import { ChartPopupLogic } from "./popup-helpers/chart-popup.js" 
+import { BlockPopupLogic } from "./popup-helpers/block-popup.js"
 
 document.addEventListener("DOMContentLoaded", () => {
-    totalPopupLogic()
-    chartPopupLogic()
-    blockPopupLogic()
+    TotalPopupLogic()
+    ChartPopupLogic()
+    BlockPopupLogic()
 
+    // change to total or daily time
+    document.getElementById("totalOrDailyDropdown").addEventListener("change", (e) => {
+        chrome.storage.local.set({ totalOrDaily: e.target.value })
+
+        RefreshTable()
+        // RefreshChart()
+    })
+
+    // change tabs
     document.getElementById("checkMoreButton").addEventListener("click", () => {
         const content = document.getElementById("content")
         const visiblePage = content.dataset.visiblePage

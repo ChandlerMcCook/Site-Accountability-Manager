@@ -5,8 +5,8 @@ import { GetLocalData } from "./helper-functions/get-local-data"
 import { GetHostName } from "./helper-functions/get-host-name"
 
 async function TrackWebsite() {
-    let trackedSites = await GetLocalData("trackedSites") || {}
-    let blockedSites = await GetLocalData("blockedSites") || []
+    let trackedSites = await GetLocalData("trackedSites")
+    let blockedSites = await GetLocalData("blockedSites")
 
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
     if (tab === undefined) return
@@ -21,7 +21,25 @@ async function TrackWebsite() {
 
     if (!(domain in trackedSites)) return
 
-    trackedSites[domain] += 1
+    const today = new Date().toLocaleDateString()
+    if (trackedSites[domain] === undefined) {
+        const template = {
+            days: [
+                {
+                    date: today,
+                    time: 1
+                }
+            ],
+            overall: 1
+        }
+        trackedSites[domain] = template
+    } else if (!trackedSites[domain].days.some(day => day.date === today)) {
+        trackedSites[domain].days.push({ date: today, time: 1 })
+        trackedSites[domain].overall += 1
+    } else {
+        trackedSites[domain].days.find(day => day.date === today).time += 1
+        trackedSites[domain].overall += 1
+    }
 
     chrome.storage.local.set({ trackedSites: trackedSites })
 }

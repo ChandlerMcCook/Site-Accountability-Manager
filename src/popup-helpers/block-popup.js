@@ -1,8 +1,8 @@
 import { GetLocalData } from "../helper-functions/get-local-data"
 
-export async function blockPopupLogic() {
+export async function BlockPopupLogic() {
         const blockTable = document.getElementById("blockTable")
-        const blocked = await GetLocalData("blockedSites") || []
+        const blocked = await GetLocalData("blockedSites")
 
         console.log(blocked)
 
@@ -23,7 +23,7 @@ export async function blockPopupLogic() {
             deleteButton.className = "deleteButton"
             deleteButton.id = `bdb${website}`
             deleteButton.addEventListener("click", async (e) => {
-                let blockedSites = await GetLocalData("blockedSites") || []
+                let blockedSites = await GetLocalData("blockedSites")
     
                 blockedSites = blockedSites.filter(s => s !== e.target.getAttribute("id").slice(3))
     
