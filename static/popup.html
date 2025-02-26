@@ -20,7 +20,7 @@
     <div id="content" data-visiblePage="">
         <!-- TOTAL PAGE -->
         <div id="totalPage">
-            <h2>Total Time Spent</h2>
+            <h2 id="totalTitle">Total Time Spent</h2>
             <div id="tableDiv">
                 <table id="timeList"></table>
             </div>
@@ -34,9 +34,11 @@
 
         <!-- CHART PAGE -->
         <div id="chartPage">
-            <h2>Total Time Graphs</h2>
+            <h2 id="chartTitle">Total Time Graphs</h2>
             <div id="chartContent">
-                <canvas id="chart"></canvas>
+                <div id="chartBackground">
+                    <canvas id="chart"></canvas>
+                </div>
                 <div id="chartButtons">
                     <button id="pieButton"></button>
                     <button id="barButton"></button>

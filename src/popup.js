@@ -9,11 +9,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     BlockPopupLogic()
 
     const totalOrDaily = document.getElementById("totalOrDailyDropdown")
-    totalOrDaily.value = await GetLocalData("totalOrDaily")
+    const tdValue = await GetLocalData("totalOrDaily")
+    totalOrDaily.value = tdValue
+    const upperCaseValue = tdValue.charAt(0).toUpperCase() + tdValue.slice(1)
+    document.getElementById("totalTitle").innerHTML = `${upperCaseValue} time spent`
+    document.getElementById("chartTitle").innerHTML = `${upperCaseValue} Time Graphs`
 
     // change to total or daily time
     totalOrDaily.addEventListener("change", (e) => {
-        chrome.storage.local.set({ totalOrDaily: e.target.value })
+        const newVal = e.target.value
+        chrome.storage.local.set({ totalOrDaily: newVal })
+        const upperCaseVal = newVal.charAt(0).toUpperCase() + newVal.slice(1)
+        document.getElementById("totalTitle").innerHTML = `${upperCaseVal} time spent`
+        document.getElementById("chartTitle").innerHTML = `${upperCaseVal} Time Graphs`
 
         RefreshTable()
         RefreshChart()
