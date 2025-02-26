@@ -1,5 +1,8 @@
 import { GetLocalData } from "../helper-functions/get-local-data"
 import { GetHostName } from "../helper-functions/get-host-name"
+import { RefreshBlocked } from "./block-popup"
+import { StoreTracked, RemoveStoredTracked } from "../helper-functions/store-remove-tracked"
+import { StoreBlocked, RemoveStoredBlocked } from "../helper-functions/store-remove-blocked"
 
 export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
@@ -27,7 +30,8 @@ export async function RefreshTable() {
             time = domainTimeData.overall
         } else {
             const today = new Date().toLocaleDateString()
-            time = domainTimeData.days.find(day => day.date === today)
+            time = domainTimeData.days.find(day => day.date === today)?.time
+            time = (time !== undefined) ? time : 0
         }
 
         const hours = time / 3600
@@ -42,8 +46,7 @@ export async function RefreshTable() {
         imageNode.className = "tableImage"
         
         // create text elements 
-        let websiteName = domain.charAt(0).toUpperCase() + domain.slice(1)
-        const domainText = document.createTextNode(`${websiteName}`)
+        const domainText = document.createTextNode(`${domain}`)
         const timeText = document.createTextNode(
             (hours > 1) ?
                 `${hours.toFixed(2)} hours`
@@ -70,13 +73,13 @@ export async function RefreshTable() {
             let blockedSites = await GetLocalData("blockedSites")
 
             if (blockedSites.includes(siteClicked)) {
-                blockedSites = blockedSites.filter(s => s !== siteClicked)
+                await RemoveStoredBlocked(siteClicked)
             } else {
-                blockedSites.push(siteClicked)
+                await StoreBlocked(siteClicked)
             }
 
-            chrome.storage.local.set({ blockedSites: blockedSites })
-            document.location.reload(true)
+            RefreshTable()
+            RefreshBlocked()
         })
         const bbNode = document.createElement("td")
         bbNode.className = "tableButton"
@@ -87,12 +90,8 @@ export async function RefreshTable() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `db${domain}`
         deleteButton.addEventListener("click", async (e) => {
-            let trackedSites = await GetLocalData("trackedSites")
-
-            delete trackedSites[e.target.getAttribute("id").slice(2)]
-
-            chrome.storage.local.set({ trackedSites: trackedSites })
-            document.location.reload(true)
+            await RemoveStoredTracked(e.target.getAttribute("id").slice(2))
+            RefreshTable()
         })
         const dbNode = document.createElement("td")
         dbNode.className = "tableButton"
@@ -105,30 +104,36 @@ export async function RefreshTable() {
     })
 }
 
+async function AddTrackedWebsite() {
+    const newDomain = document.getElementById("newDomain")
+    const domain = newDomain.value
+    newDomain.value = ""
+    
+    if (domain === "") {
+        alert("Please enter a value")
+        return
+    }
+    
+    const domainName = GetHostName(domain)
+    
+    await StoreTracked(domainName)
+
+    RefreshTable()
+}
+
 export async function TotalPopupLogic() {
-    // TIME LIST 
+    // populate tracked table on startup
     RefreshTable()
     
 
     // ADD WEBSITE BUTTON
-    document.getElementById("newForm").addEventListener("submit", async () => {
-        const domain = document.getElementById("newDomain").value
+    document.getElementById("addSiteButton").addEventListener("click", () => {
+        AddTrackedWebsite()
+    })
 
-        const domainName = GetHostName(domain)
-        console.log(domainName)
-
-        const trackedSites = await GetLocalData("trackedSites")
-    
-        if (domainName in trackedSites) {
-            alert("Website is already tracked")
-            console.log("site already added")
-            return
+    document.getElementById("newDomain").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            AddTrackedWebsite()
         }
-
-        trackedSites[domainName] = {
-            days: [],
-            overall: 0
-        }
-        chrome.storage.local.set({ trackedSites: trackedSites })
     })
 }

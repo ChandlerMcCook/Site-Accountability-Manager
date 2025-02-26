@@ -1,6 +1,9 @@
 import { Chart, registerables } from "chart.js"
 import { GetLocalData } from "../helper-functions/get-local-data"
 
+let currentChart = null
+const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
+
 async function GetChartData(totalOrDaily) {
     const timeData = await GetLocalData("trackedSites")
 
@@ -13,27 +16,45 @@ async function GetChartData(totalOrDaily) {
     else {
         const today = new Date().toLocaleDateString()
         times = Object.keys(timeData).map(key => {
-            return timeData[key].days.find(day => day.date === today).time
+            return timeData[key].days.find(day => day.date === today)?.time
         })
     }
 
     return [names, times]
 }
 
+export async function RefreshChart() {
+    const chart = document.getElementById("chart")
+    const totalOrDaily = await GetLocalData("totalOrDaily")
+    const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+    
+    if (currentChart) {
+        currentChart.destroy()
+    }
+    
+    currentChart = new Chart(chart, {
+        type: "doughnut",
+        data: {
+            labels: siteNames,
+            datasets: [
+                {
+                    cutout: "90%",
+                    label: " Hours",
+                    data: siteTimes,
+                    backgroundColor: chartColors
+                }
+            ]
+        }
+    })
+}
+
 export function ChartPopupLogic () {
     Chart.register(...registerables)
     
-    // get vars to be used in all buttons across the page
-    const content = document.getElementById("content")
-    content.dataset.visiblePage = "total"
-    let currentChart = null
-
-    
-    const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
-    
     document.getElementById("pieButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const [siteNames, siteTimes] = await GetChartData("total")
+        const totalOrDaily = await GetLocalData("totalOrDaily")
+        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
         
         if (currentChart) {
             currentChart.destroy()
@@ -57,7 +78,8 @@ export function ChartPopupLogic () {
 
     document.getElementById("barButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const [siteNames, siteTimes] = await GetChartData("total")
+        const totalOrDaily = await GetLocalData("totalOrDaily")
+        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
         
         if (currentChart) {
             currentChart.destroy()
@@ -80,7 +102,8 @@ export function ChartPopupLogic () {
 
     document.getElementById("lineButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const [siteNames, siteTimes] = await GetChartData("total")
+        const totalOrDaily = await GetLocalData("totalOrDaily")
+        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
         
         if (currentChart) {
             currentChart.destroy()
@@ -101,27 +124,7 @@ export function ChartPopupLogic () {
         })
     })
 
-    document.getElementById("checkMoreButton").addEventListener("click", async () => {
-        const chart = document.getElementById("chart")
-        const [siteNames, siteTimes] = await GetChartData("total")
-        
-        if (currentChart) {
-            currentChart.destroy()
-        }
-        
-        currentChart = new Chart(chart, {
-            type: "doughnut",
-            data: {
-                labels: siteNames,
-                datasets: [
-                    {
-                        cutout: "90%",
-                        label: " Hours",
-                        data: siteTimes,
-                        backgroundColor: chartColors
-                    }
-                ]
-            }
-        })
+    document.getElementById("checkMoreButton").addEventListener("click", () => {
+        RefreshChart()
     })
 }

@@ -20,3 +20,26 @@
     border-collapse: collapse;
     width: 100%;
 }
+
+/* ADD BLOCKED SITE */
+
+#addBlockedSiteDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--accent-light);
+    width: auto;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+#blockInput {
+    background-color: var(--accent-dark);
+    color: var(--cream);
+    border-radius: 5px;
+}
+
+#addBlockedSiteButton {
+    background-color: var(--accent-dark);
+    color: var(--cream);
+    border-radius: 5px;
+}

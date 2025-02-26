@@ -1,18 +1,22 @@
 import { TotalPopupLogic, RefreshTable } from "./popup-helpers/total-popup.js"
-import { ChartPopupLogic } from "./popup-helpers/chart-popup.js" 
+import { ChartPopupLogic, RefreshChart } from "./popup-helpers/chart-popup.js" 
 import { BlockPopupLogic } from "./popup-helpers/block-popup.js"
+import { GetLocalData } from "./helper-functions/get-local-data.js"
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     TotalPopupLogic()
     ChartPopupLogic()
     BlockPopupLogic()
 
+    const totalOrDaily = document.getElementById("totalOrDailyDropdown")
+    totalOrDaily.value = await GetLocalData("totalOrDaily")
+
     // change to total or daily time
-    document.getElementById("totalOrDailyDropdown").addEventListener("change", (e) => {
+    totalOrDaily.addEventListener("change", (e) => {
         chrome.storage.local.set({ totalOrDaily: e.target.value })
 
         RefreshTable()
-        // RefreshChart()
+        RefreshChart()
     })
 
     // change tabs

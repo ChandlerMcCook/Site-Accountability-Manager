@@ -16,44 +16,10 @@
     border-radius: 8px;
 }
 
-::-webkit-scrollbar {
-    display: none;
-    background-color: var(--accent-dark);
-    width: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--accent-light);
-    border-radius: 8px;
-    border: 1px solid black; 
-}
-
 #timeList {
     background-color: var(--accent-light);
     border-collapse: collapse;
     width: 100%;
-}
-
-.tableImage {
-    text-align: center;
-}
-
-.tableButton {
-    text-align: center;
-}
-
-.blockButton {
-    background-image: url("../images/ui-images/light-cancel.png");
-    height: 28px;
-    width: 28px;
-}
-
-.deleteButton {
-    background-image: url("../images/ui-images/delete.png");
-    height: 28px;
-    width: 28px;
 }
 
 /* add website button */
