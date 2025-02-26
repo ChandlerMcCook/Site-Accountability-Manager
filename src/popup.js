@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const blockDiv = document.getElementById("blockPage")
         const checkMoreButton = document.getElementById("checkMoreButton")
         
-        if (visiblePage === "" || visiblePage === "total") {
+        if (visiblePage === undefined || visiblePage === "total") {
             content.dataset.visiblePage = "chart"
             checkMoreButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
             
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             chartDiv.style.display = "flex"
         } else if (visiblePage == "chart") {
             content.dataset.visiblePage = "block"
-            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/settings.png\")"
+            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/clock-theme1.png\")"
 
             chartDiv.style.display = "none"
             blockDiv.style.display = "flex"
