@@ -7,14 +7,14 @@ export async function SetThemeVariables() {
     switch(theme) {
         case "purple": 
             root.style.setProperty('--light', '#757fa4')
-            root.style.setProperty('--dark', '#b8c0ff')
-            root.style.setProperty('--accent-light', '#ffd6ff')
-            root.style.setProperty('--accent-medium', '#e7c6ff')
-            root.style.setProperty('--accent-dark', '#c8b6ff')
+            root.style.setProperty('--dark', '#242832')
+            root.style.setProperty('--accent-light', '#8a95bd')
+            root.style.setProperty('--accent-medium', '#7981a1')
+            root.style.setProperty('--accent-dark', '#545b75')
             root.style.setProperty('--cream', '#fcfacc')
             break
         case "cottonCandy":
-            root.style.setProperty('--light', '#757fa4')
+            root.style.setProperty('--light', '#bbd0ff')
             root.style.setProperty('--dark', '#b8c0ff')
             root.style.setProperty('--accent-light', '#ffd6ff')
             root.style.setProperty('--accent-medium', '#e7c6ff')

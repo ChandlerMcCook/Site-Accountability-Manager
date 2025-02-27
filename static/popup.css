@@ -2,56 +2,6 @@
 @import url("css/chart.css");
 @import url("css/block.css");
 
-:root {
-    /* purple */
-    /* --light: #757fa4;
-    --dark: #242832;
-    --accent-light: #8a95bd;
-    --accent-medium: #7981a1;
-    --accent-dark: #545b75;
-    --cream: #fcfacc; */
-
-    /* green */
-    /* --light: #F0F0D7;
-    --dark: #727D73;
-    --accent-light: #bfcab3;
-    --accent-medium: #AAB99A;
-    --accent-dark: #9bad88;
-    --cream: #fcfacc; */
-
-    /* cotton candy */
-    --light: #bbd0ff;
-    --dark: #b8c0ff;
-    --accent-light: #ffd6ff;
-    --accent-medium: #e7c6ff;
-    --accent-dark: #c8b6ff;
-    --cream: #fcfacc;
-
-    /* cobalt */
-    /* --light: #e7ecef;
-    --dark: #8b8c89;
-    --accent-light: #a3cef1;
-    --accent-medium: #6096ba;
-    --accent-dark: #274c77;
-    --cream: #fcfacc; */
-
-    /* forest */
-    /* --light: #c7bfa8;
-    --dark: #654d39;
-    --accent-light: #839f8c;
-    --accent-medium: #607c68;
-    --accent-dark: #475c4e;
-    --cream: #fcfacc; */
-
-    /* sepia */
-    /* --light: #B9B28A;
-    --dark: #504B38;
-    --accent-light: #F8F3D9;
-    --accent-medium: #EBE5C2;
-    --accent-dark: #ded49b;
-    --cream: #fcfacc; */
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
