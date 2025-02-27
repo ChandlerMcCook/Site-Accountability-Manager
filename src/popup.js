@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         RefreshChart()
     })
 
+    // open settings
+    document.getElementById("settings").addEventListener("click", () => {
+        chrome.tabs.create({ url: chrome.runtime.getURL("extension-pages/settings/settings.html") })
+    })
+
     // change tabs
     document.getElementById("checkMoreButton").addEventListener("click", () => {
         const content = document.getElementById("content")

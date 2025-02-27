@@ -8,18 +8,23 @@ async function GetChartData(totalOrDaily) {
     const timeData = await GetLocalData("trackedSites")
     const today = new Date().toLocaleDateString()
 
+    const websites = Object.keys(timeData)
+
+    // make sure that two colors don't end up next to each other in pie chart
+    if (websites.length === chartColors.length) chartColors.push("maroon")
+
     // get names of websites and times associated with websites
     let names = []
     let times = []
     if (totalOrDaily === "total") {
-        names = Object.keys(timeData)
+        names = websites
             .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-        times = Object.keys(timeData).map(key => timeData[key].overall / 3600)
+        times = websites.map(site => timeData[site].overall / 3600)
     } else {
-        Object.keys(timeData).forEach(key => {
-            const todayData = timeData[key].days.find(day => day.date === today)
+        websites.forEach(site => {
+            const todayData = timeData[site].days.find(day => day.date === today)
             if (todayData !== undefined) {
-                names.push(key)
+                names.push(site)
                 times.push(todayData.time)
             }
         })
