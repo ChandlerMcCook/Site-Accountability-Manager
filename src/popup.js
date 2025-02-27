@@ -2,8 +2,10 @@ import { TotalPopupLogic, RefreshTable } from "./popup-helpers/total-popup.js"
 import { ChartPopupLogic, RefreshChart } from "./popup-helpers/chart-popup.js" 
 import { BlockPopupLogic } from "./popup-helpers/block-popup.js"
 import { GetLocalData } from "./helper-functions/get-local-data.js"
+import { SetThemeVariables } from "./helper-functions/set-theme-variables.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
+    SetThemeVariables()
     TotalPopupLogic()
     ChartPopupLogic()
     BlockPopupLogic()

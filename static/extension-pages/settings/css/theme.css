@@ -1,0 +1,179 @@
+#themePage {
+    display: flex;
+    flex-direction: column;
+}
+
+#themeScrollChooser {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    max-height: 70vh;
+    width: 50vw;
+    overflow-y: auto;
+    background-color: var(--accent-dark);
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.themeChoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    background-color: var(--accent-light);
+    padding: 30px;
+}
+
+span {
+    min-width: 80px;
+    background-color: var(--accent-dark);
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.palette {
+    height: 50px;
+    width: 20vw;
+    background-color: white;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+}
+.palette:first-child {
+    border-top: 1px solid var(--border);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.palette:last-child {
+    border-bottom: 1px solid var(--border);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.selectPaletteButton {
+    background-color: var(--accent-dark);
+}
+
+
+/* PREBUILT THEMES */
+
+
+#green-light {
+    background-color: #F0F0D7;
+}
+#green-dark {
+    background-color: #727D73;
+}
+#green-accent-light {
+    background-color: #bfcab3;
+}
+#green-accent-medium {
+    background-color: #AAB99A;
+}
+#green-accent-dark {
+    background-color: #9bad88;
+}
+#green-cream {
+    background-color: #fcfacc;
+}
+
+
+#purple-light {
+    background-color: #757fa4;
+}
+#purple-dark {
+    background-color: #242832;
+}
+#purple-accent-light {
+    background-color: #8a95bd;
+}
+#purple-accent-medium {
+    background-color: #7981a1;
+}
+#purple-accent-dark {
+    background-color: #545b75;
+}
+#purple-cream {
+    background-color: #fcfacc;
+}
+
+
+#cottonCandy-light {
+    background-color: #bbd0ff;
+}
+#cottonCandy-dark {
+    background-color: #b8c0ff;
+}
+#cottonCandy-accent-light {
+    background-color: #ffd6ff;
+}
+#cottonCandy-accent-medium {
+    background-color: #e7c6ff;
+}
+#cottonCandy-accent-dark {
+    background-color: #c8b6ff;
+}
+#cottonCandy-cream {
+    background-color: #fcfacc;
+}
+
+
+#cobalt-light {
+    background-color: #e7ecef;
+}
+#cobalt-dark {
+    background-color: #8b8c89;
+}
+#cobalt-accent-light {
+    background-color: #a3cef1;
+}
+#cobalt-accent-medium {
+    background-color: #6096ba;
+}
+#cobalt-accent-dark {
+    background-color: #274c77;
+}
+#cobalt-cream {
+    background-color: #fcfacc;
+}
+
+
+#forest-light {
+    background-color: #c7bfa8;
+}
+#forest-dark {
+    background-color: #654d39;
+}
+#forest-accent-light {
+    background-color: #bfcab3;
+}
+#forest-accent-medium {
+    background-color: #607c68;
+}
+#forest-accent-dark {
+    background-color: #475c4e;
+}
+#forest-cream {
+    background-color: #fcfacc;
+}
+
+
+#sepia-light {
+    background-color: #B9B28A;
+}
+#sepia-dark {
+    background-color: #504B38;
+}
+#sepia-accent-light {
+    background-color: #F8F3D9;
+}
+#sepia-accent-medium {
+    background-color: #EBE5C2;
+}
+#sepia-accent-dark {
+    background-color: #ded49b;
+}
+#sepia-cream {
+    background-color: #fcfacc;
+}
