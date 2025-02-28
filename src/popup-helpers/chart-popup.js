@@ -112,26 +112,38 @@ export function ChartPopupLogic () {
 
     document.getElementById("lineButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const totalOrDaily = await GetLocalData("totalOrDaily")
-        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
-        
-        if (currentChart) {
-            currentChart.destroy()
-        }
+        const trackedSites = await GetLocalData("trackedSites")
+        const siteDays = Object.entries(trackedSites)
 
-        currentChart = new Chart(chart, {
-            type: "line",
-            data: {
-                labels: siteNames,
-                datasets: [
-                    {
-                        label: " Hours",
-                        data: siteTimes,
-                        backgroundColor: chartColors
-                    }
-                ]
-            }
+        console.log(siteDays)
+
+        const totalTimePerDay = {}
+        siteDays.forEach(sd => {
+            if (totalTimePerDay[sd.date] === undefined)
+                totalTimePerDay[sd.date] = sd.time
+            else 
+                totalTimePerDay[sd.date] += sd.time
         })
+        const siteNames = Object.keys(totalTimePerDay)
+        const siteTimes = Object.values(totalTimePerDay)
+
+        // if (currentChart) {
+        //     currentChart.destroy()
+        // }
+
+        // currentChart = new Chart(chart, {
+        //     type: "line",
+        //     data: {
+        //         labels: siteNames,
+        //         datasets: [
+        //             {
+        //                 label: " Hours",
+        //                 data: siteTimes,
+        //                 backgroundColor: chartColors
+        //             }
+        //         ]
+        //     }
+        // })
     })
 
     document.getElementById("checkMoreButton").addEventListener("click", () => {
