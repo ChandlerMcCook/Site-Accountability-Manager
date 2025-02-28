@@ -45,6 +45,22 @@ export async function SetThemeVariables() {
             root.style.setProperty('--accent-dark', '#ded49b')
             root.style.setProperty('--cream', '#fcfacc')
             break
+        case "daytime":
+            root.style.setProperty('--light', '#fdf7e3');       // Soft pastel cream  
+            root.style.setProperty('--dark', '#b5a68d');        // Muted warm brown for contrast  
+            root.style.setProperty('--accent-light', '#ffe8a3'); // Light pastel yellow  
+            root.style.setProperty('--accent-medium', '#ffd36b'); // Warm golden yellow  
+            root.style.setProperty('--accent-dark', '#c9a227');   // Deep mustard yellow  
+            root.style.setProperty('--cream', '#fff9e6');        // Warm cream shade 
+            break
+        case "roses":
+            root.style.setProperty('--light', '#fae1dd');       // Soft blush pink (background)  
+            root.style.setProperty('--dark', '#6d3e3e');        // Deep muted rose (for contrast)  
+            root.style.setProperty('--accent-light', '#f8c8dc'); // Light pastel pink (highlights)  
+            root.style.setProperty('--accent-medium', '#e58f8f'); // Warm rosy pink (main accent)  
+            root.style.setProperty('--accent-dark', '#a44e4e');   // Deep dusty red (strong contrast)  
+            root.style.setProperty('--cream', '#fff5f3');        // Warm soft cream (complementary) 
+            break
         default: 
             root.style.setProperty('--light', '#F0F0D7')
             root.style.setProperty('--dark', '#727D73')

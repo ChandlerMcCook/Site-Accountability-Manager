@@ -24,4 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
             chrome.storage.local.set({ theme: e.target.getAttribute("id") })
         })
     })
+
+    const defaultThemePage = document.getElementById("defaultThemePage")
+    const userThemePage = document.getElementById("userThemePage")
+    const defaultThemeButton = document.getElementById("defaultThemeButton")
+    const userThemeButton = document.getElementById("userThemeButton")
+
+    defaultThemeButton.addEventListener("click", () => {
+        defaultThemePage.style.display = "flex"
+        userThemePage.style.display = "none"
+    })
+
+    userThemeButton.addEventListener("click", () => {
+        userThemePage.style.display = "flex"
+        defaultThemePage.style.display = "none"
+    })
+
 })

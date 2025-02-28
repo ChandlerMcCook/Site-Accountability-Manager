@@ -3,11 +3,37 @@
     flex-direction: column;
 }
 
-#themeScrollChooser {
+#themeSettingsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#themeSettingsNavbar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: space-around;
+    left: 18vw; /* Moves it to the left of the centered div */
+    background-color: var(--accent-dark);
+    height: 70vh;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#defaultThemePage {
+    display: flex;
+}
+
+#userThemePage {
+    display: none;
+}
+
+.themeScrollChooser {
     display: flex;
     flex-direction: column;
     gap: 50px;
-    max-height: 70vh;
+    height: 70vh;
     width: 50vw;
     overflow-y: auto;
     background-color: var(--accent-dark);
@@ -55,6 +81,9 @@ span {
     background-color: var(--accent-dark);
 }
 
+
+
+#userThemePage
 
 /* PREBUILT THEMES */
 
@@ -176,4 +205,44 @@ span {
 }
 #sepia-cream {
     background-color: #fcfacc;
+}
+
+
+#daytime-light {
+    background-color: #fdf7e3; 
+}
+#daytime-dark {
+    background-color: #b5a68d; 
+}
+#daytime-accent-light {
+    background-color: #ffe8a3; 
+}
+#daytime-accent-medium {
+    background-color: #ffd36b; 
+}
+#daytime-accent-dark {
+    background-color: #c9a227; 
+}
+#daytime-cream {
+    background-color: #fff9e6; 
+}
+
+
+#roses-light {
+    background-color: #fae1dd; 
+}
+#roses-dark {
+    background-color: #6d3e3e; 
+}
+#roses-accent-light {
+    background-color: #f8c8dc; 
+}
+#roses-accent-medium {
+    background-color: #e58f8f; 
+}
+#roses-accent-dark {
+    background-color: #a44e4e; 
+}
+#roses-cream {
+    background-color: #fff5f3; 
 }
