@@ -25,7 +25,7 @@ async function GetChartData(totalOrDaily) {
             const todayData = timeData[site].days.find(day => day.date === today)
             if (todayData !== undefined) {
                 names.push(site)
-                times.push(todayData.time)
+                times.push(todayData.time / 3600)
             }
         })
     }
@@ -113,37 +113,41 @@ export function ChartPopupLogic () {
     document.getElementById("lineButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
         const trackedSites = await GetLocalData("trackedSites")
-        const siteDays = Object.entries(trackedSites)
-
-        console.log(siteDays)
-
-        const totalTimePerDay = {}
-        siteDays.forEach(sd => {
-            if (totalTimePerDay[sd.date] === undefined)
-                totalTimePerDay[sd.date] = sd.time
-            else 
-                totalTimePerDay[sd.date] += sd.time
+        let totalTimePerDay = {}
+        Object.entries(trackedSites).forEach(entry => {
+            entry[1].days.forEach(day => {
+                const hours = day.time / 3600
+                if (totalTimePerDay[day.date] === undefined)
+                    totalTimePerDay[day.date] = hours
+                else 
+                    totalTimePerDay[day.date] += hours
+            })
         })
-        const siteNames = Object.keys(totalTimePerDay)
-        const siteTimes = Object.values(totalTimePerDay)
+        totalTimePerDay = Object.entries(totalTimePerDay)
+        totalTimePerDay.sort((a, b) => new Date(a[0]) - new Date(b[0]))
+        const siteNames = totalTimePerDay.map(entry => entry[0])
+        const siteTimes = totalTimePerDay.map(entry => entry[1])
 
-        // if (currentChart) {
-        //     currentChart.destroy()
-        // }
+        console.log(siteNames)
+        console.log(siteTimes)
 
-        // currentChart = new Chart(chart, {
-        //     type: "line",
-        //     data: {
-        //         labels: siteNames,
-        //         datasets: [
-        //             {
-        //                 label: " Hours",
-        //                 data: siteTimes,
-        //                 backgroundColor: chartColors
-        //             }
-        //         ]
-        //     }
-        // })
+        if (currentChart) {
+            currentChart.destroy()
+        }
+
+        currentChart = new Chart(chart, {
+            type: "line",
+            data: {
+                labels: siteNames,
+                datasets: [
+                    {
+                        label: " Hours",
+                        data: siteTimes,
+                        backgroundColor: chartColors
+                    }
+                ]
+            }
+        })
     })
 
     document.getElementById("checkMoreButton").addEventListener("click", () => {

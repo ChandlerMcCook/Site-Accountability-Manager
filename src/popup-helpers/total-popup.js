@@ -22,6 +22,7 @@ export async function RefreshTable() {
         return
     }
 
+    // sort total or daily and by usage time
     const mode = await GetLocalData("totalOrDaily")
     const today = new Date().toLocaleDateString()
     if (mode === "total") {
@@ -32,8 +33,6 @@ export async function RefreshTable() {
             timeForEntry = (timeForEntry !== undefined) ? timeForEntry : 0
             return [entry[0], timeForEntry]
         })
-
-        console.log(trackedWebsiteEntries)
     }
     trackedWebsiteEntries.sort((a, b) => b[1] - a[1])
 
