@@ -13,27 +13,32 @@ export async function RefreshTable() {
     const tracker = await GetLocalData("trackedSites")
     const blocked = await GetLocalData("blockedSites")
 
-    const domainsOfSites = Object.entries(tracker)
+    let trackedWebsiteEntries = Object.entries(tracker)
 
-    if (domainsOfSites.length === 0) {
+    if (trackedWebsiteEntries.length === 0) {
         const noWebsitesText = document.createTextNode("No websites currently tracked :)")
         timeList.appendChild(noWebsitesText)
         timeList.style.display = "flex"
+        return
     }
 
+    const mode = await GetLocalData("totalOrDaily")
+    const today = new Date().toLocaleDateString()
+    if (mode === "total") {
+        trackedWebsiteEntries = trackedWebsiteEntries.map(entry => [entry[0], entry[1].overall])
+    } else {
+        trackedWebsiteEntries = trackedWebsiteEntries.map(entry => {
+            let timeForEntry = entry[1].days.find(day => day.date === today)?.time
+            timeForEntry = (timeForEntry !== undefined) ? timeForEntry : 0
+            return [entry[0], timeForEntry]
+        })
+
+        console.log(trackedWebsiteEntries)
+    }
+    trackedWebsiteEntries.sort((a, b) => b[1] - a[1])
+
     // build the table of tracked websites
-    domainsOfSites.forEach(async ([domain, domainTimeData]) => {
-        const mode = await GetLocalData("totalOrDaily")
-
-        let time
-        if (mode === "total") {
-            time = domainTimeData.overall
-        } else {
-            const today = new Date().toLocaleDateString()
-            time = domainTimeData.days.find(day => day.date === today)?.time
-            time = (time !== undefined) ? time : 0
-        }
-
+    trackedWebsiteEntries.forEach(async ([domain, time]) => {
         const hours = time / 3600
         const minutes = Math.floor(time / 60) % 60
         const seconds = time % 60
