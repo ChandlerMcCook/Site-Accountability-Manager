@@ -2,18 +2,22 @@
 
 ## Overview
 
-The Website Usage Tracker Chrome Extension helps users monitor their browsing habits by tracking total, daily, and monthly website usage. Inspired by Android's Digital Wellbeing, this extension provides insights into screen time and allows users to set timers or block specific websites for better productivity and digital wellbeing.
+![picture of extension](https://i.imgur.com/zHkNTrW.png)
+
+The Website Usage Tracker Chrome Extension helps users monitor their browsing habits by tracking total and daily website usage. Inspired by Android's Digital Wellbeing, this extension provides insights into screen time and allows users to set timers or block specific websites for better productivity and digital wellbeing.
 
 
 ## Features
 
 **Total Usage Tracking**: Monitor total time spent on websites, similar to steam game tracking total hours
 
-**Daily & Monthly Reports**: View detailed usage statistics over time.
+**Daily Reports**: View detailed usage statistics day by day.
 
 **Site Timers**: Set time limits for specific websites.
 
 **Website Blocking**: Restrict access to certain websites after the time limit is reached.
+
+**Variety of Themes**: A variety of default color themes are offered with the ability to generate your own themes.
 
 **User-Friendly Interface**: A clean and intuitive UI for easy tracking and management.
 
@@ -22,11 +26,15 @@ The Website Usage Tracker Chrome Extension helps users monitor their browsing ha
 
 1. Download or clone this repository.
 
-2. Open Chrome and navigate to chrome://extensions/.
+2. Type npm install in project directory
 
-3. Enable "Developer mode" (toggle in the top right corner).
+3. Type npm run build to build the dist folder
 
-4. Click "Load unpacked" and select the extension folder.
+4. Open Chrome and navigate to chrome://extensions/.
+
+5. Enable "Developer mode" (toggle in the top right corner).
+
+6. Click "Load unpacked" and select the dist folder in the project directory.
 
 The extension will now be installed and visible in your toolbar.
 
@@ -40,8 +48,6 @@ At a later point I will upload the extension to the chrome webstore
 **Customizable Alerts**: Notifications before reaching limits.
 
 **Category-Based Limits**: Restrict entire categories (e.g., social media, news).
-
-**Dark Mode Support**
 
 
 ## Contributing
