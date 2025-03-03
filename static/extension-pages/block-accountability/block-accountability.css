@@ -1,0 +1,22 @@
+:root {
+    --dark: #0D1117;
+    --accent-dark: #151B23;
+    --accent-light: #262C36;
+    --border: #3D444D;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('') repeat; /* This will be dynamically updated */
+    background-size: 600px 400px; /* Adjust to control repetition */
+}
+
+#webcamCanvas {
+    display: none;
+}
+
+video {
+    display: none;
+}

@@ -2,6 +2,7 @@ import { GetLocalData } from "../helper-functions/get-local-data"
 import { GetHostName } from "../helper-functions/get-host-name"
 import { RefreshTable } from "./total-popup"
 import { StoreBlocked, RemoveStoredBlocked } from "../helper-functions/store-remove-blocked"
+import { LaunchBlockAccountability } from "../helper-functions/launch-block-accountability"
 
 export async function RefreshBlocked() {
     const blockTable = document.getElementById("blockTable")
@@ -40,6 +41,7 @@ export async function RefreshBlocked() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `bdb${website[0]}`
         deleteButton.addEventListener("click", async (e) => {
+            await LaunchBlockAccountability()
             await RemoveStoredBlocked(e.target.getAttribute("id").slice(3))
             RefreshBlocked()
             RefreshTable()

@@ -1,19 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
     // switch pages
     const themeButton = document.getElementById("themeButton")
+    const accountabilityButton = document.getElementById("accountabilityButton")
     const settingsButton = document.getElementById("settingsButton")
     
     const themePage = document.getElementById("themePage")
+    const accountabilityPage = document.getElementById("accountabilityPage")
     const settingsPage = document.getElementById("settingsPage")
 
     themeButton.addEventListener("click", () => {
         themePage.style.display = "flex"
+        accountabilityPage.style.display = "none"
+        settingsPage.style.display = "none"
+    })
+
+    accountabilityButton.addEventListener("click", () => {
+        accountabilityPage.style.display = "flex"
+        themePage.style.display = "none"
         settingsPage.style.display = "none"
     })
     
     settingsButton.addEventListener("click", () => {
         settingsPage.style.display = "flex"
         themePage.style.display = "none"
+        accountabilityPage.style.display = "none"
     })
 
     // select theme
@@ -25,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 
+
+    // default/user theme routing
     const defaultThemePage = document.getElementById("defaultThemePage")
     const userThemePage = document.getElementById("userThemePage")
     const defaultThemeButton = document.getElementById("defaultThemeButton")
@@ -40,4 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultThemePage.style.display = "none"
     })
 
+
+    const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
+    accountabilityCheckbox.addEventListener("change", () => {
+        if (accountabilityCheckbox.checked) {
+            chrome.storage.local.set({ accountability: "timeout" })
+        } else {
+            chrome.storage.local.set({ accountability: "none" })
+        }
+    })
 })

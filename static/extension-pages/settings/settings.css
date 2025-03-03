@@ -1,5 +1,6 @@
 @import url("css/theme.css");
 
+
 :root {
     --dark: #0D1117;
     --accent-dark: #151B23;
@@ -59,6 +60,9 @@ button {
     background-color: var(--dark);
 }
 
+#accountabilityPage {
+    display: none;
+}
 
 #settingsPage {
     display: none;
