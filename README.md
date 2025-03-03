@@ -2,7 +2,7 @@
 
 ## Overview
 
-![picture of extension](https://i.imgur.com/zHkNTrW.png)
+![picture of extension](https://i.imgur.com/djmIn05.png)
 
 The Website Usage Tracker Chrome Extension helps users monitor their browsing habits by tracking total and daily website usage. Inspired by Android's Digital Wellbeing, this extension provides insights into screen time and allows users to set timers or block specific websites for better productivity and digital wellbeing.
 
