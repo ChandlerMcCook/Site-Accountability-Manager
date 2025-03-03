@@ -41,8 +41,8 @@ export async function RefreshBlocked() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `bdb${website[0]}`
         deleteButton.addEventListener("click", async (e) => {
-            await LaunchBlockAccountability()
-            await RemoveStoredBlocked(e.target.getAttribute("id").slice(3))
+            const domain = e.target.getAttribute("id").slice(3)
+            await LaunchBlockAccountability(domain)
             RefreshBlocked()
             RefreshTable()
         })

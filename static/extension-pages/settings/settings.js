@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { GetLocalData } from "@helpers/get-local-data.js"
+
+document.addEventListener("DOMContentLoaded", async () => {
     // switch pages
     const themeButton = document.getElementById("themeButton")
     const accountabilityButton = document.getElementById("accountabilityButton")
@@ -52,8 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultThemePage.style.display = "none"
     })
 
-
+    const curAccountability = await GetLocalData("accountability")
     const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
+    if (curAccountability === "none")
+        accountabilityCheckbox.checked = false
+    else {
+        accountabilityCheckbox.checked = true
+    }
     accountabilityCheckbox.addEventListener("change", () => {
         if (accountabilityCheckbox.checked) {
             chrome.storage.local.set({ accountability: "timeout" })
