@@ -3,6 +3,7 @@ import { GetHostName } from "../helper-functions/get-host-name"
 import { RefreshBlocked } from "./block-popup"
 import { StoreTracked, RemoveStoredTracked } from "../helper-functions/store-remove-tracked"
 import { StoreBlocked, RemoveStoredBlocked } from "../helper-functions/store-remove-blocked"
+import { LaunchBlockAccountability } from "../helper-functions/launch-block-accountability"
 
 export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
@@ -77,7 +78,7 @@ export async function RefreshTable() {
             let blockedSites = Object.keys(await GetLocalData("blockedSites"))
 
             if (blockedSites.includes(siteClicked)) {
-                await RemoveStoredBlocked(siteClicked)
+                await LaunchBlockAccountability(siteClicked)
             } else {
                 await StoreBlocked(siteClicked)
             }
