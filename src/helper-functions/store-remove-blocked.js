@@ -2,17 +2,17 @@ import { GetLocalData } from "./get-local-data"
 
 export async function StoreBlocked(name) {
     const blockedSites = await GetLocalData("blockedSites")
-    if (blockedSites.includes(name)) {
+    if (name in blockedSites) {
         alert("Website is already blocked")
         return false 
     }
-    blockedSites.push(name)
+    blockedSites[name] = new Date().toLocaleDateString()
     chrome.storage.local.set({ blockedSites: blockedSites })
     return true
 }
 
 export async function RemoveStoredBlocked(name) {
     let blockedSites = await GetLocalData("blockedSites")
-    blockedSites = blockedSites.filter(s => s !== name)
+    delete blockedSites[name]
     chrome.storage.local.set({ blockedSites: blockedSites })
 }

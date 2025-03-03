@@ -13,7 +13,7 @@ async function TrackWebsite() {
 
     const domain = GetHostName(tab.url)
 
-    if (blockedSites.includes(domain)) {
+    if (domain in blockedSites) {
         const blockUrl = chrome.runtime.getURL("extension-pages/blocked-site/blocked-site.html")
         await chrome.tabs.update(tab.id, { url: blockUrl })
         return

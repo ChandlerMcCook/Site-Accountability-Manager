@@ -11,7 +11,7 @@ export async function RefreshTable() {
     }
 
     const tracker = await GetLocalData("trackedSites")
-    const blocked = await GetLocalData("blockedSites")
+    const blocked = Object.keys(await GetLocalData("blockedSites"))
 
     let trackedWebsiteEntries = Object.entries(tracker)
 
@@ -74,7 +74,7 @@ export async function RefreshTable() {
         blockButton.addEventListener("click", async (e) => {
             const siteClicked = e.target.getAttribute("id").slice(2)
 
-            let blockedSites = await GetLocalData("blockedSites")
+            let blockedSites = Object.keys(await GetLocalData("blockedSites"))
 
             if (blockedSites.includes(siteClicked)) {
                 await RemoveStoredBlocked(siteClicked)

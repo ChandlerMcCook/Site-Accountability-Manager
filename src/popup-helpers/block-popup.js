@@ -9,7 +9,8 @@ export async function RefreshBlocked() {
         blockTable.removeChild(blockTable.lastChild)
     }
 
-    const blocked = await GetLocalData("blockedSites")
+    const blockedSites = await GetLocalData("blockedSites")
+    const blocked = Object.entries(blockedSites)
     
     if (blocked.length === 0) {
         const noWebsitesText = document.createTextNode("No websites currently blocked :)")
@@ -20,16 +21,15 @@ export async function RefreshBlocked() {
     }
 
     blocked.forEach(async website => {
-
         // create img element
         const domainImg = document.createElement("img")
-        domainImg.src = `https://www.google.com/s2/favicons?sz=24&domain_url=${website}`
+        domainImg.src = `https://www.google.com/s2/favicons?sz=24&domain_url=${website[0]}`
         const imageNode = document.createElement("td")
         imageNode.appendChild(domainImg)
         imageNode.className = "tableImage"
 
         // create website name element
-        const name = document.createTextNode(website)
+        const name = document.createTextNode(website[0])
         const nameNode = document.createElement("td")
         nameNode.appendChild(name)
 
@@ -38,7 +38,7 @@ export async function RefreshBlocked() {
         // create delete button element
         const deleteButton = document.createElement("button")
         deleteButton.className = "deleteButton"
-        deleteButton.id = `bdb${website}`
+        deleteButton.id = `bdb${website[0]}`
         deleteButton.addEventListener("click", async (e) => {
             await RemoveStoredBlocked(e.target.getAttribute("id").slice(3))
             RefreshBlocked()
@@ -48,9 +48,21 @@ export async function RefreshBlocked() {
         dbNode.className = "tableButton"
         dbNode.appendChild(deleteButton)
 
+        // create block streak element
+        const streakFlameImage = document.createElement("img")
+        streakFlameImage.src = "../../images/ui-images/flame.gif"
+        const streakValue = Math.floor(
+            (new Date() - new Date(website[1])) / (1000 * 60 * 60 * 24)
+        )
+        const streakNode = document.createTextNode(streakValue)
+        const blockStreakNode = document.createElement("td")
+        blockStreakNode.append(streakFlameImage, streakNode)
+        blockStreakNode.className = "tableImage"
+
+
         // add elements to table
         const row = document.createElement("tr")
-        row.append(imageNode, nameNode, dbNode)
+        row.append(imageNode, nameNode, blockStreakNode, dbNode)
         blockTable.appendChild(row)
     })
 }
