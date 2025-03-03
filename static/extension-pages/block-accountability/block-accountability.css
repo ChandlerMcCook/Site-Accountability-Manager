@@ -6,17 +6,36 @@
 }
 
 body {
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    background: url('') repeat; /* This will be dynamically updated */
-    background-size: 600px 400px; /* Adjust to control repetition */
+    background-color: var(--dark);
 }
 
-#webcamCanvas {
-    display: none;
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
 }
 
 video {
-    display: none;
+    /* min-height: calc(60vw * (9/16)); */
+    min-height: auto;
+    min-width: 60vw;
+    border: 10px solid var(--border);
+    border-radius: 8px;
+}
+
+#countdown {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    background: var(--accent-dark);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    text-align: center;
+    min-width: 80px;
 }

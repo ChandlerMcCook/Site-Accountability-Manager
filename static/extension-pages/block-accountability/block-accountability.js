@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const video = document.getElementById("webcamVideo")
-    const canvas = document.getElementById("webcamCanvas")
-    const context = canvas.getContext("2d")
-
+    
     try {
         if (!navigator.mediaDevices?.getUserMedia) {
             throw new Error("getUserMedia is not supported on this browser.");
@@ -10,19 +8,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
-        
-        video.addEventListener("loadedmetadata", () => {
-            canvas.width = 600
-            canvas.height = 400
-    
-            const draw = () => {
-                context.drawImage(video, 0, 0, canvas.width, canvas.height)
-                document.body.style.backgroundImage = `url('${canvas.toDataURL()}')`
-                requestAnimationFrame(draw)
-            }
-            draw()
-        })
     } catch (error) {
         console.log("Something went wrong!", error);
     }
+
+    const countdown = document.getElementById("countdown")
+
+    let timeLeft = 30
+    const updateCountdown = () => {
+        if (timeLeft > 0) {
+            countdown.textContent = timeLeft
+            timeLeft--
+        } else {
+            clearInterval(intervalId)
+            countdown.textContent = "Unblock"
+            countdown.addEventListener("click", () => {
+
+            })
+        }
+    }
+    
+    const intervalId = setInterval(updateCountdown, 1000)
+    updateCountdown()
 })
