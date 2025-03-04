@@ -17,6 +17,8 @@ body {
     padding: 0;
     overflow-x: hidden;
     color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,12 +44,19 @@ button {
     height: 2vw;
     width: 5vw;
     min-height: 30px;
-    min-width: 100px;
+    min-width: 110px;
     max-height: 50px;
     border-radius: 8px;
     background-color: var(--accent-light);
     color: white;
+    font-size: 1rem;
     border: 1px solid var(--border);
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--border);
 }
 
 #content {

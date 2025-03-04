@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             chartDiv.style.display = "flex"
         } else if (visiblePage == "chart") {
             content.dataset.visiblePage = "block"
-            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/clock-theme1.png\")"
+            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/clock.png\")"
 
             chartDiv.style.display = "none"
             blockDiv.style.display = "flex"

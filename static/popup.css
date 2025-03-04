@@ -6,6 +6,10 @@
     display: none;
 }
 
+::placeholder {
+    color: #fcfacc;
+}
+
 body {
     background-color: var(--dark);
 }
