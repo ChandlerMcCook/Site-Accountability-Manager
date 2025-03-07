@@ -81,6 +81,7 @@ button:hover {
 }
 
 #whitelistContainer {
+    display: none;
     background-color: var(--accent-dark);
     padding: 16px;
     border: 2px solid var(--border);

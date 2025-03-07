@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         defaultThemePage.style.display = "none"
     })
 
+    // accountability checkbox logic
     const curAccountability = await GetLocalData("accountability")
     const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
     if (curAccountability === "none" || curAccountability === undefined) {
@@ -69,21 +70,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
 
+    // whitelist checkbox logic
     const curWhitelist = await GetLocalData("whitelist")
     const whitelistCheckbox = document.getElementById("whitelistCheckbox")
-    const whitelistDiv = document.getElementById("whitelistDiv")
-    if (whitelistCheckbox === false || whitelistCheckbox === undefined) {
+    const whitelistContainer = document.getElementById("whitelistContainer")
+    if (curWhitelist === false || curWhitelist === undefined) {
         whitelistCheckbox.checked = false
     } else {
         whitelistCheckbox.checked = true
+        whitelistContainer.style.display = "inline"
     } 
     whitelistCheckbox.addEventListener("change", () => {
         if (whitelistCheckbox.checked) {
             chrome.storage.local.set({ whitelist: true })
-            whitelistDiv.style.display = "flex"
+            whitelistContainer.style.display = "inline"
         } else {
             chrome.storage.local.set({ whitelist: false })
-            whitelistDiv.style.display = "none"
+            whitelistContainer.style.display = "none"
         }
+    })
+
+    const createPresetButton = document.getElementById("createPreset")
+    createPresetButton.addEventListener("click", () => {
+        
     })
 })
