@@ -125,11 +125,27 @@
 
                     <div id="userThemePage">
                         <div class="themeScrollChooser">
-                            <div id="themeViewer">
-
-                            </div>
+                            <div id="themeViewer"></div>
                             <div id="themeBuilder">
-                                
+                                <label for="cream-input">Cream: #</label>
+                                <input type="text" id="cream-input">
+                                <br>
+                                <label for="light-input">Light: #</label>
+                                <input type="text" id="light-input">
+                                <br>
+                                <label for="accent-light-input">Accent-Light: #</label>
+                                <input type="text" id="accent-light-input">
+                                <br>
+                                <label for="accent-medium-input">Accent-Medium: #</label>
+                                <input type="text" id="accent-medium-input">
+                                <br>
+                                <label for="accent-dark-input">Accent-Dark: #</label>
+                                <input type="text" id="accent-dark-input">
+                                <br>
+                                <label for="dark-input">Dark: #</label>
+                                <input type="text" id="dark-input">
+                                <br>
+                                <button>Create</button>
                             </div>
                         </div>
                     </div>
@@ -143,7 +159,35 @@
             </div>
 
             <div id="settingsPage">
-                <p>settings</p>
+                <div>
+                    <input type="checkbox" id="whitelistCheckbox">
+                    <label for="whitelistCheckbox">Whitelist Mode</label>
+                </div>
+
+                <div id="whitelistContainer">
+                    <div id="whitelistSettings">
+                        <select id="presetDropdown">
+                            <option value="" disabled selected>Select a Preset</option>
+                        </select>
+                
+                        <div id="presetButtons">
+                            <button id="createPreset">New Preset</button>
+                            <button id="editPreset">Edit Preset</button>
+                            <button id="deletePreset">Delete Preset</button>
+                        </div>
+                
+                        <table id="whitelistTable">
+                            <thead>
+                                <tr>
+                                    <th>Website</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </body>

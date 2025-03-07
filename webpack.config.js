@@ -5,13 +5,13 @@ module.exports = {
     entry: {
         popup: "./src/popup.js",
         background: "./src/background.js",
-        settings: "./static/extension-pages/settings/settings.js", // Process settings.js
+        settings: "./static/extension-pages/settings/settings.js", 
         "block-accountability": "./static/extension-pages/block-accountability/block-accountability.js"
     },
     output: {
         filename: (pathData) => {
             return (pathData.chunk.name !== "popup" && pathData.chunk.name !== "background")
-                ? `extension-pages/${pathData.chunk.name}/${pathData.chunk.name}.js` // Keep settings.js in the correct folder
+                ? `extension-pages/${pathData.chunk.name}/${pathData.chunk.name}.js` 
                 : "[name].js";
         },
         path: path.resolve(__dirname, "dist")
@@ -19,9 +19,9 @@ module.exports = {
     mode: "production",
     watch: true,
     resolve: {
-        modules: [path.resolve(__dirname, "src"), "node_modules"], // Allow imports from src
+        modules: [path.resolve(__dirname, "src"), "node_modules"], 
         alias: {
-            "@helpers": path.resolve(__dirname, "src/helper-functions") // Shortcut for helper imports
+            "@helpers": path.resolve(__dirname, "src/helper-functions") 
         }
     },
     module: {
@@ -29,9 +29,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, "src"),   // Process src JS files
-                    path.resolve(__dirname, "static/extension-pages/settings"), // Process settings.js
-                    path.resolve(__dirname, "static/extension-pages/block-accountability") // Process block-accountability.js
+                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, "static/extension-pages/settings"),
+                    path.resolve(__dirname, "static/extension-pages/block-accountability")
                 ],
                 use: "babel-loader"
             },
@@ -50,13 +50,13 @@ module.exports = {
             patterns: [
                 {
                     from: "static/extension-pages", 
-                    to: "extension-pages" // Copies everything inside static/extension-pages to dist/extension-pages
+                    to: "extension-pages"
                 },
                 {
                     from: "static", 
-                    to: ".", // Copy everything inside static but place directly into dist/ (no "static" folder)
+                    to: ".",
                     globOptions: {
-                        ignore: ["extension-pages/**"] // Prevents double copying of extension-pages
+                        ignore: ["extension-pages/**"]
                     }
                 }
             ]

@@ -7,35 +7,48 @@
 
 body {
     background-color: var(--dark);
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
 #container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
 }
 
 video {
-    /* min-height: calc(60vw * (9/16)); */
     min-height: auto;
     min-width: 60vw;
     border: 10px solid var(--border);
     border-radius: 8px;
 }
 
-#countdown {
+#goBackText {
+    color: white;
+}
+
+#countdownDiv {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#countdown {
     font-size: 2rem;
     font-weight: bold;
     color: white;
+    text-align: center;
     background: var(--accent-dark);
     padding: 10px 20px;
     border-radius: 8px;
     border: 2px solid var(--border);
-    text-align: center;
     min-width: 80px;
 }

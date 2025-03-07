@@ -56,9 +56,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const curAccountability = await GetLocalData("accountability")
     const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
-    if (curAccountability === "none")
+    if (curAccountability === "none" || curAccountability === undefined) {
         accountabilityCheckbox.checked = false
-    else {
+    } else {
         accountabilityCheckbox.checked = true
     }
     accountabilityCheckbox.addEventListener("change", () => {
@@ -66,6 +66,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             chrome.storage.local.set({ accountability: "timeout" })
         } else {
             chrome.storage.local.set({ accountability: "none" })
+        }
+    })
+
+    const curWhitelist = await GetLocalData("whitelist")
+    const whitelistCheckbox = document.getElementById("whitelistCheckbox")
+    const whitelistDiv = document.getElementById("whitelistDiv")
+    if (whitelistCheckbox === false || whitelistCheckbox === undefined) {
+        whitelistCheckbox.checked = false
+    } else {
+        whitelistCheckbox.checked = true
+    } 
+    whitelistCheckbox.addEventListener("change", () => {
+        if (whitelistCheckbox.checked) {
+            chrome.storage.local.set({ whitelist: true })
+            whitelistDiv.style.display = "flex"
+        } else {
+            chrome.storage.local.set({ whitelist: false })
+            whitelistDiv.style.display = "none"
         }
     })
 })

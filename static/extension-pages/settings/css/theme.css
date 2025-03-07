@@ -64,6 +64,10 @@ span {
     text-align: center;
 }
 
+/* input {
+    background-color: var(--border);
+} */
+
 .palette {
     height: 50px;
     width: 20vw;
@@ -94,6 +98,9 @@ span {
 
 #themeBuilder {
     flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: var(--accent-light);
     border: 1px solid var(--border);
 }
