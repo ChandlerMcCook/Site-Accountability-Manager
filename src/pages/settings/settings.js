@@ -1,4 +1,4 @@
-import { GetLocalData } from "@helpers/get-local-data.js"
+import { getLocalData } from "../../helper-functions/getLocalData"
 
 document.addEventListener("DOMContentLoaded", async () => {
     // switch pages
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
 
     // accountability checkbox logic
-    const curAccountability = await GetLocalData("accountability")
+    const curAccountability = await getLocalData("accountability")
     const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
     if (curAccountability === "none" || curAccountability === undefined) {
         accountabilityCheckbox.checked = false
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
 
     // whitelist checkbox logic
-    const curWhitelist = await GetLocalData("whitelist")
+    const curWhitelist = await getLocalData("whitelist")
     const whitelistCheckbox = document.getElementById("whitelistCheckbox")
     const whitelistContainer = document.getElementById("whitelistContainer")
     if (curWhitelist === false || curWhitelist === undefined) {

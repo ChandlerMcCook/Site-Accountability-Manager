@@ -1,8 +1,8 @@
-import { GetLocalData } from "../helper-functions/get-local-data"
-import { GetHostName } from "../helper-functions/get-host-name"
-import { RefreshTable } from "./total-popup"
-import { StoreBlocked, RemoveStoredBlocked } from "../helper-functions/store-remove-blocked"
-import { LaunchBlockAccountability } from "../helper-functions/launch-block-accountability"
+import { getLocalData } from "../helper-functions/getLocalData"
+import { getHostName } from "../helper-functions/getHostName"
+import { RefreshTable } from "./totalPopup"
+import { storeBlocked, removeStoredBlocked } from "../helper-functions/storeRemoveBlocked"
+import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
 
 export async function RefreshBlocked() {
     const blockTable = document.getElementById("blockTable")
@@ -10,7 +10,7 @@ export async function RefreshBlocked() {
         blockTable.removeChild(blockTable.lastChild)
     }
 
-    const blockedSites = await GetLocalData("blockedSites")
+    const blockedSites = await getLocalData("blockedSites")
     const blocked = Object.entries(blockedSites)
     
     if (blocked.length === 0) {
@@ -42,7 +42,7 @@ export async function RefreshBlocked() {
         deleteButton.id = `bdb${website[0]}`
         deleteButton.addEventListener("click", async (e) => {
             const domain = e.target.getAttribute("id").slice(3)
-            await LaunchBlockAccountability(domain)
+            await launchBlockAccountability(domain)
             RefreshBlocked()
             RefreshTable()
         })
@@ -79,15 +79,15 @@ async function AddBlockedWebsite() {
         return
     }
 
-    const domainName = GetHostName(domain)
+    const domainName = getHostName(domain)
 
-    await StoreBlocked(domainName)
+    await storeBlocked(domainName)
 
     RefreshTable()
     RefreshBlocked()
 }
 
-export function BlockPopupLogic() {
+export function blockPopupLogic() {
     // populate blocked table on startup
     RefreshBlocked()
 

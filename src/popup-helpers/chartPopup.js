@@ -1,11 +1,11 @@
 import { Chart, registerables } from "chart.js"
-import { GetLocalData } from "../helper-functions/get-local-data"
+import { getLocalData } from "../helper-functions/getLocalData"
 
 let currentChart = null
 const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
 
 async function GetChartData(totalOrDaily) {
-    const timeData = await GetLocalData("trackedSites")
+    const timeData = await getLocalData("trackedSites")
     const today = new Date().toLocaleDateString()
 
     const websites = Object.keys(timeData)
@@ -35,7 +35,7 @@ async function GetChartData(totalOrDaily) {
 
 export async function RefreshChart() {
     const chart = document.getElementById("chart")
-    const totalOrDaily = await GetLocalData("totalOrDaily")
+    const totalOrDaily = await getLocalData("totalOrDaily")
     const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
     
     if (currentChart) {
@@ -58,12 +58,12 @@ export async function RefreshChart() {
     })
 }
 
-export function ChartPopupLogic () {
+export function chartPopupLogic () {
     Chart.register(...registerables)
     
     document.getElementById("pieButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const totalOrDaily = await GetLocalData("totalOrDaily")
+        const totalOrDaily = await getLocalData("totalOrDaily")
         const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
         
         if (currentChart) {
@@ -88,7 +88,7 @@ export function ChartPopupLogic () {
 
     document.getElementById("barButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const totalOrDaily = await GetLocalData("totalOrDaily")
+        const totalOrDaily = await getLocalData("totalOrDaily")
         const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
         
         if (currentChart) {
@@ -112,7 +112,7 @@ export function ChartPopupLogic () {
 
     document.getElementById("lineButton").addEventListener("click", async () => {
         const chart = document.getElementById("chart")
-        const trackedSites = await GetLocalData("trackedSites")
+        const trackedSites = await getLocalData("trackedSites")
         let totalTimePerDay = {}
         Object.entries(trackedSites).forEach(entry => {
             entry[1].days.forEach(day => {

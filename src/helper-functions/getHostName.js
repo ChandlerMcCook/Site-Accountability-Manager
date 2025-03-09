@@ -1,4 +1,4 @@
-export function GetHostName(url) {
+export function getHostName(url) {
     let hostname;
     if (url == undefined) return ""
   

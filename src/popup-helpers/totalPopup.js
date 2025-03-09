@@ -1,9 +1,9 @@
-import { GetLocalData } from "../helper-functions/get-local-data"
-import { GetHostName } from "../helper-functions/get-host-name"
-import { RefreshBlocked } from "./block-popup"
-import { StoreTracked, RemoveStoredTracked } from "../helper-functions/store-remove-tracked"
-import { StoreBlocked, RemoveStoredBlocked } from "../helper-functions/store-remove-blocked"
-import { LaunchBlockAccountability } from "../helper-functions/launch-block-accountability"
+import { getLocalData } from "../helper-functions/getLocalData"
+import { getHostName } from "../helper-functions/getHostName"
+import { RefreshBlocked } from "./blockPopup"
+import { StoreTracked, RemoveStoredTracked } from "../helper-functions/storeRemoveTracked"
+import { storeBlocked, removeStoredBlocked } from "../helper-functions/storeRemoveBlocked"
+import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
 
 export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
@@ -11,8 +11,8 @@ export async function RefreshTable() {
         timeList.removeChild(timeList.lastChild)
     }
 
-    const tracker = await GetLocalData("trackedSites")
-    const blocked = Object.keys(await GetLocalData("blockedSites"))
+    const tracker = await getLocalData("trackedSites")
+    const blocked = Object.keys(await getLocalData("blockedSites"))
 
     let trackedWebsiteEntries = Object.entries(tracker)
 
@@ -24,7 +24,7 @@ export async function RefreshTable() {
     }
 
     // sort total or daily and by usage time
-    const mode = await GetLocalData("totalOrDaily")
+    const mode = await getLocalData("totalOrDaily")
     const today = new Date().toLocaleDateString()
     if (mode === "total") {
         trackedWebsiteEntries = trackedWebsiteEntries.map(entry => [entry[0], entry[1].overall])
@@ -75,12 +75,12 @@ export async function RefreshTable() {
         blockButton.addEventListener("click", async (e) => {
             const siteClicked = e.target.getAttribute("id").slice(2)
 
-            let blockedSites = Object.keys(await GetLocalData("blockedSites"))
+            let blockedSites = Object.keys(await getLocalData("blockedSites"))
 
             if (blockedSites.includes(siteClicked)) {
-                await LaunchBlockAccountability(siteClicked)
+                await launchBlockAccountability(siteClicked)
             } else {
-                await StoreBlocked(siteClicked)
+                await storeBlocked(siteClicked)
             }
 
             RefreshTable()
@@ -119,14 +119,14 @@ async function AddTrackedWebsite() {
         return
     }
     
-    const domainName = GetHostName(domain)
+    const domainName = getHostName(domain)
     
     await StoreTracked(domainName)
 
     RefreshTable()
 }
 
-export async function TotalPopupLogic() {
+export async function totalPopupLogic() {
     // populate tracked table on startup
     RefreshTable()
     

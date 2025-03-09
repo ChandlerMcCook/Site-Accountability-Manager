@@ -1,4 +1,4 @@
-import { RemoveStoredBlocked } from "@helpers/store-remove-blocked.js"
+import { removeStoredBlocked } from "../../helper-functions/storeRemoveBlocked.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
     const video = document.getElementById("webcamVideo")
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function Unblock(domain) {
     // get name of blocked site from url query
-    await RemoveStoredBlocked(domain)
+    await removeStoredBlocked(domain)
     chrome.tabs.getCurrent(tab => {
         chrome.tabs.remove(tab.id)
     })
