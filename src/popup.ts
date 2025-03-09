@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     chartPopupLogic()
     blockPopupLogic()
 
-    const totalOrDaily = document.getElementById("totalOrDailyDropdown")
+    const totalOrDaily = document.getElementById("totalOrDailyDropdown") as HTMLSelectElement
     const tdValue = await getLocalData("totalOrDaily")
     totalOrDaily.value = tdValue
     const upperCaseValue = tdValue.charAt(0).toUpperCase() + tdValue.slice(1)
@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("chartTitle").innerHTML = `${upperCaseValue} Time Graphs`
 
     // change to total or daily time
-    totalOrDaily.addEventListener("change", (e) => {
-        const newVal = e.target.value
+    totalOrDaily.addEventListener("change", (e : Event) => {
+        const target = e.target as HTMLSelectElement
+        const newVal = target.value
         chrome.storage.local.set({ totalOrDaily: newVal })
         const upperCaseVal = newVal.charAt(0).toUpperCase() + newVal.slice(1)
         document.getElementById("totalTitle").innerHTML = `${upperCaseVal} time spent`

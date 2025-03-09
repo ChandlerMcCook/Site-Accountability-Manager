@@ -21,7 +21,7 @@ async function TrackWebsite() {
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
     if (!tab || !tab.url) return
 
-    const domain : string = getHostName(tab.url)
+    const domain = getHostName(tab.url)
 
     if (domain in blockedSites) {
         const blockUrl = chrome.runtime.getURL("pages/blockedSite/blockedSite.html")

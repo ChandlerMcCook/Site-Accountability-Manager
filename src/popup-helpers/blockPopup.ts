@@ -41,7 +41,8 @@ export async function RefreshBlocked() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `bdb${website[0]}`
         deleteButton.addEventListener("click", async (e) => {
-            const domain = e.target.getAttribute("id").slice(3)
+            const targetButton = e.target as HTMLButtonElement
+            const domain = targetButton.getAttribute("id").slice(3)
             await launchBlockAccountability(domain)
             RefreshBlocked()
             RefreshTable()
@@ -54,9 +55,9 @@ export async function RefreshBlocked() {
         const streakFlameImage = document.createElement("img")
         streakFlameImage.src = "../../images/ui-images/flame.gif"
         const streakValue = Math.floor(
-            (new Date() - new Date(website[1])) / (1000 * 60 * 60 * 24)
+            (new Date().getTime() - new Date(website[1] as string).getTime()) / (1000 * 60 * 60 * 24)
         )
-        const streakNode = document.createTextNode(streakValue)
+        const streakNode = document.createTextNode(String(streakValue))
         const blockStreakNode = document.createElement("td")
         blockStreakNode.append(streakFlameImage, streakNode)
         blockStreakNode.className = "tableImage"
@@ -70,7 +71,7 @@ export async function RefreshBlocked() {
 }
 
 async function AddBlockedWebsite() {
-    const blockInput = document.getElementById("blockInput")
+    const blockInput = document.getElementById("blockInput") as HTMLInputElement
     const domain = blockInput.value
     blockInput.value = ""
         

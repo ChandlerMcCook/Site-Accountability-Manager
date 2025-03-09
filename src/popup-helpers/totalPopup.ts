@@ -4,6 +4,7 @@ import { RefreshBlocked } from "./blockPopup"
 import { StoreTracked, RemoveStoredTracked } from "../helper-functions/storeRemoveTracked"
 import { storeBlocked, removeStoredBlocked } from "../helper-functions/storeRemoveBlocked"
 import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
+import { TrackedWebsite, TrackedWebsiteMap } from "../interfaces/trackedWebsite"
 
 export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
@@ -11,7 +12,7 @@ export async function RefreshTable() {
         timeList.removeChild(timeList.lastChild)
     }
 
-    const tracker = await getLocalData("trackedSites")
+    const tracker = await getLocalData("trackedSites") as TrackedWebsiteMap
     const blocked = Object.keys(await getLocalData("blockedSites"))
 
     let trackedWebsiteEntries = Object.entries(tracker)
@@ -26,19 +27,20 @@ export async function RefreshTable() {
     // sort total or daily and by usage time
     const mode = await getLocalData("totalOrDaily")
     const today = new Date().toLocaleDateString()
+    let timePerWebsite : [string, number][]
     if (mode === "total") {
-        trackedWebsiteEntries = trackedWebsiteEntries.map(entry => [entry[0], entry[1].overall])
+        timePerWebsite = trackedWebsiteEntries.map((entry : [string, TrackedWebsite]) => [entry[0], entry[1].overall])
     } else {
-        trackedWebsiteEntries = trackedWebsiteEntries.map(entry => {
+        timePerWebsite = trackedWebsiteEntries.map(entry => {
             let timeForEntry = entry[1].days.find(day => day.date === today)?.time
             timeForEntry = (timeForEntry !== undefined) ? timeForEntry : 0
             return [entry[0], timeForEntry]
         })
     }
-    trackedWebsiteEntries.sort((a, b) => b[1] - a[1])
+    timePerWebsite.sort((a, b) => b[1] - a[1])
 
     // build the table of tracked websites
-    trackedWebsiteEntries.forEach(async ([domain, time]) => {
+    timePerWebsite.forEach(async ([domain, time]) => {
         const hours = time / 3600
         const minutes = Math.floor(time / 60) % 60
         const seconds = time % 60
@@ -73,7 +75,8 @@ export async function RefreshTable() {
             blockButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
         }
         blockButton.addEventListener("click", async (e) => {
-            const siteClicked = e.target.getAttribute("id").slice(2)
+            const target = e.target as HTMLButtonElement
+            const siteClicked = target.getAttribute("id").slice(2)
 
             let blockedSites = Object.keys(await getLocalData("blockedSites"))
 
@@ -95,7 +98,8 @@ export async function RefreshTable() {
         deleteButton.className = "deleteButton"
         deleteButton.id = `db${domain}`
         deleteButton.addEventListener("click", async (e) => {
-            await RemoveStoredTracked(e.target.getAttribute("id").slice(2))
+            const target = e.target as HTMLButtonElement
+            await RemoveStoredTracked(target.getAttribute("id").slice(2))
             RefreshTable()
         })
         const dbNode = document.createElement("td")
@@ -110,7 +114,7 @@ export async function RefreshTable() {
 }
 
 async function AddTrackedWebsite() {
-    const newDomain = document.getElementById("newDomain")
+    const newDomain = document.getElementById("newDomain") as HTMLInputElement
     const domain = newDomain.value
     newDomain.value = ""
     
