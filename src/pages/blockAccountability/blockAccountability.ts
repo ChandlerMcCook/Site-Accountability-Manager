@@ -1,4 +1,4 @@
-import { removeStoredBlocked } from "../../helper-functions/storeRemoveBlocked.js"
+import { removeStoredBlocked } from "../../helper-functions/storeRemoveBlocked"
 
 document.addEventListener("DOMContentLoaded", async () => {
     const video = document.getElementById("webcamVideo") as HTMLVideoElement

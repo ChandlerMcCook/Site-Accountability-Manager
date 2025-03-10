@@ -1,8 +1,8 @@
-import { totalPopupLogic, RefreshTable } from "./popup-helpers/totalPopup.js"
-import { chartPopupLogic, RefreshChart } from "./popup-helpers/chartPopup.js" 
-import { blockPopupLogic } from "./popup-helpers/blockPopup.js"
-import { getLocalData } from "./helper-functions/getLocalData.js"
-import { setThemeVariables } from "./helper-functions/setThemeVariables.js"
+import { totalPopupLogic, RefreshTable } from "./popup-helpers/totalPopup"
+import { chartPopupLogic, RefreshChart } from "./popup-helpers/chartPopup" 
+import { blockPopupLogic } from "./popup-helpers/blockPopup"
+import { getLocalData } from "./helper-functions/getLocalData"
+import { setThemeVariables } from "./helper-functions/setThemeVariables"
 
 document.addEventListener("DOMContentLoaded", async () => {
     setThemeVariables()
