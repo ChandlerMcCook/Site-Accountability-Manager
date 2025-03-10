@@ -3,10 +3,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     entry: {
-        popup: "./src/popup.js",
+        popup: "./src/popup.ts",
         background: "./src/background.ts",
-        "pages/blockAccountability/blockAccountability": "./src/pages/blockAccountability/blockAccountability.js",
-        "pages/settings/settings": "./src/pages/settings/settings.js"
+        "pages/blockAccountability/blockAccountability": "./src/pages/blockAccountability/blockAccountability.ts",
+        "pages/settings/settings": "./src/pages/settings/settings.ts"
     },
     module: {
         rules: [
@@ -16,6 +16,9 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
     },
     output: {
         filename: "[name].js",

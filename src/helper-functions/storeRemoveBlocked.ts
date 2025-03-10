@@ -1,6 +1,6 @@
 import { getLocalData } from "./getLocalData"
 
-export async function storeBlocked(name) {
+export async function storeBlocked(name : string) {
     const blockedSites = await getLocalData("blockedSites")
     if (name in blockedSites) {
         alert("Website is already blocked")
@@ -11,7 +11,7 @@ export async function storeBlocked(name) {
     return true
 }
 
-export async function removeStoredBlocked(name) {
+export async function removeStoredBlocked(name : string) {
     let blockedSites = await getLocalData("blockedSites")
     delete blockedSites[name]
     chrome.storage.local.set({ blockedSites: blockedSites })

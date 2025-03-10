@@ -32,8 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const selectThemeButtons = Array.from(document.getElementsByClassName("selectPaletteButton"))
     selectThemeButtons.forEach(button => {
         button.addEventListener("click", (e) => {
-            console.log(e.target.getAttribute("id"))
-            chrome.storage.local.set({ theme: e.target.getAttribute("id") })
+            const target = e.target as HTMLButtonElement
+            console.log(target.getAttribute("id"))
+            chrome.storage.local.set({ theme: target.getAttribute("id") })
         })
     })
 
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // accountability checkbox logic
     const curAccountability = await getLocalData("accountability")
-    const accountabilityCheckbox = document.getElementById("accountabilityCheckbox")
+    const accountabilityCheckbox = document.getElementById("accountabilityCheckbox") as HTMLInputElement
     if (curAccountability === "none" || curAccountability === undefined) {
         accountabilityCheckbox.checked = false
     } else {
@@ -72,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // whitelist checkbox logic
     const curWhitelist = await getLocalData("whitelist")
-    const whitelistCheckbox = document.getElementById("whitelistCheckbox")
+    const whitelistCheckbox = document.getElementById("whitelistCheckbox") as HTMLInputElement
     const whitelistContainer = document.getElementById("whitelistContainer")
     if (curWhitelist === false || curWhitelist === undefined) {
         whitelistCheckbox.checked = false

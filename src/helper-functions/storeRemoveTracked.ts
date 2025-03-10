@@ -1,6 +1,6 @@
 import { getLocalData } from "./getLocalData"
 
-export async function StoreTracked(name) {
+export async function StoreTracked(name : string) {
     const trackedSites = await getLocalData("trackedSites")
     if (name in trackedSites) {
         alert("Website is already tracked")
@@ -14,7 +14,7 @@ export async function StoreTracked(name) {
     return
 }
 
-export async function RemoveStoredTracked(name) {
+export async function RemoveStoredTracked(name : string) {
     let trackedSites = await getLocalData("trackedSites")
     delete trackedSites[name]
     chrome.storage.local.set({ trackedSites: trackedSites })

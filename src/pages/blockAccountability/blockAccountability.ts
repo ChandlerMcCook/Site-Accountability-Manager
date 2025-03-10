@@ -1,7 +1,7 @@
 import { removeStoredBlocked } from "../../helper-functions/storeRemoveBlocked.js"
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const video = document.getElementById("webcamVideo")
+    const video = document.getElementById("webcamVideo") as HTMLVideoElement
     
     try {
         if (!navigator.mediaDevices?.getUserMedia) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let timeLeft = 30
     const updateCountdown = () => {
         if (timeLeft > 0) {
-            countdown.textContent = timeLeft
+            countdown.textContent = String(timeLeft)
             timeLeft--
         } else {
             clearInterval(intervalId)
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateCountdown()
 })
 
-async function Unblock(domain) {
+async function Unblock(domain : string) {
     // get name of blocked site from url query
     await removeStoredBlocked(domain)
     chrome.tabs.getCurrent(tab => {

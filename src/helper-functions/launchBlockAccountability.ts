@@ -1,7 +1,7 @@
 import { getLocalData } from "./getLocalData"
 import { removeStoredBlocked } from "./storeRemoveBlocked"
 
-export async function launchBlockAccountability(domain) {
+export async function launchBlockAccountability(domain : string) {
     const acc = await getLocalData("accountability")
     if (acc === "none") {
         await removeStoredBlocked(domain)
