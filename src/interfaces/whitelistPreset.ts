@@ -1,3 +1,3 @@
-export interface WhitelistPreset {
+export interface WhitelistPresets {
     [key : string]: string[]
 }

@@ -54,7 +54,7 @@
     border-collapse: collapse;
 }
 
-.whitelistTable th, #whitelistTable td {
+.whitelistTable th, .whitelistTable td {
     padding: 8px;
     border-bottom: 1px solid var(--border);
     text-align: left;

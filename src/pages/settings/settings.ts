@@ -1,11 +1,12 @@
 import { getLocalData } from "../../helper-functions/getLocalData"
 import { navbarLogic } from "./settings-helpers/navbar"
 import { themeLogic } from "./settings-helpers/theme"
+import { whitelistLogic } from "./settings-helpers/whitelist"
 
 document.addEventListener("DOMContentLoaded", async () => {
     navbarLogic()
     themeLogic()
-    
+    whitelistLogic()
     
     // accountability checkbox logic
     const curAccountability = await getLocalData("accountability")
@@ -23,26 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
     
-    // whitelist checkbox logic
-    const curWhitelist = await getLocalData("whitelist")
-    const whitelistCheckbox = document.getElementById("whitelistCheckbox") as HTMLInputElement
-    const whitelistContainer = document.getElementById("whitelistContainer")
-    if (curWhitelist === false || curWhitelist === undefined) {
-        whitelistCheckbox.checked = false
-    } else {
-        whitelistCheckbox.checked = true
-        whitelistContainer.style.display = "inline"
-    } 
-    whitelistCheckbox.addEventListener("change", () => {
-        if (whitelistCheckbox.checked) {
-            chrome.storage.local.set({ whitelist: true })
-            whitelistContainer.style.display = "inline"
-        } else {
-            chrome.storage.local.set({ whitelist: false })
-            whitelistContainer.style.display = "none"
-        }
-    })
-
     // modal button logic
     const openModalButtons = document.querySelectorAll('[data-modal-target]') as NodeListOf<HTMLButtonElement>
     const closeModalButtons = document.querySelectorAll("[data-close-modal-button]") as NodeListOf<HTMLButtonElement>
