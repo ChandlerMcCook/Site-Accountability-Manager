@@ -1,5 +1,5 @@
 @import url("css/theme.css");
-
+@import url("css/whitelist.css");
 
 :root {
     --dark: #0D1117;
@@ -69,77 +69,66 @@ button:hover {
     background-color: var(--dark);
 }
 
-#accountabilityPage {
-    display: none;
-}
-
 #settingsPage {
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-#whitelistContainer {
-    display: none;
-    background-color: var(--accent-dark);
-    padding: 16px;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    color: white;
-    min-width: 30vw;
-    margin: 20px auto;
-}
-
-#whitelistSettings {
-    margin-top: 10px;
-}
-
-#presetDropdown {
-    width: 100%;
-    padding: 8px;
-    background-color: var(--accent-light);
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
     border: 1px solid var(--border);
-    color: white;
-    border-radius: 4px;
+    border-radius: 8px;
+    z-index: 10;
+    background-color: var(--accent-dark);
+    width: 700px;
+    max-width: 80%;
 }
 
-#presetButtons {
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modalHeader {
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-}
-
-#presetButtons button {
-    background-color: var(--border);
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#presetButtons button:hover {
-    background-color: var(--accent-light);
-}
-
-#whitelistTable {
-    width: 100%;
-    margin-top: 12px;
-    border-collapse: collapse;
-}
-
-#whitelistTable th, #whitelistTable td {
-    padding: 8px;
+    align-items: center;
     border-bottom: 1px solid var(--border);
-    text-align: left;
 }
 
-#whitelistTable th {
-    background-color: var(--accent-light);
+.modalTitle {
+    font-weight: bold;
 }
 
-#whitelistTable tr:nth-child(even) {
-    background-color: var(--dark);
+.closeModalButton {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: inherit;
 }
 
+.modalBody {
+    padding: 10px 15px;
+}
+
+#overlay {
+   position: fixed;
+   opacity: 0;
+   transition: 200ms ease-in-out;
+   top: 0;
+   left: 0; 
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+   pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}

@@ -11,6 +11,7 @@ chrome.runtime.onInstalled.addListener(details => {
         chrome.storage.local.set({ theme: "green" })
         chrome.storage.local.set({ totalOrDaily: "total" })
         chrome.storage.local.set({ whitelist: false })
+        chrome.storage.local.set({ whitelistPresets: [] })
     }
 })
 
@@ -24,7 +25,7 @@ async function TrackWebsite() {
     const domain = getHostName(tab.url)
 
     if (domain in blockedSites) {
-        const blockUrl = chrome.runtime.getURL("pages/blockedSite/blockedSite.html")
+        const blockUrl = chrome.runtime.getURL("pages/blocked-site/blocked-site.html")
         await chrome.tabs.update(tab.id, { url: blockUrl })
         return
     }

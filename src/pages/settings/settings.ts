@@ -1,60 +1,12 @@
 import { getLocalData } from "../../helper-functions/getLocalData"
+import { navbarLogic } from "./settings-helpers/navbar"
+import { themeLogic } from "./settings-helpers/theme"
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // switch pages
-    const themeButton = document.getElementById("themeButton")
-    const accountabilityButton = document.getElementById("accountabilityButton")
-    const settingsButton = document.getElementById("settingsButton")
+    navbarLogic()
+    themeLogic()
     
-    const themePage = document.getElementById("themePage")
-    const accountabilityPage = document.getElementById("accountabilityPage")
-    const settingsPage = document.getElementById("settingsPage")
-
-    themeButton.addEventListener("click", () => {
-        themePage.style.display = "flex"
-        accountabilityPage.style.display = "none"
-        settingsPage.style.display = "none"
-    })
-
-    accountabilityButton.addEventListener("click", () => {
-        accountabilityPage.style.display = "flex"
-        themePage.style.display = "none"
-        settingsPage.style.display = "none"
-    })
     
-    settingsButton.addEventListener("click", () => {
-        settingsPage.style.display = "flex"
-        themePage.style.display = "none"
-        accountabilityPage.style.display = "none"
-    })
-
-    // select theme
-    const selectThemeButtons = Array.from(document.getElementsByClassName("selectPaletteButton"))
-    selectThemeButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
-            const target = e.target as HTMLButtonElement
-            console.log(target.getAttribute("id"))
-            chrome.storage.local.set({ theme: target.getAttribute("id") })
-        })
-    })
-
-
-    // default/user theme routing
-    const defaultThemePage = document.getElementById("defaultThemePage")
-    const userThemePage = document.getElementById("userThemePage")
-    const defaultThemeButton = document.getElementById("defaultThemeButton")
-    const userThemeButton = document.getElementById("userThemeButton")
-
-    defaultThemeButton.addEventListener("click", () => {
-        defaultThemePage.style.display = "flex"
-        userThemePage.style.display = "none"
-    })
-
-    userThemeButton.addEventListener("click", () => {
-        userThemePage.style.display = "flex"
-        defaultThemePage.style.display = "none"
-    })
-
     // accountability checkbox logic
     const curAccountability = await getLocalData("accountability")
     const accountabilityCheckbox = document.getElementById("accountabilityCheckbox") as HTMLInputElement
@@ -70,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             chrome.storage.local.set({ accountability: "none" })
         }
     })
-
+    
     // whitelist checkbox logic
     const curWhitelist = await getLocalData("whitelist")
     const whitelistCheckbox = document.getElementById("whitelistCheckbox") as HTMLInputElement
@@ -91,8 +43,42 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })
 
-    const createPresetButton = document.getElementById("createPreset")
-    createPresetButton.addEventListener("click", () => {
-        
+    // modal button logic
+    const openModalButtons = document.querySelectorAll('[data-modal-target]') as NodeListOf<HTMLButtonElement>
+    const closeModalButtons = document.querySelectorAll("[data-close-modal-button]") as NodeListOf<HTMLButtonElement>
+    const overlay = document.getElementById("overlay")
+    
+    openModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = document.querySelector(button.dataset.modalTarget)
+            openModal(modal)
+        })
+    })
+    
+    closeModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const modal = button.closest('.modal')
+            closeModal(modal)
+        })
+    })
+    
+    
+    function openModal(modal : Element) {
+        if (modal == null) return
+        modal.classList.add("active")
+        overlay.classList.add("active")
+    }
+    
+    function closeModal(modal : Element) {
+        if (modal == null) return
+        modal.classList.remove("active")
+        overlay.classList.remove("active")
+    }
+    
+    overlay.addEventListener("click", () => {
+        const modals = document.querySelectorAll(".modal.active")
+        modals.forEach(modal => {
+            closeModal(modal)
+        })
     })
 })

@@ -5,8 +5,9 @@ module.exports = {
     entry: {
         popup: "./src/popup.ts",
         background: "./src/background.ts",
-        "pages/blockAccountability/blockAccountability": "./src/pages/blockAccountability/blockAccountability.ts",
-        "pages/settings/settings": "./src/pages/settings/settings.ts"
+        "pages/block-accountability/blockAccountability": "./src/pages/block-accountability/blockAccountability.ts",
+        "pages/settings/settings": "./src/pages/settings/settings.ts",
+        "pages/blocked-site/blockedSite": "./src/pages/blocked-site/blockedSite.ts"
     },
     module: {
         rules: [
