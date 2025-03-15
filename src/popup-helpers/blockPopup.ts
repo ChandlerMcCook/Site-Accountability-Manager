@@ -1,8 +1,9 @@
 import { getLocalData } from "../helper-functions/getLocalData"
 import { getHostName } from "../helper-functions/getHostName"
 import { RefreshTable } from "./totalPopup"
-import { storeBlocked, removeStoredBlocked } from "../helper-functions/storeRemoveBlocked"
+import { storeBlocked, changeBlockLimit } from "../helper-functions/storeRemoveBlocked"
 import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
+import { BlockedWesbite, BlockedWebsiteMap } from "../interfaces/blockedWebsite"
 
 export async function RefreshBlocked() {
     const blockTable = document.getElementById("blockTable")
@@ -10,7 +11,7 @@ export async function RefreshBlocked() {
         blockTable.removeChild(blockTable.lastChild)
     }
 
-    const blockedSites = await getLocalData("blockedSites")
+    const blockedSites = await getLocalData("blockedSites") as BlockedWebsiteMap
     const blocked = Object.entries(blockedSites)
     
     if (blocked.length === 0) {
@@ -22,24 +23,63 @@ export async function RefreshBlocked() {
     }
 
     blocked.forEach(async website => {
+        const websiteName = website[0]
+        const websiteData = website[1]
+
         // create img element
         const domainImg = document.createElement("img")
-        domainImg.src = `https://www.google.com/s2/favicons?sz=24&domain_url=${website[0]}`
+        domainImg.src = `https://www.google.com/s2/favicons?sz=24&domain_url=${websiteName}`
         const imageNode = document.createElement("td")
         imageNode.appendChild(domainImg)
         imageNode.className = "tableImage"
 
         // create website name element
-        const name = document.createTextNode(website[0])
+        const name = document.createTextNode(websiteName)
         const nameNode = document.createElement("td")
         nameNode.appendChild(name)
 
-        // create days since last visit element
+        // create block streak element
+        const streakFlameImage = document.createElement("img")
+        streakFlameImage.src = "../../images/ui-images/flame.gif"
+        const streakValue = Math.floor(
+            (new Date().getTime() - new Date(websiteData.startDate as string).getTime()) / (1000 * 60 * 60 * 24)
+        )
+        const streakNode = document.createTextNode(String(streakValue))
+        const blockStreakNode = document.createElement("td")
+        blockStreakNode.append(streakFlameImage, streakNode)
+        blockStreakNode.className = "tableImage"
+
+        // create timer dropdown
+        const timerDropdown = document.createElement("select")
+        timerDropdown.className = "timerDropdown"
+        timerDropdown.id = `timeDrop${websiteName}`
+        const topRange = 14400 // 4 * 60 * 60
+        const step = 300 // 5 * 60
+        for (let i=0; i<=topRange; i+=step) {
+            const option = document.createElement("option")
+            option.className = "timeOption"
+            option.value = `${i}`
+            const hrAmount = Math.floor(i / 3600)
+            const minAmount = (i-3600*hrAmount) / 60
+            option.textContent = (hrAmount >= 1) 
+                ? 
+                    (minAmount >= 1) ? `${hrAmount} hr ${(i-3600*hrAmount) / 60} min` : `${hrAmount} hr`
+                :
+                    `${i/60} min`
+            timerDropdown.add(option)
+        }
+        timerDropdown.value = `${websiteData.timeLimit.limit}`
+        timerDropdown.addEventListener("change", async (e) => {
+            const target = e.target as HTMLSelectElement
+            const name = target.getAttribute("id").slice(8)
+            const limit = Number(target.value)
+            await changeBlockLimit(name, limit)
+        })
 
         // create delete button element
         const deleteButton = document.createElement("button")
         deleteButton.className = "deleteButton"
-        deleteButton.id = `bdb${website[0]}`
+        deleteButton.id = `bdb${websiteName}`
         deleteButton.addEventListener("click", async (e) => {
             const targetButton = e.target as HTMLButtonElement
             const domain = targetButton.getAttribute("id").slice(3)
@@ -51,21 +91,9 @@ export async function RefreshBlocked() {
         dbNode.className = "tableButton"
         dbNode.appendChild(deleteButton)
 
-        // create block streak element
-        const streakFlameImage = document.createElement("img")
-        streakFlameImage.src = "../../images/ui-images/flame.gif"
-        const streakValue = Math.floor(
-            (new Date().getTime() - new Date(website[1] as string).getTime()) / (1000 * 60 * 60 * 24)
-        )
-        const streakNode = document.createTextNode(String(streakValue))
-        const blockStreakNode = document.createElement("td")
-        blockStreakNode.append(streakFlameImage, streakNode)
-        blockStreakNode.className = "tableImage"
-
-
         // add elements to table
         const row = document.createElement("tr")
-        row.append(imageNode, nameNode, blockStreakNode, dbNode)
+        row.append(imageNode, nameNode, blockStreakNode, timerDropdown, dbNode)
         blockTable.appendChild(row)
     })
 }

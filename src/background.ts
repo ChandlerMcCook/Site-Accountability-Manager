@@ -3,7 +3,8 @@
 
 import { getLocalData } from "./helper-functions/getLocalData"
 import { getHostName } from "./helper-functions/getHostName"
-import { Day, TrackedWebsite, TrackedWebsiteMap } from "./interfaces/trackedWebsite"
+import { Day, TrackedWebsiteMap } from "./interfaces/trackedWebsite"
+import { BlockedWebsiteMap } from "./interfaces/blockedWebsite"
 
 chrome.runtime.onInstalled.addListener(details => {
     if (details.reason === "install") {
@@ -16,23 +17,36 @@ chrome.runtime.onInstalled.addListener(details => {
 })
 
 async function TrackWebsite() {
-    let trackedSites : TrackedWebsiteMap = await getLocalData("trackedSites") as TrackedWebsiteMap
-    let blockedSites : Record<string, string> = await getLocalData("blockedSites")
+    let trackedSites = await getLocalData("trackedSites") as TrackedWebsiteMap
+    let blockedSites = await getLocalData("blockedSites") as BlockedWebsiteMap
 
     const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
     if (!tab || !tab.url) return
 
     const domain = getHostName(tab.url)
+    const today = new Date().toLocaleDateString()
 
     if (domain in blockedSites) {
-        const blockUrl = chrome.runtime.getURL("pages/blocked-site/blocked-site.html")
-        await chrome.tabs.update(tab.id, { url: blockUrl })
-        return
+        const timeLimit = blockedSites[domain].timeLimit
+        const trackedDate = timeLimit.todayDate
+        if (trackedDate !== today) {
+            timeLimit.todayDate = today
+            timeLimit.time = 0
+        }
+
+        timeLimit.time++
+        
+        chrome.storage.local.set({ blockedSites: blockedSites })
+
+        if (timeLimit.time >= timeLimit.limit) {
+            const blockUrl = chrome.runtime.getURL("pages/blocked-site/blocked-site.html")
+            await chrome.tabs.update(tab.id, { url: blockUrl })
+            return
+        }
     }
 
     if (!(domain in trackedSites)) return
 
-    const today = new Date().toLocaleDateString()
     if (!trackedSites[domain]) {
         const template = {
             days: [
