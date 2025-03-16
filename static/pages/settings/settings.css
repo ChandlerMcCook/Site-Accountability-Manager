@@ -112,6 +112,10 @@ button:hover {
     background-color: inherit;
 }
 
+.closeModalButton:hover {
+    background-color: inherit;
+}
+
 .modalBody {
     padding: 10px 15px;
 }

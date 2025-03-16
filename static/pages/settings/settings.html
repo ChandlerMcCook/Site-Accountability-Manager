@@ -178,9 +178,17 @@
                             </div>
                             <div class="modalBody">
                                 <div class="whitelistModalBody">
-                                    Add Website to Whitelist: <input type="text" class="whitelistInput" placeholder="ex: facebook.com">
-                                    <button class="addWhitelistButton"></button>
-                                    <table class="whitelistTable"></table>
+                                    <div>
+                                        <span>Preset Name: </span>
+                                        <input type="text" class="whitelistInput" id="whitelistNameInput">
+                                        <br>
+                                        <br>
+                                        <span>Add Website to Whitelist: </span>
+                                        <input type="text" class="whitelistInput" id="addToPresetInput" placeholder="ex: facebook.com">
+                                        <button class="addWhitelistButton">&plus;</button>
+                                    </div>
+                                    <table class="whitelistTable" id="createWhitelistTable"></table>
+                                    <button class="submitPreset" id="submitCreatePreset">Create Preset</button>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +199,14 @@
                                 <button data-close-modal-button class="closeModalButton">&times;</button>
                             </div>
                             <div class="modalBody">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus nisi iusto iste dolorem obcaecati dolor asperiores aut, quasi adipisci voluptates vero, harum, odit ex tenetur odio esse ea? Qui quidem tenetur aut delectus cupiditate, vel assumenda cum asperiores repudiandae quisquam numquam eaque laudantium sequi officia nostrum pariatur error debitis voluptatem laboriosam quod quos. Iste magnam voluptatibus porro aut eum, quo voluptas atque saepe qui blanditiis harum ducimus nisi non laborum? Aperiam ipsa accusantium hic, ut praesentium veritatis ea laboriosam fuga?
+                                <div class="whitelistModalBody">
+                                    <div>
+                                        Add Website to Whitelist: <input type="text" class="whitelistInput" placeholder="ex: facebook.com">
+                                        <button class="addWhitelistButton">&plus;</button>
+                                    </div>
+                                    <table class="whitelistTable" id="editWhitelistTable"></table>
+                                    <button id="submitEditPreset">Finish</button>
+                                </div>
                             </div>
                         </div>
 
