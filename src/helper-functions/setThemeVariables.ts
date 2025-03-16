@@ -1,7 +1,7 @@
-import { GetLocalData } from "./get-local-data"
+import { getLocalData } from "./getLocalData"
 
-export async function SetThemeVariables() {
-    const theme = await GetLocalData("theme")
+export async function setThemeVariables() {
+    const theme = await getLocalData("theme")
     const root = document.documentElement
     
     switch(theme) {

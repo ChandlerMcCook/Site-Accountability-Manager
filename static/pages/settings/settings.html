@@ -8,7 +8,7 @@
     <body>
         <div id="topbar">
             <button id="themeButton">Theme</button>
-            <button id="accountabilityButton">Accountability</button>
+            <button id="whitelistButton">Whitelist Mode</button>
             <button id="settingsButton">Settings</button>
         </div>
 
@@ -153,36 +153,77 @@
 
             </div>
 
-            <div id="accountabilityPage">
-                <input type="checkbox" id="accountabilityCheckbox">
-                <label for="accountabilityCheckbox">Blocking Accountability</label>
-            </div>
-
-            <div id="settingsPage">
+            <div id="whitelistPage">
                 <div>
                     <input type="checkbox" id="whitelistCheckbox">
                     <label for="whitelistCheckbox">Whitelist Mode</label>
                 </div>
-
+                
                 <div id="whitelistContainer">
                     <div id="whitelistSettings">
                         <select id="presetDropdown">
                             <option value="" disabled selected>Select a Preset</option>
                         </select>
-                
+                        
                         <div id="presetButtons">
-                            <button id="createPreset">New Preset</button>
-                            <button id="editPreset">Edit Preset</button>
+                            <button data-modal-target="#createPresetModal" id="createPreset">New Preset</button>
+                            <button data-modal-target ="#editPresetModal" id="editPreset">Edit Preset</button>
                             <button id="deletePreset">Delete Preset</button>
                         </div>
-                
+                        
+                        <div class="modal" id="createPresetModal">
+                            <div class="modalHeader">
+                                <div class="modalTitle">Create Preset</div>
+                                <button data-close-modal-button class="closeModalButton">&times;</button>
+                            </div>
+                            <div class="modalBody">
+                                <div class="whitelistModalBody">
+                                    <div>
+                                        <span>Preset Name: </span>
+                                        <input type="text" class="whitelistInput" id="whitelistNameInput">
+                                        <br>
+                                        <br>
+                                        <span>Add Website to Whitelist: </span>
+                                        <input type="text" class="whitelistInput" id="addToPresetInput" placeholder="ex: facebook.com">
+                                        <button class="addWhitelistButton">&plus;</button>
+                                    </div>
+                                    <table class="whitelistTable" id="createWhitelistTable"></table>
+                                    <button class="submitPreset" id="submitCreatePreset">Create Preset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal" id="editPresetModal">
+                            <div class="modalHeader">
+                                <div class="modalTitle">Edit Preset</div>
+                                <button data-close-modal-button class="closeModalButton">&times;</button>
+                            </div>
+                            <div class="modalBody">
+                                <div class="whitelistModalBody">
+                                    <div>
+                                        Add Website to Whitelist: <input type="text" class="whitelistInput" placeholder="ex: facebook.com">
+                                        <button class="addWhitelistButton">&plus;</button>
+                                    </div>
+                                    <table class="whitelistTable" id="editWhitelistTable"></table>
+                                    <button id="submitEditPreset">Finish</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <table id="whitelistTable">
                         </table>
                     </div>
-
                 </div>
-
+                
             </div>
+            
+            <div id="settingsPage">
+                <input type="checkbox" id="accountabilityCheckbox">
+                <label for="accountabilityCheckbox">Blocking Accountability</label>
+            </div>
+
         </div>
+        
+        <div id="overlay"></div>
     </body>
     </html>

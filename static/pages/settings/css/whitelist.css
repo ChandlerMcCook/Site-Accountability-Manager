@@ -1,0 +1,97 @@
+#whitelistPage {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#whitelistContainer {
+    display: none;
+    background-color: var(--accent-dark);
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    min-width: 30vw;
+    margin: 20px auto;
+}
+
+#whitelistSettings {
+    margin-top: 10px;
+}
+
+#presetDropdown {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--accent-light);
+    border: 1px solid var(--border);
+    color: white;
+    border-radius: 4px;
+}
+
+#presetButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#presetButtons button {
+    background-color: var(--border);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#presetButtons button:hover {
+    background-color: var(--accent-light);
+}
+
+.whitelistModalBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.addWhitelistButton {
+    height: 1vh;
+    width: 1vh;
+}
+
+.whitelistTable {
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+    border: 1px solid var(--border)
+}
+
+.whitelistTable th, .whitelistTable td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.whitelistTable th {
+    background-color: var(--accent-light);
+}
+
+.whitelistTable tr:nth-child(even) {
+    background-color: var(--dark);
+}
+
+.removeWebsiteFromWhitelist {
+    border: none;
+    background-color: inherit;
+    max-width: 1vh;
+    max-height: 1vh;
+}
+.removeWebsiteFromWhitelist:hover {
+    background-color: inherit;
+}
+/* 
+.submitPreset {
+
+} */

@@ -1,25 +1,26 @@
-import { TotalPopupLogic, RefreshTable } from "./popup-helpers/total-popup.js"
-import { ChartPopupLogic, RefreshChart } from "./popup-helpers/chart-popup.js" 
-import { BlockPopupLogic } from "./popup-helpers/block-popup.js"
-import { GetLocalData } from "./helper-functions/get-local-data.js"
-import { SetThemeVariables } from "./helper-functions/set-theme-variables.js"
+import { totalPopupLogic, RefreshTable } from "./popup-helpers/totalPopup"
+import { chartPopupLogic, RefreshChart } from "./popup-helpers/chartPopup" 
+import { blockPopupLogic } from "./popup-helpers/blockPopup"
+import { getLocalData } from "./helper-functions/getLocalData"
+import { setThemeVariables } from "./helper-functions/setThemeVariables"
 
 document.addEventListener("DOMContentLoaded", async () => {
-    SetThemeVariables()
-    TotalPopupLogic()
-    ChartPopupLogic()
-    BlockPopupLogic()
+    setThemeVariables()
+    totalPopupLogic()
+    chartPopupLogic()
+    blockPopupLogic()
 
-    const totalOrDaily = document.getElementById("totalOrDailyDropdown")
-    const tdValue = await GetLocalData("totalOrDaily")
+    const totalOrDaily = document.getElementById("totalOrDailyDropdown") as HTMLSelectElement
+    const tdValue = await getLocalData("totalOrDaily")
     totalOrDaily.value = tdValue
     const upperCaseValue = tdValue.charAt(0).toUpperCase() + tdValue.slice(1)
     document.getElementById("totalTitle").innerHTML = `${upperCaseValue} time spent`
     document.getElementById("chartTitle").innerHTML = `${upperCaseValue} Time Graphs`
 
     // change to total or daily time
-    totalOrDaily.addEventListener("change", (e) => {
-        const newVal = e.target.value
+    totalOrDaily.addEventListener("change", (e : Event) => {
+        const target = e.target as HTMLSelectElement
+        const newVal = target.value
         chrome.storage.local.set({ totalOrDaily: newVal })
         const upperCaseVal = newVal.charAt(0).toUpperCase() + newVal.slice(1)
         document.getElementById("totalTitle").innerHTML = `${upperCaseVal} time spent`
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // open settings
     document.getElementById("settings").addEventListener("click", () => {
-        chrome.tabs.create({ url: chrome.runtime.getURL("extension-pages/settings/settings.html") })
+        chrome.tabs.create({ url: chrome.runtime.getURL("pages/settings/settings.html") })
     })
 
     // change tabs

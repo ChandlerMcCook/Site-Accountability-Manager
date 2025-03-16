@@ -1,11 +1,12 @@
-import { Chart, registerables } from "chart.js"
-import { GetLocalData } from "../helper-functions/get-local-data"
+import { Chart, ChartComponent, registerables } from "chart.js"
+import { getLocalData } from "../helper-functions/getLocalData"
+import { Day, TrackedWebsite, TrackedWebsiteMap } from "../interfaces/trackedWebsite"
 
-let currentChart = null
+let currentChart : Chart | null = null
 const chartColors = ["red", "blue", "yellow", "green", "purple", "orange"]
 
-async function GetChartData(totalOrDaily) {
-    const timeData = await GetLocalData("trackedSites")
+async function GetChartData(totalOrDaily : string) {
+    const timeData = await getLocalData("trackedSites") as TrackedWebsiteMap
     const today = new Date().toLocaleDateString()
 
     const websites = Object.keys(timeData)
@@ -14,15 +15,15 @@ async function GetChartData(totalOrDaily) {
     if (websites.length === chartColors.length) chartColors.push("maroon")
 
     // get names of websites and times associated with websites
-    let names = []
-    let times = []
+    let names : string[] = []
+    let times : number[] = []
     if (totalOrDaily === "total") {
         names = websites
             .map(name => name.charAt(0).toUpperCase() + name.slice(1))
         times = websites.map(site => timeData[site].overall / 3600)
     } else {
         websites.forEach(site => {
-            const todayData = timeData[site].days.find(day => day.date === today)
+            const todayData = timeData[site].days.find((day : Day) => day.date === today)
             if (todayData !== undefined) {
                 names.push(site)
                 times.push(todayData.time / 3600)
@@ -34,9 +35,11 @@ async function GetChartData(totalOrDaily) {
 }
 
 export async function RefreshChart() {
-    const chart = document.getElementById("chart")
-    const totalOrDaily = await GetLocalData("totalOrDaily")
-    const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+    const chart = document.getElementById("chart") as HTMLCanvasElement
+    const totalOrDaily = await getLocalData("totalOrDaily")
+    let [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+    siteNames = siteNames as string[]
+    siteTimes = siteTimes as number[]
     
     if (currentChart) {
         currentChart.destroy()
@@ -45,12 +48,12 @@ export async function RefreshChart() {
     currentChart = new Chart(chart, {
         type: "doughnut",
         data: {
-            labels: siteNames,
+            labels: siteNames as string[],
             datasets: [
                 {
-                    cutout: "90%",
+                    // cutout: "90%",
                     label: " Hours",
-                    data: siteTimes,
+                    data: siteTimes as number[],
                     backgroundColor: chartColors
                 }
             ]
@@ -58,13 +61,15 @@ export async function RefreshChart() {
     })
 }
 
-export function ChartPopupLogic () {
+export function chartPopupLogic () {
     Chart.register(...registerables)
     
     document.getElementById("pieButton").addEventListener("click", async () => {
-        const chart = document.getElementById("chart")
-        const totalOrDaily = await GetLocalData("totalOrDaily")
-        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+        const chart = document.getElementById("chart") as HTMLCanvasElement
+        const totalOrDaily = await getLocalData("totalOrDaily")
+        let [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+        siteNames = siteNames as string[]
+        siteTimes = siteTimes as number[]
         
         if (currentChart) {
             currentChart.destroy()
@@ -73,10 +78,10 @@ export function ChartPopupLogic () {
         currentChart = new Chart(chart, {
             type: "doughnut",
             data: {
-                labels: siteNames,
+                labels: siteNames as string[],
                 datasets: [
                     {
-                        cutout: "90%",
+                        // cutout: "90%",
                         label: " Hours",
                         data: siteTimes,
                         backgroundColor: chartColors
@@ -87,9 +92,11 @@ export function ChartPopupLogic () {
     })
 
     document.getElementById("barButton").addEventListener("click", async () => {
-        const chart = document.getElementById("chart")
-        const totalOrDaily = await GetLocalData("totalOrDaily")
-        const [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+        const chart = document.getElementById("chart") as HTMLCanvasElement
+        const totalOrDaily = await getLocalData("totalOrDaily")
+        let [siteNames, siteTimes] = await GetChartData(totalOrDaily)
+        siteNames = siteNames as string[]
+        siteTimes = siteTimes as number[]
         
         if (currentChart) {
             currentChart.destroy()
@@ -98,7 +105,7 @@ export function ChartPopupLogic () {
         currentChart = new Chart(chart, {
             type: "bar",
             data: {
-                labels: siteNames,
+                labels: siteNames as string[],
                 datasets: [
                     {
                         label: " Hours",
@@ -111,10 +118,15 @@ export function ChartPopupLogic () {
     })
 
     document.getElementById("lineButton").addEventListener("click", async () => {
-        const chart = document.getElementById("chart")
-        const trackedSites = await GetLocalData("trackedSites")
-        let totalTimePerDay = {}
-        Object.entries(trackedSites).forEach(entry => {
+        const chart = document.getElementById("chart") as HTMLCanvasElement
+        const trackedSites = await getLocalData("trackedSites") as TrackedWebsiteMap
+
+        interface TimePerDay {
+            [key: string]: number
+        }
+
+        let totalTimePerDay : TimePerDay = {}
+        Object.entries(trackedSites).forEach((entry : [string, TrackedWebsite]) => {
             entry[1].days.forEach(day => {
                 const hours = day.time / 3600
                 if (totalTimePerDay[day.date] === undefined)
@@ -123,15 +135,12 @@ export function ChartPopupLogic () {
                     totalTimePerDay[day.date] += hours
             })
         })
-        totalTimePerDay = Object.entries(totalTimePerDay)
-        totalTimePerDay.sort((a, b) => new Date(a[0]) - new Date(b[0]))
-        const siteNames = totalTimePerDay.map(entry => entry[0])
-        const siteTimes = totalTimePerDay.map(entry => entry[1])
+        let daysAndTimes = Object.entries(totalTimePerDay)
+        daysAndTimes.sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime())
+        const siteNames = daysAndTimes.map(entry => entry[0])
+        const siteTimes = daysAndTimes.map(entry => entry[1])
 
-        console.log(siteNames)
-        console.log(siteTimes)
-
-        if (currentChart) {
+        if (currentChart) { 
             currentChart.destroy()
         }
 

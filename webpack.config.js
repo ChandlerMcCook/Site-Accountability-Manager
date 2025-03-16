@@ -1,65 +1,35 @@
-const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require("path")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     entry: {
-        popup: "./src/popup.js",
-        background: "./src/background.js",
-        settings: "./static/extension-pages/settings/settings.js", 
-        "block-accountability": "./static/extension-pages/block-accountability/block-accountability.js"
-    },
-    output: {
-        filename: (pathData) => {
-            return (pathData.chunk.name !== "popup" && pathData.chunk.name !== "background")
-                ? `extension-pages/${pathData.chunk.name}/${pathData.chunk.name}.js` 
-                : "[name].js";
-        },
-        path: path.resolve(__dirname, "dist")
-    },
-    mode: "production",
-    watch: true,
-    resolve: {
-        modules: [path.resolve(__dirname, "src"), "node_modules"], 
-        alias: {
-            "@helpers": path.resolve(__dirname, "src/helper-functions") 
-        }
+        popup: "./src/popup.ts",
+        background: "./src/background.ts",
+        "pages/block-accountability/blockAccountability": "./src/pages/block-accountability/blockAccountability.ts",
+        "pages/settings/settings": "./src/pages/settings/settings.ts",
+        "pages/blocked-site/blockedSite": "./src/pages/blocked-site/blockedSite.ts"
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
-                include: [
-                    path.resolve(__dirname, "src"),
-                    path.resolve(__dirname, "static/extension-pages/settings"),
-                    path.resolve(__dirname, "static/extension-pages/block-accountability")
-                ],
-                use: "babel-loader"
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            },
-            {
-                test: /\.html$/,
-                use: "html-loader"
+                test: /\.ts$/,
+                use: "ts-loader",
+                exclude: /node_modules/
             }
         ]
     },
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    output: {
+        filename: "[name].js",
+        path: path.resolve(__dirname, "dist")
+    },
+    mode: "production",
+    watch: true,
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: "static/extension-pages", 
-                    to: "extension-pages"
-                },
-                {
-                    from: "static", 
-                    to: ".",
-                    globOptions: {
-                        ignore: ["extension-pages/**"]
-                    }
-                }
-            ]
+            patterns: [{ from: "static" }]
         })
     ]
-};
+}

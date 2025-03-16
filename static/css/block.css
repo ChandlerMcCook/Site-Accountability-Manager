@@ -21,6 +21,32 @@
     width: 100%;
 }
 
+#blockTable td {
+    vertical-align: center;
+    text-align: center;
+}
+
+#blockTable tr:nth-child(2n+1) .timerDropdown {
+    background-color: var(--accent-light);
+}
+
+#blockTable tr:nth-child(2n) .timerDropdown {
+    background-color: var(--accent-medium);
+}
+
+#blockTable tr:nth-child(2n+1) .timeOption {
+    background-color: var(--accent-light);
+}
+
+#blockTable tr:nth-child(2n) .timeOption {
+    background-color: var(--accent-medium);
+}
+
+.timerDropdown {
+    border: none;
+    margin: 0 auto;
+}
+
 /* ADD BLOCKED SITE */
 
 #addBlockedSiteDiv {
