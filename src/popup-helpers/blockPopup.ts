@@ -4,6 +4,7 @@ import { RefreshTable } from "./totalPopup"
 import { storeBlocked, changeBlockLimit } from "../helper-functions/storeRemoveBlocked"
 import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
 import { BlockedWesbite, BlockedWebsiteMap } from "../interfaces/blockedWebsite"
+import { customAlert } from "../helper-functions/customAlert"
 
 export async function RefreshBlocked() {
     const blockTable = document.getElementById("blockTable")
@@ -104,7 +105,7 @@ async function AddBlockedWebsite() {
     blockInput.value = ""
         
     if (domain === "") {
-        alert("Please enter a value")
+        customAlert("Please enter a value")
         return
     }
 

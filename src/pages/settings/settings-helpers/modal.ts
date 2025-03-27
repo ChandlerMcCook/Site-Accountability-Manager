@@ -17,17 +17,6 @@ export function modalLogic() {
         })
     })
     
-    function openModal(modal : Element) {
-        if (modal == null) return
-        modal.classList.add("active")
-        overlay.classList.add("active")
-    }
-    
-    function closeModal(modal : Element) {
-        if (modal == null) return
-        modal.classList.remove("active")
-        overlay.classList.remove("active")
-    }
     
     overlay.addEventListener("click", () => {
         const modals = document.querySelectorAll(".modal.active")
@@ -35,4 +24,18 @@ export function modalLogic() {
             closeModal(modal)
         })
     })
+}
+
+export function openModal(modal : Element) {
+    if (modal == null) return
+    const overlay = document.getElementById("overlay")
+    modal.classList.add("active")
+    overlay.classList.add("active")
+}
+
+export function closeModal(modal : Element) {
+    if (modal == null) return
+    const overlay = document.getElementById("overlay")
+    modal.classList.remove("active")
+    overlay.classList.remove("active")
 }

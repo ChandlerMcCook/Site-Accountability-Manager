@@ -1,9 +1,10 @@
 import { getLocalData } from "./getLocalData"
+import { customAlert } from "./customAlert"
 
 export async function storeBlocked(name : string) {
     const blockedSites = await getLocalData("blockedSites")
     if (name in blockedSites) {
-        alert("Website is already blocked")
+        customAlert("Website is already blocked")
         return false 
     }
     blockedSites[name] = {

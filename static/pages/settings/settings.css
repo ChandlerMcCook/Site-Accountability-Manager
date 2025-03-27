@@ -43,9 +43,8 @@ body {
 button {
     height: 3vw;
     width: 5vw;
-    min-height: 30px;
+    min-height: 50px;
     min-width: 110px;
-    max-height: 50px;
     border-radius: 8px;
     background-color: var(--accent-light);
     color: white;

@@ -1,9 +1,10 @@
 import { getLocalData } from "./getLocalData"
+import { customAlert } from "./customAlert"
 
 export async function StoreTracked(name : string) {
     const trackedSites = await getLocalData("trackedSites")
     if (name in trackedSites) {
-        alert("Website is already tracked")
+        customAlert("Website is already tracked")
         return
     }
     trackedSites[name] = {

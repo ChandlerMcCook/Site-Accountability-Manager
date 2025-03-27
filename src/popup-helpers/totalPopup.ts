@@ -5,6 +5,7 @@ import { StoreTracked, RemoveStoredTracked } from "../helper-functions/storeRemo
 import { storeBlocked, removeStoredBlocked } from "../helper-functions/storeRemoveBlocked"
 import { launchBlockAccountability } from "../helper-functions/launchBlockAccountability"
 import { TrackedWebsite, TrackedWebsiteMap } from "../interfaces/trackedWebsite"
+import { customAlert } from "../helper-functions/customAlert"
 
 export async function RefreshTable() {
     const timeList = document.getElementById("timeList")
@@ -119,7 +120,7 @@ async function AddTrackedWebsite() {
     newDomain.value = ""
     
     if (domain === "") {
-        alert("Please enter a value")
+        customAlert("Please enter a value")
         return
     }
     
