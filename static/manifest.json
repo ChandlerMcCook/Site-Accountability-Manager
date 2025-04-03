@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Site Accountability Manager Typescript",
+    "name": "Site Accountability Manager",
     "description": "Manage and track website usage",
     "version": "1.0",
     "permissions": [

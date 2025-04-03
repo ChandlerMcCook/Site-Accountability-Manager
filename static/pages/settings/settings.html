@@ -14,143 +14,108 @@
 
         <div id="content">
             <div id="themePage">
-                <h2>Themes</h2>
-
-                <div id="themeSettingsContainer">
-                    <div id="themeSettingsNavbar">
-                        <button id="defaultThemeButton">Default Themes</button>
-                        <button id="userThemeButton">User Themes</button>
-                    </div>
-
-                    <div id="defaultThemePage">
-                        <div class="themeScrollChooser">
-                            <div class="themeChoice">
-                                <span>Green</span>
-                                <div class="paletteContainer">
-                                    <div id="green-cream" class="palette"></div>
-                                    <div id="green-light" class="palette"></div>
-                                    <div id="green-accent-light" class="palette"></div>
-                                    <div id="green-accent-medium" class="palette"></div>
-                                    <div id="green-accent-dark" class="palette"></div>
-                                    <div id="green-dark" class="palette"></div>
-                                </div>
-                                <button id="green" class="selectPaletteButton">Choose!</button>
+                <div>
+                    <h2>Themes</h2>
+    
+                    <div class="themeScrollChooser">
+                        <div class="themeChoice">
+                            <span>Green</span>
+                            <div class="paletteContainer">
+                                <div id="green-cream" class="palette"></div>
+                                <div id="green-light" class="palette"></div>
+                                <div id="green-accent-light" class="palette"></div>
+                                <div id="green-accent-medium" class="palette"></div>
+                                <div id="green-accent-dark" class="palette"></div>
+                                <div id="green-dark" class="palette"></div>
                             </div>
-                            <div class="themeChoice">
-                                <span>Purple</span>
-                                <div class="paletteContainer">
-                                    <div id="purple-cream" class="palette"></div>
-                                    <div id="purple-light" class="palette"></div>
-                                    <div id="purple-accent-light" class="palette"></div>
-                                    <div id="purple-accent-medium" class="palette"></div>
-                                    <div id="purple-accent-dark" class="palette"></div>
-                                    <div id="purple-dark" class="palette"></div>
-                                </div>
-                                <button id="purple" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Cotton Candy</span>
-                                <div class="paletteContainer">
-                                    <div id="cottonCandy-cream" class="palette"></div>
-                                    <div id="cottonCandy-light" class="palette"></div>
-                                    <div id="cottonCandy-accent-light" class="palette"></div>
-                                    <div id="cottonCandy-accent-medium" class="palette"></div>
-                                    <div id="cottonCandy-accent-dark" class="palette"></div>
-                                    <div id="cottonCandy-dark" class="palette"></div>
-                                </div>
-                                <button id="cottonCandy" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Cobalt</span>
-                                <div class="paletteContainer">
-                                    <div id="cobalt-cream" class="palette"></div>
-                                    <div id="cobalt-light" class="palette"></div>
-                                    <div id="cobalt-accent-light" class="palette"></div>
-                                    <div id="cobalt-accent-medium" class="palette"></div>
-                                    <div id="cobalt-accent-dark" class="palette"></div>
-                                    <div id="cobalt-dark" class="palette"></div>
-                                </div>
-                                <button id="cobalt" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Forest</span>
-                                <div class="paletteContainer">
-                                    <div id="forest-cream" class="palette"></div>
-                                    <div id="forest-light" class="palette"></div>
-                                    <div id="forest-accent-light" class="palette"></div>
-                                    <div id="forest-accent-medium" class="palette"></div>
-                                    <div id="forest-accent-dark" class="palette"></div>
-                                    <div id="forest-dark" class="palette"></div>
-                                </div>
-                                <button id="forest" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Sepia</span>
-                                <div class="paletteContainer">
-                                    <div id="sepia-cream" class="palette"></div>
-                                    <div id="sepia-light" class="palette"></div>
-                                    <div id="sepia-accent-light" class="palette"></div>
-                                    <div id="sepia-accent-medium" class="palette"></div>
-                                    <div id="sepia-accent-dark" class="palette"></div>
-                                    <div id="sepia-dark" class="palette"></div>
-                                </div>
-                                <button id="sepia" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Daytime</span>
-                                <div class="paletteContainer">
-                                    <div id="daytime-cream" class="palette"></div>
-                                    <div id="daytime-light" class="palette"></div>
-                                    <div id="daytime-accent-light" class="palette"></div>
-                                    <div id="daytime-accent-medium" class="palette"></div>
-                                    <div id="daytime-accent-dark" class="palette"></div>
-                                    <div id="daytime-dark" class="palette"></div>
-                                </div>
-                                <button id="daytime" class="selectPaletteButton">Choose!</button>
-                            </div>
-                            <div class="themeChoice">
-                                <span>Roses</span>
-                                <div class="paletteContainer">
-                                    <div id="roses-cream" class="palette"></div>
-                                    <div id="roses-light" class="palette"></div>
-                                    <div id="roses-accent-light" class="palette"></div>
-                                    <div id="roses-accent-medium" class="palette"></div>
-                                    <div id="roses-accent-dark" class="palette"></div>
-                                    <div id="roses-dark" class="palette"></div>
-                                </div>
-                                <button id="roses" class="selectPaletteButton">Choose!</button>
-                            </div>
+                            <button id="green" class="selectPaletteButton">Choose!</button>
                         </div>
-                    </div>
-
-                    <div id="userThemePage">
-                        <div class="themeScrollChooser">
-                            <div id="themeViewer"></div>
-                            <div id="themeBuilder">
-                                <label for="cream-input">Cream: #</label>
-                                <input type="text" id="cream-input">
-                                <br>
-                                <label for="light-input">Light: #</label>
-                                <input type="text" id="light-input">
-                                <br>
-                                <label for="accent-light-input">Accent-Light: #</label>
-                                <input type="text" id="accent-light-input">
-                                <br>
-                                <label for="accent-medium-input">Accent-Medium: #</label>
-                                <input type="text" id="accent-medium-input">
-                                <br>
-                                <label for="accent-dark-input">Accent-Dark: #</label>
-                                <input type="text" id="accent-dark-input">
-                                <br>
-                                <label for="dark-input">Dark: #</label>
-                                <input type="text" id="dark-input">
-                                <br>
-                                <button>Create</button>
+                        <div class="themeChoice">
+                            <span>Purple</span>
+                            <div class="paletteContainer">
+                                <div id="purple-cream" class="palette"></div>
+                                <div id="purple-light" class="palette"></div>
+                                <div id="purple-accent-light" class="palette"></div>
+                                <div id="purple-accent-medium" class="palette"></div>
+                                <div id="purple-accent-dark" class="palette"></div>
+                                <div id="purple-dark" class="palette"></div>
                             </div>
+                            <button id="purple" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Cotton Candy</span>
+                            <div class="paletteContainer">
+                                <div id="cottonCandy-cream" class="palette"></div>
+                                <div id="cottonCandy-light" class="palette"></div>
+                                <div id="cottonCandy-accent-light" class="palette"></div>
+                                <div id="cottonCandy-accent-medium" class="palette"></div>
+                                <div id="cottonCandy-accent-dark" class="palette"></div>
+                                <div id="cottonCandy-dark" class="palette"></div>
+                            </div>
+                            <button id="cottonCandy" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Cobalt</span>
+                            <div class="paletteContainer">
+                                <div id="cobalt-cream" class="palette"></div>
+                                <div id="cobalt-light" class="palette"></div>
+                                <div id="cobalt-accent-light" class="palette"></div>
+                                <div id="cobalt-accent-medium" class="palette"></div>
+                                <div id="cobalt-accent-dark" class="palette"></div>
+                                <div id="cobalt-dark" class="palette"></div>
+                            </div>
+                            <button id="cobalt" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Forest</span>
+                            <div class="paletteContainer">
+                                <div id="forest-cream" class="palette"></div>
+                                <div id="forest-light" class="palette"></div>
+                                <div id="forest-accent-light" class="palette"></div>
+                                <div id="forest-accent-medium" class="palette"></div>
+                                <div id="forest-accent-dark" class="palette"></div>
+                                <div id="forest-dark" class="palette"></div>
+                            </div>
+                            <button id="forest" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Sepia</span>
+                            <div class="paletteContainer">
+                                <div id="sepia-cream" class="palette"></div>
+                                <div id="sepia-light" class="palette"></div>
+                                <div id="sepia-accent-light" class="palette"></div>
+                                <div id="sepia-accent-medium" class="palette"></div>
+                                <div id="sepia-accent-dark" class="palette"></div>
+                                <div id="sepia-dark" class="palette"></div>
+                            </div>
+                            <button id="sepia" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Daytime</span>
+                            <div class="paletteContainer">
+                                <div id="daytime-cream" class="palette"></div>
+                                <div id="daytime-light" class="palette"></div>
+                                <div id="daytime-accent-light" class="palette"></div>
+                                <div id="daytime-accent-medium" class="palette"></div>
+                                <div id="daytime-accent-dark" class="palette"></div>
+                                <div id="daytime-dark" class="palette"></div>
+                            </div>
+                            <button id="daytime" class="selectPaletteButton">Choose!</button>
+                        </div>
+                        <div class="themeChoice">
+                            <span>Roses</span>
+                            <div class="paletteContainer">
+                                <div id="roses-cream" class="palette"></div>
+                                <div id="roses-light" class="palette"></div>
+                                <div id="roses-accent-light" class="palette"></div>
+                                <div id="roses-accent-medium" class="palette"></div>
+                                <div id="roses-accent-dark" class="palette"></div>
+                                <div id="roses-dark" class="palette"></div>
+                            </div>
+                            <button id="roses" class="selectPaletteButton">Choose!</button>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div id="whitelistPage">
@@ -167,7 +132,7 @@
                         
                         <div id="presetButtons">
                             <button data-modal-target="#createPresetModal" id="createPreset">New Preset</button>
-                            <button data-modal-target ="#editPresetModal" id="editPreset">Edit Preset</button>
+                            <button data-modal-target ="#editPresetModal" data-can-fire="false" id="editPreset">Edit Preset</button>
                             <button id="deletePreset">Delete Preset</button>
                         </div>
                         
@@ -210,8 +175,8 @@
                             </div>
                         </div>
 
-                        <table id="whitelistTable">
-                        </table>
+                        <div id="presetPicker">
+                        </div>
                     </div>
                 </div>
                 

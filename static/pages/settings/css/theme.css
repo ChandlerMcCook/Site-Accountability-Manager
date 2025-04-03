@@ -1,10 +1,6 @@
 #themePage {
     display: flex;
     flex-direction: column;
-}
-
-#themeSettingsContainer {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -21,21 +17,13 @@
     padding: 10px;
 }
 
-#defaultThemePage {
-    display: flex;
-}
-
-#userThemePage {
-    display: none;
-}
-
 .themeScrollChooser {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Adjusted to prevent excess spacing */
     width: 50vw;
-    min-height: 70vh;
-    max-height: 70vh;
+    min-width: 750px;
+    height: 70vh;
     overflow-y: auto;
     background-color: var(--accent-dark);
     border-radius: 8px;
@@ -53,6 +41,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    min-width: 650px;
     gap: 20px;
     border-radius: 8px;
     background-color: var(--accent-light);
@@ -70,7 +59,7 @@ span {
 
 .palette {
     height: 50px;
-    width: 20vw;
+    width: 350px;
     background-color: white;
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
@@ -90,20 +79,6 @@ span {
     background-color: var(--accent-dark);
 }
 
-#themeViewer {
-    flex: 1;
-    background-color: var(--accent-light);
-    border: 1px solid var(--border);
-}
-
-#themeBuilder {
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--accent-light);
-    border: 1px solid var(--border);
-}
 
 /* PREBUILT THEMES */
 

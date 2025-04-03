@@ -1,3 +1,5 @@
+import { customAlert } from "../../../helper-functions/customAlert"
+
 export function modalLogic() {
     const openModalButtons = document.querySelectorAll('[data-modal-target]') as NodeListOf<HTMLButtonElement>
     const closeModalButtons = document.querySelectorAll("[data-close-modal-button]") as NodeListOf<HTMLButtonElement>
@@ -5,6 +7,12 @@ export function modalLogic() {
     
     openModalButtons.forEach(button => {
         button.addEventListener("click", () => {
+            if (button.dataset.hasOwnProperty("can-fire")) {
+                if (button.dataset.canFire == "false") {
+                    customAlert("Please select a preset")
+                    return
+                }
+            }
             const modal = document.querySelector(button.dataset.modalTarget)
             openModal(modal)
         })

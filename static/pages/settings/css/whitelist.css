@@ -7,13 +7,12 @@
 
 #whitelistContainer {
     display: none;
-    max-width: 400px;
+    width: 400px;
     background-color: var(--accent-dark);
     padding: 15px;
     border: 2px solid var(--border);
     border-radius: 8px;
     color: white;
-    min-width: 30vw;
     margin: 20px auto;
 }
 
@@ -93,7 +92,28 @@
 .removeWebsiteFromWhitelist:hover {
     background-color: inherit;
 }
-/* 
-.submitPreset {
 
-} */
+
+.preset-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.preset-table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.preset-table th, .preset-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.preset-table th {
+    background-color: #f2f2f2;
+}
