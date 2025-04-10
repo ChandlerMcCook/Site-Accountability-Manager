@@ -97,9 +97,9 @@
 .preset-item {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: var(--accent-light);
 }
 
 .preset-table {
@@ -109,11 +109,11 @@
 }
 
 .preset-table th, .preset-table td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
     padding: 8px;
     text-align: left;
 }
 
 .preset-table th {
-    background-color: #f2f2f2;
+    background-color: var(--accent-dark);
 }

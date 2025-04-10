@@ -211,57 +211,33 @@ function deletePreset() {
 async function refreshPresetPicker() {
     const presets = Object.entries(await getLocalData("whitelistPresets") as WhitelistPresets)
     const presetPicker = document.getElementById("presetPicker")
-    presets.forEach((name, sites) => {
 
-    })
-}
+    presetPicker.innerHTML = ""
 
-
-function renderPresets() {
-    const presets = [
-        { name: "Work", websites: ["github.com", "stackoverflow.com", "atlassian.com"] },
-        { name: "Entertainment", websites: ["netflix.com", "youtube.com", "spotify.com"] },
-        { name: "Study", websites: ["wikipedia.org", "khanacademy.org", "coursera.org"] },
-    ]
-    const container = document.getElementById("presetPicker")
-    container.innerHTML = "" // Clear container before rendering
-
-    presets.forEach((preset, index) => {
-        // Create a div for each preset
+    presets.forEach(async entry => {
+        const [name, websites] = entry
         const presetDiv = document.createElement("div")
         presetDiv.classList.add("preset-item")
-
-        // Create radio button and label
+        
         const radio = document.createElement("input")
         radio.type = "radio"
         radio.name = "preset"
-        radio.value = String(index)
-        radio.id = `preset-${index}`
-        if (index === 0) radio.checked = true // Default selection
-
+        radio.value = name
+        radio.id = `preset-${name}`
+        radio.checked = name === await getLocalData("curWhitelistPreset")
+        
         const label = document.createElement("label")
-        label.htmlFor = `preset-${index}`
-        label.textContent = preset.name
+        label.htmlFor = `preset-${name}`
+        label.textContent = name
 
-        // Create table
         const table = document.createElement("table")
         table.classList.add("preset-table")
-        table.innerHTML = `<thead><tr><th>Websites</th></tr></thead>`
-        
-        const tbody = document.createElement("tbody")
-        preset.websites.forEach((website) => {
-            const row = document.createElement("tr")
-            row.innerHTML = `<td>${website}</td>`
-            tbody.appendChild(row)
+        websites.forEach(website => { 
+            addToTable(table, website)
         })
-        
-        table.appendChild(tbody)
 
-        // Append elements
-        presetDiv.appendChild(radio)
-        presetDiv.appendChild(label)
-        presetDiv.appendChild(table)
-        container.appendChild(presetDiv)
+        presetDiv.append(radio, label, table)
+        presetPicker.appendChild(presetDiv)
     })
 }
 
@@ -288,8 +264,8 @@ export async function whitelistLogic() {
 
     await handlePresetDropdown()
     await refreshEditWhitelistTable()
+    await refreshPresetPicker()
     handleEditModal()
     handleCreateModal()
     deletePreset()
-    renderPresets()
 }
