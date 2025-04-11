@@ -1,6 +1,6 @@
 # Privacy Policy for Website Usage Tracker
 
-**Effective Date:** [Insert Date]
+**Effective Date:** 04/10/2025
 
 Website Usage Tracker is a Chrome extension designed to help users monitor and manage their web activity by tracking time spent on specific websites, setting timers, and blocking distractions. We are committed to respecting your privacy and ensuring that all user data is handled securely and transparently.
 
