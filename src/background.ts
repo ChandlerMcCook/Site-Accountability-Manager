@@ -9,10 +9,8 @@ import { BlockedWebsiteMap } from "./interfaces/blockedWebsite"
 chrome.runtime.onInstalled.addListener(details => {
     if (details.reason === "install") {
         chrome.storage.local.set({ accountability: "none" })
-        chrome.storage.local.set({ theme: "green" })
+        chrome.storage.local.set({ theme: "cobalt" })
         chrome.storage.local.set({ totalOrDaily: "total" })
-        chrome.storage.local.set({ whitelist: false })
-        chrome.storage.local.set({ whitelistPresets: [] })
     }
 })
 

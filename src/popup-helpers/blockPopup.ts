@@ -76,6 +76,8 @@ export async function RefreshBlocked() {
             const limit = Number(target.value)
             await changeBlockLimit(name, limit)
         })
+        const dropdownNode = document.createElement("td")
+        dropdownNode.appendChild(timerDropdown)
 
         // create delete button element
         const deleteButton = document.createElement("button")
@@ -94,7 +96,7 @@ export async function RefreshBlocked() {
 
         // add elements to table
         const row = document.createElement("tr")
-        row.append(imageNode, nameNode, blockStreakNode, timerDropdown, dbNode)
+        row.append(imageNode, nameNode, blockStreakNode, dropdownNode, dbNode)
         blockTable.appendChild(row)
     })
 }
