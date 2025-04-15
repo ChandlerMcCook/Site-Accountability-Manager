@@ -23,6 +23,8 @@ export async function RefreshTable() {
         timeList.appendChild(noWebsitesText)
         timeList.style.display = "flex"
         return
+    } else {
+        timeList.style.display = "table"
     }
 
     // sort total or daily and by usage time
@@ -87,7 +89,7 @@ export async function RefreshTable() {
                 await storeBlocked(siteClicked)
             }
 
-            RefreshTable()
+            await RefreshTable()
             RefreshBlocked()
         })
         const bbNode = document.createElement("td")
@@ -101,7 +103,7 @@ export async function RefreshTable() {
         deleteButton.addEventListener("click", async (e) => {
             const target = e.target as HTMLButtonElement
             await RemoveStoredTracked(target.getAttribute("id").slice(2))
-            RefreshTable()
+            await RefreshTable()
         })
         const dbNode = document.createElement("td")
         dbNode.className = "tableButton"
@@ -128,12 +130,12 @@ async function AddTrackedWebsite() {
     
     await StoreTracked(domainName)
 
-    RefreshTable()
+    await RefreshTable()
 }
 
 export async function totalPopupLogic() {
     // populate tracked table on startup
-    RefreshTable()
+    await RefreshTable()
     
 
     // ADD WEBSITE BUTTON
