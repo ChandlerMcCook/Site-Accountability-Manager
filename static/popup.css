@@ -41,10 +41,21 @@ body {
     width: 28px;
 }
 
-#checkMoreButton {
-    background-image: url("images/ui-images/bar-chart.png");
+.standardButton {
     height: 28px;
     width: 28px;
+}
+
+#goToTotalButton {
+    background-image: url("images/ui-images/clock.png");
+}
+
+#goToChartButton {
+    background-image: url("images/ui-images/bar-chart.png");
+}
+
+#goToBlockButton {
+    background-image: url("images/ui-images/cancel.png");
 }
 
 #title {

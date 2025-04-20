@@ -67,33 +67,6 @@ export async function RefreshTable() {
         domainNode.appendChild(domainText)
         timeNode.appendChild(timeText)
 
-        // block website button logic
-        const blockButton = document.createElement("button")
-        blockButton.className = "blockButton"
-        blockButton.id = `bb${domain}`
-        // change the button from greyed out to highlighted if blocked
-        if (blocked.includes(domain)) {
-            blockButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
-        }
-        blockButton.addEventListener("click", async (e) => {
-            const target = e.target as HTMLButtonElement
-            const siteClicked = target.getAttribute("id").slice(2)
-
-            let blockedSites = Object.keys(await getLocalData("blockedSites"))
-
-            if (blockedSites.includes(siteClicked)) {
-                await launchBlockAccountability(siteClicked)
-            } else {
-                await storeBlocked(siteClicked)
-            }
-
-            RefreshTable()
-            RefreshBlocked()
-        })
-        const bbNode = document.createElement("td")
-        bbNode.className = "tableButton"
-        bbNode.appendChild(blockButton)
-
         // add delete button
         const deleteButton = document.createElement("button")
         deleteButton.className = "deleteButton"
@@ -109,7 +82,7 @@ export async function RefreshTable() {
 
         // add to table
         const row = document.createElement("tr")
-        row.append(imageNode, domainNode, timeNode, bbNode, dbNode)
+        row.append(imageNode, domainNode, timeNode, dbNode)
         timeList.appendChild(row)
     })
 }

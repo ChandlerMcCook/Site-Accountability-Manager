@@ -159,7 +159,7 @@ export function chartPopupLogic () {
         })
     })
 
-    document.getElementById("checkMoreButton").addEventListener("click", () => {
+    document.getElementById("goToChartButton").addEventListener("click", () => {
         RefreshChart()
     })
 }

@@ -36,33 +36,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
 
     // change tabs
-    document.getElementById("checkMoreButton").addEventListener("click", () => {
-        const content = document.getElementById("content")
-        const visiblePage = content.dataset.visiblePage
+    const totalDiv = document.getElementById("totalPage")
+    const chartDiv = document.getElementById("chartPage")
+    const blockDiv = document.getElementById("blockPage")
 
-        const totalDiv = document.getElementById("totalPage")
-        const chartDiv = document.getElementById("chartPage")
-        const blockDiv = document.getElementById("blockPage")
-        const checkMoreButton = document.getElementById("checkMoreButton")
-        
-        if (visiblePage === undefined || visiblePage === "total") {
-            content.dataset.visiblePage = "chart"
-            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/cancel.png\")"
-            
-            totalDiv.style.display = "none"
-            chartDiv.style.display = "flex"
-        } else if (visiblePage == "chart") {
-            content.dataset.visiblePage = "block"
-            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/clock.png\")"
+    document.getElementById("goToTotalButton").addEventListener("click", () => {
+        chartDiv.style.display = "none"
+        blockDiv.style.display = "none"
+        totalDiv.style.display = "flex"
+    })
 
-            chartDiv.style.display = "none"
-            blockDiv.style.display = "flex"
-        } else {
-            content.dataset.visiblePage = "total"
-            checkMoreButton.style.backgroundImage = "url(\"images/ui-images/bar-chart.png\")"
+    document.getElementById("goToChartButton").addEventListener("click", () => {
+        totalDiv.style.display = "none"
+        blockDiv.style.display = "none"
+        chartDiv.style.display = "flex"
+    })
 
-            blockDiv.style.display = "none"
-            totalDiv.style.display = "flex"
-        }
+    document.getElementById("goToBlockButton").addEventListener("click", () => {
+        totalDiv.style.display = "none"
+        chartDiv.style.display = "none"
+        blockDiv.style.display = "flex"
     })
 })
