@@ -20,7 +20,7 @@ export async function RefreshBlocked() {
         blockTable.appendChild(noWebsitesText)
         blockTable.style.display = "flex"
     } else {
-        blockTable.style.display = "block"
+        blockTable.style.display = "table"
     }
 
     blocked.forEach(async website => {
@@ -115,8 +115,8 @@ async function AddBlockedWebsite() {
 
     await storeBlocked(domainName)
 
-    RefreshTable()
-    RefreshBlocked()
+    await RefreshTable()
+    await RefreshBlocked()
 }
 
 export function blockPopupLogic() {
