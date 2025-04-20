@@ -23,12 +23,13 @@ The Website Usage Tracker Chrome Extension helps users monitor their browsing ha
 
 
 ## Installation
+This extension is now available on the chrome web store! Feel free to easily install it from there. However, for features as they roll out, or if you would like to make your own changes, feel free to follow these instructions to install it locally. 
 
 1. Download or clone this repository.
 
-2. Type npm install in project directory
+2. Type npm install in project directory.
 
-3. Type npm run build to build the dist folder
+3. Type npm run build to build the dist folder (requires npm). 
 
 4. Open Chrome and navigate to chrome://extensions/.
 
@@ -38,7 +39,7 @@ The Website Usage Tracker Chrome Extension helps users monitor their browsing ha
 
 The extension will now be installed and visible in your toolbar.
 
-At a later point I will upload the extension to the chrome webstore
+At a later point I will upload the extension to the chrome webstore.
 
 
 ## Future Enhancements
@@ -48,6 +49,8 @@ At a later point I will upload the extension to the chrome webstore
 **Customizable Alerts**: Notifications before reaching limits.
 
 **Category-Based Limits**: Restrict entire categories (e.g., social media, news).
+
+**Full Website Tracking**: Right now tracking only follows websites that you choose, but a future setting to allow tracking of all website usage is in progress. 
 
 
 ## Contributing
