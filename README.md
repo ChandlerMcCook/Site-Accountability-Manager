@@ -39,8 +39,6 @@ This extension is now available on the chrome web store! Feel free to easily ins
 
 The extension will now be installed and visible in your toolbar.
 
-At a later point I will upload the extension to the chrome webstore.
-
 
 ## Future Enhancements
 
